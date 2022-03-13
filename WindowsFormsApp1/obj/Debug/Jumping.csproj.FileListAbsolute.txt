@@ -8,3 +8,14 @@ C:\Users\macie\Documents\GitStuff\JumpingChungus\WindowsFormsApp1\obj\Debug\Jump
 C:\Users\macie\Documents\GitStuff\JumpingChungus\WindowsFormsApp1\obj\Debug\Jumping.csproj.CoreCompileInputs.cache
 C:\Users\macie\Documents\GitStuff\JumpingChungus\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
 C:\Users\macie\Documents\GitStuff\JumpingChungus\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
+C:\Users\Czarek\Source\Repos\I3estOFF\JumpingChungus\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe.config
+C:\Users\Czarek\Source\Repos\I3estOFF\JumpingChungus\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe
+C:\Users\Czarek\Source\Repos\I3estOFF\JumpingChungus\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.pdb
+C:\Users\Czarek\Source\Repos\I3estOFF\JumpingChungus\WindowsFormsApp1\obj\Debug\Jumping.csproj.AssemblyReference.cache
+C:\Users\Czarek\Source\Repos\I3estOFF\JumpingChungus\WindowsFormsApp1\obj\Debug\Jumping.csproj.SuggestedBindingRedirects.cache
+C:\Users\Czarek\Source\Repos\I3estOFF\JumpingChungus\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
+C:\Users\Czarek\Source\Repos\I3estOFF\JumpingChungus\WindowsFormsApp1\obj\Debug\Jumping.csproj.GenerateResource.cache
+C:\Users\Czarek\Source\Repos\I3estOFF\JumpingChungus\WindowsFormsApp1\obj\Debug\Jumping.csproj.CoreCompileInputs.cache
+C:\Users\Czarek\Source\Repos\I3estOFF\JumpingChungus\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
+C:\Users\Czarek\Source\Repos\I3estOFF\JumpingChungus\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
+C:\Users\Czarek\source\repos\I3estOFF\JumpingChungus\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form1.resources

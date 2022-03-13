@@ -12,6 +12,8 @@ namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
+        bool goLeft, goRight;
+        int playerspeed = 12;
         public Form1()
         {
             InitializeComponent();
@@ -69,6 +71,53 @@ namespace WindowsFormsApp1
             ground.Width = width;
             ground.Tag = "ground";
             Controls.Add(ground);
+
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+  
+
+
+        private void KeyU(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Left)
+            {
+                goLeft = false;
+            }
+            if (e.KeyCode == Keys.Right)
+            {
+                goRight = false;
+            }
+        }
+
+        private void KeyDow(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Left)
+            {
+                goLeft = true;
+            }
+            if (e.KeyCode == Keys.Right)
+            {
+                goRight = true;
+            }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+
+            if (goLeft == true)
+            {
+                player.Left -= playerspeed;
+            }
+            if (goRight == true)
+            {
+                player.Left += playerspeed;
+            }
 
 
         }
