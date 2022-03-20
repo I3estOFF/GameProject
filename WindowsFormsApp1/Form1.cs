@@ -16,64 +16,13 @@ namespace WindowsFormsApp1
         bool goLeft, goRight, goUp, goDown;
         int playerspeed = 12;
         int jumpspeed = 8;
-
+        bool jump;
+        int force = 8;
         public Form1()
         {
             InitializeComponent();
-            generatePlatform(0, 400, 1000); //podloga
-
-            generatePlatform(500, 300, 300);
-            generatePlatform(50, 75, 120);
-            generatePlatform(600, 200, 80);
-            generatePlatform(270, 200, 180);
-
-
-
-            //generatePlatformRandom(5);
-
-        }
-
-
-
-        public void generatePlatformRandom(int numberOf)
-        {
-            Random rand = new Random();
-            for (int i = 0; i < numberOf; i++)
-            {
-                int ran1 = rand.Next(10, 700);
-                int ran2 = rand.Next(0, 350);
-                int ran3 = rand.Next(100, 200);
-                generatePlatform(ran1, ran2, ran3);
-            }
-        }
-        public void generatePlatform(int posX, int posY, int width)
-        {
-
-            PictureBox grass = new PictureBox();
-            Bitmap grassImage = Properties.Resources.grass;
-
-            grass.Image = (Image)grassImage;
-            grass.SizeMode = PictureBoxSizeMode.StretchImage;
-
-            grass.Location = new Point(posX, posY);
-            grass.Height = 10;
-            grass.Width = width;
-            grass.Tag = "grass";
-            Controls.Add(grass);
-
-
-            PictureBox ground = new PictureBox();
-            Bitmap groundImage = Properties.Resources.ground;
-
-            ground.Image = (Image)groundImage;
-            ground.SizeMode = PictureBoxSizeMode.StretchImage;
-
-            ground.Location = new Point(posX, posY + 10);
-            ground.Height = 1000;
-            ground.Width = width;
-            ground.Tag = "ground";
-            Controls.Add(ground);
-
+            FormBorderStyle = FormBorderStyle.None;
+            WindowState = FormWindowState.Maximized;
 
         }
 
@@ -81,9 +30,6 @@ namespace WindowsFormsApp1
         {
 
         }
-
-
-
 
         private void KeyU(object sender, KeyEventArgs e)
         {
@@ -95,10 +41,9 @@ namespace WindowsFormsApp1
             {
                 goRight = false;
             }
-            else if (e.KeyCode == Keys.Up)
+            else if (jump == true)
             {
-                goUp = false;
-                goDown = true;
+                jump = false;
             }
 
         }
@@ -113,17 +58,15 @@ namespace WindowsFormsApp1
             {
                 goRight = true;
             }
-            else if (e.KeyCode == Keys.Up)
+            else if (e.KeyCode == Keys.Space && jump == false)
             {
-                goUp = true;
-                goDown = false;
+                jump = true;
             }
 
         }
-
         private void timer1_Tick(object sender, EventArgs e)
         {
-
+            player.Top += jumpspeed;
             if (goLeft == true && player.Left >= 0 + 2)
             {
                 player.Left -= playerspeed;
@@ -132,14 +75,28 @@ namespace WindowsFormsApp1
             {
                 player.Left += playerspeed;
             }
-            if (goUp == true && player.Top >= 0)
+            if (jump == true && force < 0)
             {
-                player.Top -= jumpspeed;
+                jump = false;
             }
-            if (goDown == true && player.Top <= 489 - player.Height - 88)
+            if (jump == true)                                           //&& w tym miejscu dopisać warunek kolizji z platformą
             {
-                player.Top += jumpspeed;
+                jumpspeed = -8;
+                force -= 1;
             }
+            else
+            {
+                jumpspeed = 10;
+            }
+            foreach(Control x in this.Controls)
+            {
+                if(player.Top <= 489 - player.Height - 88)
+                {
+                    force = 8;
+                    player.Top = 315;
+                }
+            }
+            pictureBox1.Size = new Size(this.Width, this.Height);
             pictureBox1.Image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
             Graphics g = Graphics.FromImage(pictureBox1.Image);
             g.DrawImage(Properties.Resources._31, 0, 380);
@@ -155,6 +112,7 @@ namespace WindowsFormsApp1
 
             g.DrawImage(Properties.Resources.bpxurrk5l37211, player.Left, player.Top);
             pictureBox1.Refresh();
+
         }
 
     }
