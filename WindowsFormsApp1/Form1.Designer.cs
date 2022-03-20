@@ -45,39 +45,53 @@
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.LightBlue;
-            this.pictureBox1.Location = new System.Drawing.Point(1, -1);
+<<<<<<< HEAD
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(801, 455);
+            this.pictureBox1.Size = new System.Drawing.Size(1067, 554);
+=======
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(585, 651);
+>>>>>>> 82393a4af41d5d342f0d0f9370b94b84bfffdea1
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
             // 
             // player
             // 
-            this.player.BackColor = System.Drawing.Color.Transparent;
-            this.player.BackgroundImage = global::WindowsFormsApp1.Properties.Resources.bpxurrk5l37211;
-            this.player.Location = new System.Drawing.Point(82, 315);
+            this.player.Image = global::WindowsFormsApp1.Properties.Resources.bpxurrk5l37211;
+            this.player.Location = new System.Drawing.Point(116, 382);
             this.player.Name = "player";
-            this.player.Size = new System.Drawing.Size(60, 97);
-            this.player.TabIndex = 0;
+            this.player.Size = new System.Drawing.Size(60, 95);
+            this.player.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.player.TabIndex = 3;
             this.player.TabStop = false;
-            this.player.Tag = "player";
-            this.player.Click += new System.EventHandler(this.pictureBox1_Click);
+            this.player.Visible = false;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+<<<<<<< HEAD
+            this.ClientSize = new System.Drawing.Size(1067, 554);
+=======
+            this.ClientSize = new System.Drawing.Size(1264, 681);
             this.Controls.Add(this.pictureBox1);
+>>>>>>> 82393a4af41d5d342f0d0f9370b94b84bfffdea1
             this.Controls.Add(this.player);
+            this.Controls.Add(this.pictureBox1);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "A Game";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyDow);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.KeyU);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.player)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

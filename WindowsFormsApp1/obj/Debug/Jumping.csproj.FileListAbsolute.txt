@@ -19,3 +19,4 @@ C:\Users\Czarek\Source\Repos\I3estOFF\JumpingChungus\WindowsFormsApp1\obj\Debug\
 C:\Users\Czarek\Source\Repos\I3estOFF\JumpingChungus\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
 C:\Users\Czarek\Source\Repos\I3estOFF\JumpingChungus\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
 C:\Users\Czarek\source\repos\I3estOFF\JumpingChungus\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form1.resources
+C:\Users\macie\Documents\GitStuff\JumpingChungus\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form1.resources

@@ -13,67 +13,38 @@ namespace WindowsFormsApp1
 
     public partial class Form1 : Form
     {
-        bool goLeft, goRight, goUp, goDown;
-        int playerspeed = 12;
-        int jumpspeed = 8;
+<<<<<<< HEAD
+        Graphics g;
+        List<Rectangle> PlatformHB = new List<Rectangle>(); // hitboxy platform
+        bool playerRight = false;
+        bool playerLeft = false;
+        bool playerUp = false;
+        bool isGrounded = false;
+        int fallSpeed = 0;
+        int jumpSpeed = 200;
+        int playerSpeed = 5;
+        //int scroll = 0;
 
         public Form1()
         {
             InitializeComponent();
-            generatePlatform(0, 400, 1000); //podloga
-
-            generatePlatform(500, 300, 300);
-            generatePlatform(50, 75, 120);
-            generatePlatform(600, 200, 80);
-            generatePlatform(270, 200, 180);
-
-
-
-            //generatePlatformRandom(5);
 
         }
 
 
 
-        public void generatePlatformRandom(int numberOf)
+
+=======
+        bool goLeft, goRight, goUp, goDown;
+        int playerspeed = 12;
+        int jumpspeed = 8;
+        bool jump;
+        int force = 8;
+        public Form1()
         {
-            Random rand = new Random();
-            for (int i = 0; i < numberOf; i++)
-            {
-                int ran1 = rand.Next(10, 700);
-                int ran2 = rand.Next(0, 350);
-                int ran3 = rand.Next(100, 200);
-                generatePlatform(ran1, ran2, ran3);
-            }
-        }
-        public void generatePlatform(int posX, int posY, int width)
-        {
-
-            PictureBox grass = new PictureBox();
-            Bitmap grassImage = Properties.Resources.grass;
-
-            grass.Image = (Image)grassImage;
-            grass.SizeMode = PictureBoxSizeMode.StretchImage;
-
-            grass.Location = new Point(posX, posY);
-            grass.Height = 10;
-            grass.Width = width;
-            grass.Tag = "grass";
-            Controls.Add(grass);
-
-
-            PictureBox ground = new PictureBox();
-            Bitmap groundImage = Properties.Resources.ground;
-
-            ground.Image = (Image)groundImage;
-            ground.SizeMode = PictureBoxSizeMode.StretchImage;
-
-            ground.Location = new Point(posX, posY + 10);
-            ground.Height = 1000;
-            ground.Width = width;
-            ground.Tag = "ground";
-            Controls.Add(ground);
-
+            InitializeComponent();
+            FormBorderStyle = FormBorderStyle.None;
+            WindowState = FormWindowState.Maximized;
 
         }
 
@@ -81,24 +52,29 @@ namespace WindowsFormsApp1
         {
 
         }
-
-
-
+>>>>>>> 82393a4af41d5d342f0d0f9370b94b84bfffdea1
 
         private void KeyU(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Left)
             {
-                goLeft = false;
+                playerLeft = false;
             }
-            else if (e.KeyCode == Keys.Right)
+            if (e.KeyCode == Keys.Right)
             {
-                goRight = false;
+                playerRight = false;
             }
-            else if (e.KeyCode == Keys.Up)
+<<<<<<< HEAD
+            if (e.KeyCode == Keys.Up)
             {
-                goUp = false;
-                goDown = true;
+                playerUp = false;
+                jumpSpeed = 200;
+                isGrounded = false;
+=======
+            else if (jump == true)
+            {
+                jump = false;
+>>>>>>> 82393a4af41d5d342f0d0f9370b94b84bfffdea1
             }
 
         }
@@ -107,39 +83,95 @@ namespace WindowsFormsApp1
         {
             if (e.KeyCode == Keys.Left)
             {
-                goLeft = true;
+                playerLeft = true;
             }
-            else if (e.KeyCode == Keys.Right)
+            if (e.KeyCode == Keys.Right)
             {
-                goRight = true;
+                playerRight = true;
             }
-            else if (e.KeyCode == Keys.Up)
+<<<<<<< HEAD
+            if (e.KeyCode == Keys.Up && isGrounded)
             {
-                goUp = true;
-                goDown = false;
+                playerUp = true;
+                fallSpeed = 0;
+=======
+            else if (e.KeyCode == Keys.Space && jump == false)
+            {
+                jump = true;
+>>>>>>> 82393a4af41d5d342f0d0f9370b94b84bfffdea1
             }
 
         }
-
         private void timer1_Tick(object sender, EventArgs e)
         {
+<<<<<<< HEAD
 
+            if (playerLeft == true)
+            {
+                player.Left -= playerSpeed;
+            }
+            if (playerRight == true && player.Left < this.Width)
+=======
+            player.Top += jumpspeed;
             if (goLeft == true && player.Left >= 0 + 2)
+>>>>>>> 82393a4af41d5d342f0d0f9370b94b84bfffdea1
             {
-                player.Left -= playerspeed;
+                player.Left += playerSpeed;
+
             }
-            if (goRight == true && player.Left <= 816 - 80)
+            if (playerUp == true && isGrounded)
             {
-                player.Left += playerspeed;
+                player.Top -= jumpSpeed / 10;
+                if (jumpSpeed > 0)
+                    jumpSpeed -= 7;
+                else if (jumpSpeed <= 0)
+                {
+                    playerUp = false;
+                    fallSpeed += 50;
+                }
             }
-            if (goUp == true && player.Top >= 0)
+<<<<<<< HEAD
+            if (player.Location.Y < this.Height && playerUp == false)
             {
-                player.Top -= jumpspeed;
+                player.Top += fallSpeed / 10;
+                if (fallSpeed < 100)
+                    fallSpeed += 7;
             }
-            if (goDown == true && player.Top <= 489 - player.Height - 88)
+            foreach (Rectangle hb in PlatformHB)
             {
-                player.Top += jumpspeed;
+                if (player.Bounds.IntersectsWith(hb))
+                {
+                    fallSpeed = 0;
+                    player.Top = hb.Y - player.Height;
+                    isGrounded = true;
+                }
+
             }
+            pictureBox1.Image = new Bitmap(this.Width, this.Height);
+            g = Graphics.FromImage(pictureBox1.Image);
+=======
+            if (jump == true && force < 0)
+            {
+                jump = false;
+            }
+            if (jump == true)                                           //&& w tym miejscu dopisać warunek kolizji z platformą
+            {
+                jumpspeed = -8;
+                force -= 1;
+            }
+            else
+            {
+                jumpspeed = 10;
+            }
+            foreach(Control x in this.Controls)
+            {
+                if(player.Top <= 489 - player.Height - 88)
+                {
+                    force = 8;
+                    player.Top = 315;
+                }
+            }
+            pictureBox1.Size = new Size(this.Width, this.Height);
             pictureBox1.Image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
             Graphics g = Graphics.FromImage(pictureBox1.Image);
             g.DrawImage(Properties.Resources._31, 0, 380);
@@ -152,9 +184,50 @@ namespace WindowsFormsApp1
             g.DrawImage(Properties.Resources._31, 50, 75);
             g.DrawImage(Properties.Resources._31, 600, 200);
             g.DrawImage(Properties.Resources._31, 270, 200);
+>>>>>>> 82393a4af41d5d342f0d0f9370b94b84bfffdea1
 
             g.DrawImage(Properties.Resources.bpxurrk5l37211, player.Left, player.Top);
+
+
+            generatePlatform(0, Height - 100, Width);
+
+            generatePlatform(Width/10, Height/3, Width/5);
+            generatePlatform(2*Width/5, 2*Height/3, Width/5);
+            generatePlatform(3*Width/5, 2*Height/5, Width/20);
+            generatePlatform(Width/3, Height/10, Width/20);
+            
+
+
+
             pictureBox1.Refresh();
+
+        }
+
+        int platWidth = Properties.Resources._31.Width;
+        int platHeight = Properties.Resources._31.Height;
+        private void generatePlatform(int posX,int posY, int _width)
+        {
+           
+            g.DrawImage(Properties.Resources._31, posX, posY);
+            Rectangle rect = new Rectangle(posX, posY, _width+platWidth, 1);
+            PlatformHB.Add(rect);
+            if(platWidth < _width)
+            {
+                generatePlatform(posX+platWidth, posY, _width - platWidth);
+            }
+
+        }
+
+        private void generatePlatformRandom(int numberOf)
+        {
+            Random rand = new Random();
+            for (int i = 0; i < numberOf; i++)
+            {
+                int ran1 = rand.Next(10, 700);
+                int ran2 = rand.Next(0, 350);
+                int ran3 = rand.Next(100, 200);
+                generatePlatform(ran1, ran2, ran3);
+            }
         }
 
     }
