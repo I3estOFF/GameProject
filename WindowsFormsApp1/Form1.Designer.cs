@@ -45,26 +45,20 @@
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.LightBlue;
-<<<<<<< HEAD
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(1067, 554);
-=======
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(585, 651);
->>>>>>> 82393a4af41d5d342f0d0f9370b94b84bfffdea1
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
             // 
             // player
             // 
-            this.player.Image = global::WindowsFormsApp1.Properties.Resources.bpxurrk5l37211;
+            this.player.Image = global::WindowsFormsApp1.Properties.Resources.Chungus;
             this.player.Location = new System.Drawing.Point(116, 382);
             this.player.Name = "player";
-            this.player.Size = new System.Drawing.Size(60, 95);
+            this.player.Size = new System.Drawing.Size(51, 90);
             this.player.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.player.TabIndex = 3;
             this.player.TabStop = false;
@@ -74,12 +68,7 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
-<<<<<<< HEAD
             this.ClientSize = new System.Drawing.Size(1067, 554);
-=======
-            this.ClientSize = new System.Drawing.Size(1264, 681);
-            this.Controls.Add(this.pictureBox1);
->>>>>>> 82393a4af41d5d342f0d0f9370b94b84bfffdea1
             this.Controls.Add(this.player);
             this.Controls.Add(this.pictureBox1);
             this.Margin = new System.Windows.Forms.Padding(4);
