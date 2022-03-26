@@ -15,6 +15,8 @@ namespace WindowsFormsApp1
     {
         Graphics g;
         List<Rectangle> PlatformHB = new List<Rectangle>(); // hitboxy platform
+        List<Rectangle> CarrotHB = new List<Rectangle>();
+        List<Rectangle> EmptyHB = new List<Rectangle>();
         Rectangle Player = new Rectangle(80, 200, Properties.Resources.Chungus.Width, Properties.Resources.Chungus.Height); //hitbox postaci
         Bitmap PlayerBitmap;
         bool playerRight = false;
@@ -22,17 +24,19 @@ namespace WindowsFormsApp1
         bool playerUp = false;
         bool isGrounded = false; // sprawdza czy gracz dotyka ziemi
         bool faceLeft = false; // zapamietuje ostatni kierunek ruchu
+        bool mar1 = true;
         int fallSpeed = 0;
         int jumpSpeed = 200;
         int playerSpeed = 5;
+        int punkty = 0;
         //int scroll = 0;
 
         public Form1()
         {
             InitializeComponent();
             FormBorderStyle = FormBorderStyle.None;
-            
             WindowState = FormWindowState.Maximized;
+            label1.Text = "Punkty: " + punkty;
         }
 
 
@@ -88,7 +92,7 @@ namespace WindowsFormsApp1
             {
                 Player.Y -= jumpSpeed / 10;
                 if (jumpSpeed > 0)
-                    jumpSpeed -= 11;
+                    jumpSpeed -= 9;
                 else if (jumpSpeed <= 0)
                 {
                     playerUp = false;
@@ -128,7 +132,23 @@ namespace WindowsFormsApp1
                 }
 
             }
+            bool GotIt = false; //Czy ma marchewke?
+            foreach (Rectangle cb in CarrotHB)
+            {
+               
+                if (Player.Contains(cb) && GotIt == false)
+                {
 
+                    label1.Text = "Punkty: " + punkty++;
+                    GotIt = true;
+                    generateEmpty(2 * Width / 4, 3 * Height / 5, Width / 80);
+                    mar1 = false;
+                    break;
+                }
+                else
+                break;
+
+            }
 
 
             pictureBox1.Image = new Bitmap(this.Width, this.Height);
@@ -139,6 +159,12 @@ namespace WindowsFormsApp1
             generatePlatform(2 * Width / 5, 2 * Height / 3, Width / 5);
             generatePlatform(3 * Width / 5, 2 * Height / 5, Width / 20);
             generatePlatform(Width / 3, Height / 10, Width / 20);
+
+            if(mar1 == true)
+            generateCarrot(2 * Width / 4, 3 * Height / 5, Width / 80);
+
+
+
 
             PlayerBitmap = Properties.Resources.Chungus;
 
@@ -156,6 +182,12 @@ namespace WindowsFormsApp1
         int platWidth = Properties.Resources._31.Width;
         int platHeight = Properties.Resources._31.Height;
 
+        int CarrotWidth = Properties.Resources.Carrot.Width;
+        int CarrotHeight = Properties.Resources.Carrot.Height;
+
+        int EmptyWidth = Properties.Resources.Carrot.Width;
+        int EmptyHeight = Properties.Resources.Carrot.Height;
+
         private void generatePlatform(int posX, int posY, int _width)
         {
 
@@ -167,6 +199,30 @@ namespace WindowsFormsApp1
                 generatePlatform(posX + platWidth, posY, _width - platWidth);
             }
 
+        }
+
+        private void generateCarrot(int posX, int posY, int _width)
+        {
+
+            g.DrawImage(Properties.Resources.Carrot, posX, posY);
+            Rectangle rect = new Rectangle(posX, posY, _width + CarrotWidth, 1);
+            CarrotHB.Add(rect);
+            if (CarrotWidth < _width)
+            {
+                generateCarrot(posX + CarrotWidth, posY, _width - CarrotWidth);
+            }
+        }
+
+        private void generateEmpty(int posX, int posY, int _width)
+        {
+
+            g.DrawImage(Properties.Resources.Empty, posX, posY);
+            Rectangle rect = new Rectangle(posX, posY, _width + EmptyWidth, 1);
+            EmptyHB.Add(rect);
+            if (EmptyWidth < _width)
+            {
+                generateCarrot(posX + EmptyWidth, posY, _width - EmptyWidth);
+            }
         }
 
         private void generatePlatformRandom(int numberOf)
