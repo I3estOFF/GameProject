@@ -13,7 +13,8 @@ namespace WindowsFormsApp1
 
     public partial class Form1 : Form
     {
-        Graphics g;
+        Graphics gBackground;
+        Graphics gPlayer;
         List<Rectangle> PlatformHB = new List<Rectangle>(); // hitboxy platform
         List<Rectangle> CarrotHB = new List<Rectangle>();
         List<Rectangle> EmptyHB = new List<Rectangle>();
@@ -25,7 +26,8 @@ namespace WindowsFormsApp1
         bool isGrounded = false; // sprawdza czy gracz dotyka ziemi
         bool faceLeft = false; // zapamietuje ostatni kierunek ruchu
         bool mar1 = true;
-        
+
+        bool playerSideCollison = false;
         const int fallSpeedAcceleration = 9;
         const int jumpSpeedDeceleration = 20;
         const int maxJumpSpeed = 300;
@@ -86,14 +88,14 @@ namespace WindowsFormsApp1
         }
         private void onFormLoad(object sender, EventArgs e)
         {
-            pictureBox1.Image = new Bitmap(this.Width, this.Height);
-            g = Graphics.FromImage(pictureBox1.Image);
-        }
+            pictureBoxBackground.Image = new Bitmap(this.Width, this.Height);
+            gBackground = Graphics.FromImage(pictureBoxBackground.Image);
+            pictureBoxPlayer.Image = new Bitmap(this.Width, this.Height);
+            gPlayer = Graphics.FromImage(pictureBoxPlayer.Image);
 
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            PlayerMovement();
-            PlatformCollideWith(Player);
+            pictureBoxPlayer.Dock = DockStyle.Fill;
+            pictureBoxPlayer.Parent = pictureBoxBackground;
+            pictureBoxPlayer.BackColor = Color.Transparent;
 
             generatePlatform(0, Height - 100, Width);
 
@@ -101,6 +103,15 @@ namespace WindowsFormsApp1
             generatePlatform(2 * Width / 5, 2 * Height / 3, Width / 5);
             generatePlatform(3 * Width / 5, 2 * Height / 5, Width / 20);
             generatePlatform(Width / 3, Height / 10, Width / 20);
+
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            PlayerMovement();
+            PlatformPlayerCollision();
+
+
 
 
 
@@ -126,8 +137,10 @@ namespace WindowsFormsApp1
 
 
 
-            pictureBox1.Refresh();
-            g.Clear(Color.Transparent);
+            pictureBoxBackground.Refresh();
+            //gBackground.Clear(Color.Transparent);
+            pictureBoxPlayer.Refresh();
+            gPlayer.Clear(Color.Transparent);
 
         }
 
@@ -143,7 +156,7 @@ namespace WindowsFormsApp1
         private void generatePlatform(int posX, int posY, int _width)
         {
 
-            g.DrawImage(Properties.Resources._31, posX, posY);
+            gBackground.DrawImage(Properties.Resources._31, posX, posY);
             Rectangle rect = new Rectangle(posX, posY, _width + platWidth, 1);
             PlatformHB.Add(rect);
             if (platWidth < _width)
@@ -156,7 +169,7 @@ namespace WindowsFormsApp1
         private void generateCarrot(int posX, int posY, int _width)
         {
 
-            g.DrawImage(Properties.Resources.Carrot, posX, posY);
+            gBackground.DrawImage(Properties.Resources.Carrot, posX, posY);
             Rectangle rect = new Rectangle(posX, posY, _width + CarrotWidth, 1);
             CarrotHB.Add(rect);
             if (CarrotWidth < _width)
@@ -168,7 +181,7 @@ namespace WindowsFormsApp1
         private void generateEmpty(int posX, int posY, int _width)
         {
 
-            g.DrawImage(Properties.Resources.Empty, posX, posY);
+            gBackground.DrawImage(Properties.Resources.Empty, posX, posY);
             Rectangle rect = new Rectangle(posX, posY, _width + EmptyWidth, 1);
             EmptyHB.Add(rect);
             if (EmptyWidth < _width)
@@ -193,18 +206,20 @@ namespace WindowsFormsApp1
         public void PlayerMovement()
         {
             PlayerBitmap = Properties.Resources.Chungus;
+            playerSpeed = maxPlayerSpeed;
+
 
             if (faceLeft) // zmienia zwrot postaci
             {
                 PlayerBitmap.RotateFlip(RotateFlipType.Rotate180FlipY);
             }
-            g.DrawImage(PlayerBitmap, Player.X, Player.Y);
+            gPlayer.DrawImage(PlayerBitmap, Player.X, Player.Y);
 
-            if (playerLeft == true)
+            if (playerLeft == true && !playerSideCollison)
             {
                 Player.X -= playerSpeed;
             }
-            if (playerRight == true && Player.X < this.Width)
+            if (playerRight == true && Player.X < this.Width && !playerSideCollison)
             {
                 Player.X += playerSpeed;
             }
@@ -228,29 +243,30 @@ namespace WindowsFormsApp1
                 isGrounded = false;
             }
         }
-        public void PlatformCollideWith(Rectangle Rb)
+        public void PlatformPlayerCollision()
         {
+            playerSideCollison = false;
             foreach (Rectangle hb in PlatformHB)
             {
                 // kolizja gracza z gorna krawedzia zatrzymuje opadanie //dziala
-                if (Rb.Y + Rb.Height < hb.Y + 20 && Rb.Y + Rb.Height > hb.Y - 4 &&
-                    Rb.X < hb.X + hb.Width + 50 && Rb.X > hb.X - 50)
+                if (Player.Y + Player.Height < hb.Y + 20 && Player.Y + Player.Height > hb.Y - 4 &&
+                    Player.X < hb.X + hb.Width + 50 && Player.X > hb.X - 50)
                 {
                     fallSpeed = 0;
                     jumpSpeed = maxJumpSpeed;
                     isGrounded = true;
                 }
                 //kolizja z dolna krawedzia zatrzymuje skok // dziala
-                if (Rb.Y < hb.Y + hb.Height + 40 && Rb.Y > hb.Y + hb.Height &&
-                    Rb.X < hb.X + hb.Width && Rb.X > hb.X)
+                if (Player.Y < hb.Y + hb.Height + 40 && Player.Y > hb.Y + hb.Height &&
+                    Player.X < hb.X + hb.Width && Player.X > hb.X)
                 {
                     jumpSpeed = 0;
                 }
 
                 //kolizja z bocznymi krawedziami 
-                if (Rb.Contains(hb.X, hb.Y) || Rb.Contains(hb.X + hb.Width, hb.Y + hb.Height))
+                if (Player.Contains(hb.X, hb.Y + 10) || Player.Contains(hb.X + hb.Width, hb.Y + hb.Height - 10 ))
                 {
-                    Rb.Y--;
+                    playerSideCollison = true;
                 }
 
             }
