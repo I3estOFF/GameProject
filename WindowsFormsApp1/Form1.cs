@@ -15,27 +15,13 @@ namespace WindowsFormsApp1
     {
         Graphics gBackground;
         Graphics gPlayer;
+        Bitmap PlayerBitmap;
         List<Rectangle> PlatformHB = new List<Rectangle>(); // hitboxy platform
         List<Rectangle> CarrotHB = new List<Rectangle>();
         List<Rectangle> EmptyHB = new List<Rectangle>();
-        Rectangle Player = new Rectangle(80, 200, Properties.Resources.Chungus.Width, Properties.Resources.Chungus.Height); //hitbox postaci
-        Bitmap PlayerBitmap;
-        bool playerRight = false;
-        bool playerLeft = false;
-        bool playerUp = false;
-        bool isGrounded = false; // sprawdza czy gracz dotyka ziemi
-        bool faceLeft = false; // zapamietuje ostatni kierunek ruchu
-        bool mar1 = true;
+        Player p;
 
-        bool playerSideCollison = false;
-        const int fallSpeedAcceleration = 9;
-        const int jumpSpeedDeceleration = 20;
-        const int maxJumpSpeed = 300;
-        const int maxFallSpeed = 150;
-        const int maxPlayerSpeed = 7;
-        int fallSpeed = 0;
-        int jumpSpeed = maxJumpSpeed;
-        int playerSpeed = maxPlayerSpeed;
+        public bool mar1 = true;
         int punkty = 0;
         //int scroll = 0;
 
@@ -52,17 +38,17 @@ namespace WindowsFormsApp1
         {
             if (e.KeyCode == Keys.Left)
             {
-                playerLeft = false;
+                p.playerLeft = false;
             }
             if (e.KeyCode == Keys.Right)
             {
-                playerRight = false;
+                p.playerRight = false;
             }
             if (e.KeyCode == Keys.Up)
             {
-                playerUp = false;
-                jumpSpeed = 200;
-                isGrounded = false;
+                p.playerUp = false;
+                p.jumpSpeed = 200;
+                p.isGrounded = false;
             }
 
         }
@@ -71,18 +57,18 @@ namespace WindowsFormsApp1
         {
             if (e.KeyCode == Keys.Left)
             {
-                playerLeft = true;
-                faceLeft = true;
+                p.playerLeft = true;
+                p.faceLeft = true;
             }
             if (e.KeyCode == Keys.Right)
             {
-                playerRight = true;
-                faceLeft=false;
+                p.playerRight = true;
+                p.faceLeft=false;
             }
-            if (e.KeyCode == Keys.Up && isGrounded)
+            if (e.KeyCode == Keys.Up && p.isGrounded)
             {
-                playerUp = true;
-                fallSpeed = 0;
+                p.playerUp = true;
+                p.fallSpeed = 0;
             }
 
         }
@@ -97,6 +83,8 @@ namespace WindowsFormsApp1
             pictureBoxPlayer.Parent = pictureBoxBackground;
             pictureBoxPlayer.BackColor = Color.Transparent;
 
+            p = new Player(gPlayer, PlayerBitmap, Width,Height, PlatformHB);
+
             generatePlatform(0, Height - 100, Width);
 
             generatePlatform(Width / 10, Height / 3, Width / 5);
@@ -108,9 +96,8 @@ namespace WindowsFormsApp1
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            PlayerMovement();
-            PlatformPlayerCollision();
-
+            p.PlayerMovement();
+            p.PlatformPlayerCollision();
 
 
 
@@ -119,7 +106,7 @@ namespace WindowsFormsApp1
             foreach (Rectangle cb in CarrotHB)
             {
                
-                if (Player.Contains(cb) && GotIt == false)
+                if (p.playerBox.Contains(cb) && GotIt == false)
                 {
 
                     label1.Text = "Punkty: " + punkty++;
@@ -203,73 +190,6 @@ namespace WindowsFormsApp1
         }
 
 
-        public void PlayerMovement()
-        {
-            PlayerBitmap = Properties.Resources.Chungus;
-            playerSpeed = maxPlayerSpeed;
-
-
-            if (faceLeft) // zmienia zwrot postaci
-            {
-                PlayerBitmap.RotateFlip(RotateFlipType.Rotate180FlipY);
-            }
-            gPlayer.DrawImage(PlayerBitmap, Player.X, Player.Y);
-
-            if (playerLeft == true && !playerSideCollison)
-            {
-                Player.X -= playerSpeed;
-            }
-            if (playerRight == true && Player.X < this.Width && !playerSideCollison)
-            {
-                Player.X += playerSpeed;
-            }
-            if (playerUp == true && isGrounded)
-            {
-                Player.Y -= jumpSpeed / 10;
-                if (jumpSpeed > 0)
-                    jumpSpeed -= jumpSpeedDeceleration;
-                else if (jumpSpeed <= 0)
-                {
-                    playerUp = false;
-                    fallSpeed += 50;
-                }
-            }
-
-            if (Player.Y < this.Height && playerUp == false)
-            {
-                Player.Y += fallSpeed / 10;
-                if (fallSpeed < maxFallSpeed)
-                    fallSpeed += fallSpeedAcceleration;
-                isGrounded = false;
-            }
-        }
-        public void PlatformPlayerCollision()
-        {
-            playerSideCollison = false;
-            foreach (Rectangle hb in PlatformHB)
-            {
-                // kolizja gracza z gorna krawedzia zatrzymuje opadanie //dziala
-                if (Player.Y + Player.Height < hb.Y + 20 && Player.Y + Player.Height > hb.Y - 4 &&
-                    Player.X < hb.X + hb.Width + 50 && Player.X > hb.X - 50)
-                {
-                    fallSpeed = 0;
-                    jumpSpeed = maxJumpSpeed;
-                    isGrounded = true;
-                }
-                //kolizja z dolna krawedzia zatrzymuje skok // dziala
-                if (Player.Y < hb.Y + hb.Height + 40 && Player.Y > hb.Y + hb.Height &&
-                    Player.X < hb.X + hb.Width && Player.X > hb.X)
-                {
-                    jumpSpeed = 0;
-                }
-
-                //kolizja z bocznymi krawedziami 
-                if (Player.Contains(hb.X, hb.Y + 10) || Player.Contains(hb.X + hb.Width, hb.Y + hb.Height - 10 ))
-                {
-                    playerSideCollison = true;
-                }
-
-            }
-        }
+      
     }
 }
