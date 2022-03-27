@@ -20,7 +20,7 @@ namespace WindowsFormsApp1
         const int fallSpeedAcceleration = 9;
         const int jumpSpeedDeceleration = 20;
         const int maxJumpSpeed = 300;
-        const int maxFallSpeed = 150;
+        const int maxFallSpeed = 100;
         const int maxPlayerSpeed = 7;
         public int fallSpeed = 0;
         public int jumpSpeed = maxJumpSpeed;
