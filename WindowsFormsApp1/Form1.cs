@@ -25,9 +25,15 @@ namespace WindowsFormsApp1
         bool isGrounded = false; // sprawdza czy gracz dotyka ziemi
         bool faceLeft = false; // zapamietuje ostatni kierunek ruchu
         bool mar1 = true;
+        
+        const int fallSpeedAcceleration = 9;
+        const int jumpSpeedDeceleration = 20;
+        const int maxJumpSpeed = 300;
+        const int maxFallSpeed = 150;
+        const int maxPlayerSpeed = 7;
         int fallSpeed = 0;
-        int jumpSpeed = 200;
-        int playerSpeed = 5;
+        int jumpSpeed = maxJumpSpeed;
+        int playerSpeed = maxPlayerSpeed;
         int punkty = 0;
         //int scroll = 0;
 
@@ -78,60 +84,26 @@ namespace WindowsFormsApp1
             }
 
         }
+        private void onFormLoad(object sender, EventArgs e)
+        {
+            pictureBox1.Image = new Bitmap(this.Width, this.Height);
+            g = Graphics.FromImage(pictureBox1.Image);
+        }
+
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (playerLeft == true)
-            {
-                Player.X -= playerSpeed;
-            }
-            if (playerRight == true && Player.X < this.Width)
-            {
-                Player.X += playerSpeed;
-            }
-            if (playerUp == true && isGrounded)
-            {
-                Player.Y -= jumpSpeed / 10;
-                if (jumpSpeed > 0)
-                    jumpSpeed -= 9;
-                else if (jumpSpeed <= 0)
-                {
-                    playerUp = false;
-                    fallSpeed += 50;
-                }
-            }
+            PlayerMovement();
+            PlatformCollideWith(Player);
 
-            if (Player.Y < this.Height && playerUp == false)
-            {
-                Player.Y += fallSpeed / 10;
-                if (fallSpeed < 100)
-                    fallSpeed += 9;
-                isGrounded = false;
-            }
+            generatePlatform(0, Height - 100, Width);
 
-            foreach (Rectangle hb in PlatformHB)
-            {
-                // kolizja gracza z gorna krawedzia zatrzymuje opadanie //dziala
-                if (Player.Y+Player.Height < hb.Y+20 && Player.Y+Player.Height > hb.Y-4 &&
-                    Player.X < hb.X + hb.Width+50 && Player.X > hb.X-50)
-                {
-                    fallSpeed = 0;
-                    jumpSpeed = 200;
-                    isGrounded = true;
-                }
-                //kolizja z dolna krawedzia zatrzymuje skok // dziala
-                if (Player.Y < hb.Y + hb.Height + 40 && Player.Y > hb.Y + hb.Height &&
-                    Player.X < hb.X + hb.Width && Player.X > hb.X)
-                {
-                    jumpSpeed = 0;
-                }
+            generatePlatform(Width / 10, Height / 3, Width / 5);
+            generatePlatform(2 * Width / 5, 2 * Height / 3, Width / 5);
+            generatePlatform(3 * Width / 5, 2 * Height / 5, Width / 20);
+            generatePlatform(Width / 3, Height / 10, Width / 20);
 
-                //kolizja z bocznymi krawedziami 
-                if (Player.Contains(hb.X,hb.Y) || Player.Contains(hb.X+hb.Width, hb.Y + hb.Height))
-                {
-                        Player.Y--;
-                }
 
-            }
+
             bool GotIt = false; //Czy ma marchewke?
             foreach (Rectangle cb in CarrotHB)
             {
@@ -149,33 +121,13 @@ namespace WindowsFormsApp1
                 break;
 
             }
-
-
-            pictureBox1.Image = new Bitmap(this.Width, this.Height);
-            g = Graphics.FromImage(pictureBox1.Image);
-            generatePlatform(0, Height - 100, Width);
-
-            generatePlatform(Width / 10, Height / 3, Width / 5);
-            generatePlatform(2 * Width / 5, 2 * Height / 3, Width / 5);
-            generatePlatform(3 * Width / 5, 2 * Height / 5, Width / 20);
-            generatePlatform(Width / 3, Height / 10, Width / 20);
-
             if(mar1 == true)
             generateCarrot(2 * Width / 4, 3 * Height / 5, Width / 80);
 
 
 
-
-            PlayerBitmap = Properties.Resources.Chungus;
-
-            if (faceLeft) // zmienia zwrot postaci
-            {
-                PlayerBitmap.RotateFlip(RotateFlipType.Rotate180FlipY);
-            }
- 
-
-            g.DrawImage(PlayerBitmap, Player.X, Player.Y);
             pictureBox1.Refresh();
+            g.Clear(Color.Transparent);
 
         }
 
@@ -234,6 +186,73 @@ namespace WindowsFormsApp1
                 int ran2 = rand.Next(0, 350);
                 int ran3 = rand.Next(100, 200);
                 generatePlatform(ran1, ran2, ran3);
+            }
+        }
+
+
+        public void PlayerMovement()
+        {
+            PlayerBitmap = Properties.Resources.Chungus;
+
+            if (faceLeft) // zmienia zwrot postaci
+            {
+                PlayerBitmap.RotateFlip(RotateFlipType.Rotate180FlipY);
+            }
+            g.DrawImage(PlayerBitmap, Player.X, Player.Y);
+
+            if (playerLeft == true)
+            {
+                Player.X -= playerSpeed;
+            }
+            if (playerRight == true && Player.X < this.Width)
+            {
+                Player.X += playerSpeed;
+            }
+            if (playerUp == true && isGrounded)
+            {
+                Player.Y -= jumpSpeed / 10;
+                if (jumpSpeed > 0)
+                    jumpSpeed -= jumpSpeedDeceleration;
+                else if (jumpSpeed <= 0)
+                {
+                    playerUp = false;
+                    fallSpeed += 50;
+                }
+            }
+
+            if (Player.Y < this.Height && playerUp == false)
+            {
+                Player.Y += fallSpeed / 10;
+                if (fallSpeed < maxFallSpeed)
+                    fallSpeed += fallSpeedAcceleration;
+                isGrounded = false;
+            }
+        }
+        public void PlatformCollideWith(Rectangle Rb)
+        {
+            foreach (Rectangle hb in PlatformHB)
+            {
+                // kolizja gracza z gorna krawedzia zatrzymuje opadanie //dziala
+                if (Rb.Y + Rb.Height < hb.Y + 20 && Rb.Y + Rb.Height > hb.Y - 4 &&
+                    Rb.X < hb.X + hb.Width + 50 && Rb.X > hb.X - 50)
+                {
+                    fallSpeed = 0;
+                    jumpSpeed = maxJumpSpeed;
+                    isGrounded = true;
+                }
+                //kolizja z dolna krawedzia zatrzymuje skok // dziala
+                if (Rb.Y < hb.Y + hb.Height + 40 && Rb.Y > hb.Y + hb.Height &&
+                    Rb.X < hb.X + hb.Width && Rb.X > hb.X)
+                {
+                    jumpSpeed = 0;
+                }
+
+                //kolizja z bocznymi krawedziami 
+                if (Rb.Contains(hb.X, hb.Y) || Rb.Contains(hb.X + hb.Width, hb.Y + hb.Height))
+                {
+                    Rb.Y--;
+                }
+
             }
         }
     }
