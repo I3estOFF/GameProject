@@ -89,7 +89,7 @@ namespace WindowsFormsApp1
             {
                 // kolizja gracza z gorna krawedzia zatrzymuje opadanie //dziala
                 if (playerBox.Y + playerBox.Height < hb.Y + 20 && playerBox.Y + playerBox.Height > hb.Y - 4 &&
-                    playerBox.X < hb.X + hb.Width + 50 && playerBox.X > hb.X - 50)
+                    playerBox.X < hb.X + hb.Width && playerBox.X > hb.X - 50)
                 {
                     fallSpeed = 0;
                     jumpSpeed = maxJumpSpeed;
@@ -97,13 +97,13 @@ namespace WindowsFormsApp1
                 }
                 //kolizja z dolna krawedzia zatrzymuje skok // dziala
                 if (playerBox.Y < hb.Y + hb.Height + 40 && playerBox.Y > hb.Y + hb.Height &&
-                    playerBox.X < hb.X + hb.Width && playerBox.X > hb.X)
+                    playerBox.X < hb.X + hb.Width+20 && playerBox.X > hb.X-40)
                 {
                     jumpSpeed = 0;
                 }
 
                 //kolizja z bocznymi krawedziami 
-                if (playerBox.Contains(hb.X, hb.Y + 10) || playerBox.Contains(hb.X + hb.Width, hb.Y + hb.Height - 10))
+                if (playerBox.Contains(hb.X-5, hb.Y + 20) || playerBox.Contains(hb.X + hb.Width+10, hb.Y + 20))
                 {
                     playerSideCollison = true;
                 }

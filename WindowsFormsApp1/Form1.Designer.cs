@@ -31,10 +31,10 @@
             this.components = new System.ComponentModel.Container();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.label1 = new System.Windows.Forms.Label();
-            this.pictureBoxBackground = new System.Windows.Forms.PictureBox();
             this.pictureBoxPlayer = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBackground)).BeginInit();
+            this.pictureBoxBackground = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlayer)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBackground)).BeginInit();
             this.SuspendLayout();
             // 
             // timer1
@@ -52,6 +52,14 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "label1";
             // 
+            // pictureBoxPlayer
+            // 
+            this.pictureBoxPlayer.Location = new System.Drawing.Point(0, 28);
+            this.pictureBoxPlayer.Name = "pictureBoxPlayer";
+            this.pictureBoxPlayer.Size = new System.Drawing.Size(1067, 526);
+            this.pictureBoxPlayer.TabIndex = 4;
+            this.pictureBoxPlayer.TabStop = false;
+            // 
             // pictureBoxBackground
             // 
             this.pictureBoxBackground.BackColor = System.Drawing.Color.LightBlue;
@@ -62,14 +70,6 @@
             this.pictureBoxBackground.Size = new System.Drawing.Size(1067, 554);
             this.pictureBoxBackground.TabIndex = 2;
             this.pictureBoxBackground.TabStop = false;
-            // 
-            // pictureBoxPlayer
-            // 
-            this.pictureBoxPlayer.Location = new System.Drawing.Point(0, 28);
-            this.pictureBoxPlayer.Name = "pictureBoxPlayer";
-            this.pictureBoxPlayer.Size = new System.Drawing.Size(1067, 526);
-            this.pictureBoxPlayer.TabIndex = 4;
-            this.pictureBoxPlayer.TabStop = false;
             // 
             // Form1
             // 
@@ -85,8 +85,8 @@
             this.Load += new System.EventHandler(this.onFormLoad);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyDow);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.KeyU);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBackground)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlayer)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBackground)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

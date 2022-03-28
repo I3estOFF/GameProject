@@ -85,12 +85,12 @@ namespace WindowsFormsApp1
 
             p = new Player(gPlayer, PlayerBitmap, Width,Height, PlatformHB);
 
-            generatePlatform(0, Height - 100, Width);
+            generatePlatform(0, Height - 100, 1000);
 
-            generatePlatform(Width / 10, Height / 3, Width / 5);
-            generatePlatform(2 * Width / 5, 2 * Height / 3, Width / 5);
-            generatePlatform(3 * Width / 5, 2 * Height / 5, Width / 20);
-            generatePlatform(Width / 3, Height / 10, Width / 20);
+            generatePlatform(Width / 10, Height / 3, 10);
+            generatePlatform(2 * Width / 5, 2 * Height / 3, 5);
+            generatePlatform(3 * Width / 5, 2 * Height / 5, 10);
+            generatePlatform(Width / 3, Height / 9, 7);
 
         }
 
@@ -131,8 +131,7 @@ namespace WindowsFormsApp1
 
         }
 
-        int platWidth = Properties.Resources._31.Width;
-        int platHeight = Properties.Resources._31.Height;
+
 
         int CarrotWidth = Properties.Resources.Carrot.Width;
         int CarrotHeight = Properties.Resources.Carrot.Height;
@@ -140,15 +139,20 @@ namespace WindowsFormsApp1
         int EmptyWidth = Properties.Resources.Carrot.Width;
         int EmptyHeight = Properties.Resources.Carrot.Height;
 
+
+        int platWidth = Properties.Resources._311.Width;
+        int platHeight = Properties.Resources._311.Height;
         private void generatePlatform(int posX, int posY, int _width)
         {
 
-            gBackground.DrawImage(Properties.Resources._31, posX, posY);
-            Rectangle rect = new Rectangle(posX, posY, _width + platWidth, 1);
+            gBackground.DrawImage(Properties.Resources._311, posX, posY);
+            Rectangle rect = new Rectangle(posX, posY, platWidth*_width, 1);
             PlatformHB.Add(rect);
-            if (platWidth < _width)
+            int len = 0;
+            for(int i=0;i<_width;i++)
             {
-                generatePlatform(posX + platWidth, posY, _width - platWidth);
+                gBackground.DrawImage(Properties.Resources._311, posX+len, posY);
+                len += platWidth;
             }
 
         }
@@ -159,10 +163,7 @@ namespace WindowsFormsApp1
             gBackground.DrawImage(Properties.Resources.Carrot, posX, posY);
             Rectangle rect = new Rectangle(posX, posY, _width + CarrotWidth, 1);
             CarrotHB.Add(rect);
-            if (CarrotWidth < _width)
-            {
-                generateCarrot(posX + CarrotWidth, posY, _width - CarrotWidth);
-            }
+
         }
 
         private void generateEmpty(int posX, int posY, int _width)
@@ -171,20 +172,24 @@ namespace WindowsFormsApp1
             gBackground.DrawImage(Properties.Resources.Empty, posX, posY);
             Rectangle rect = new Rectangle(posX, posY, _width + EmptyWidth, 1);
             EmptyHB.Add(rect);
-            if (EmptyWidth < _width)
-            {
-                generateCarrot(posX + EmptyWidth, posY, _width - EmptyWidth);
-            }
+
         }
 
         private void generatePlatformRandom(int numberOf)
         {
             Random rand = new Random();
+            int preRan1 = rand.Next(10, 700);
+            int preRan2 = rand.Next(0, 350);
+            int preRan3 = rand.Next(100, 200);
+            int ran1;
+            int ran2; 
+            int ran3;
+
             for (int i = 0; i < numberOf; i++)
             {
-                int ran1 = rand.Next(10, 700);
-                int ran2 = rand.Next(0, 350);
-                int ran3 = rand.Next(100, 200);
+                ran1 = rand.Next(10, 700);
+                ran2 = rand.Next(0, 350);
+                ran3 = rand.Next(100, 200);
                 generatePlatform(ran1, ran2, ran3);
             }
         }
