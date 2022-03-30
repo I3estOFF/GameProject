@@ -91,6 +91,7 @@ namespace WindowsFormsApp1
                 if (playerBox.Y + playerBox.Height < hb.Y + 20 && playerBox.Y + playerBox.Height > hb.Y - 4 &&
                     playerBox.X < hb.X + hb.Width && playerBox.X > hb.X - 50)
                 {
+                    playerBox.Y = hb.Y - playerBox.Height;
                     fallSpeed = 0;
                     jumpSpeed = maxJumpSpeed;
                     isGrounded = true;
