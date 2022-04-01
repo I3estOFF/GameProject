@@ -36,6 +36,7 @@ namespace WindowsFormsApp1
             label1.Text = "Punkty: " + punkty;
         }
 
+        //dzieją się rzeczy
         [DllImport("gdi32.dll")]
         static extern int GetDeviceCaps(IntPtr hdc, int nIndex);
         public enum DeviceCap
@@ -43,7 +44,6 @@ namespace WindowsFormsApp1
             VERTRES = 10,
             DESKTOPVERTRES = 117,
 
-            // http://pinvoke.net/default.aspx/gdi32/GetDeviceCaps.html
         }
         public float getScalingFactor()
         {
@@ -56,7 +56,7 @@ namespace WindowsFormsApp1
 
             return ScreenScalingFactor; // 1.25 = 125%
         }
-
+        // i dostajemy wspolczynnik skalowania obrazu
 
         private void KeyU(object sender, KeyEventArgs e)
         {
@@ -106,6 +106,8 @@ namespace WindowsFormsApp1
 
             System.Diagnostics.Debug.WriteLine(getScalingFactor());
 
+            Scale(new SizeF(1/ getScalingFactor(),1/ getScalingFactor()));
+            System.Diagnostics.Debug.WriteLine(getScalingFactor());
 
             pictureBoxPlayer.Dock = DockStyle.Fill;
             pictureBoxPlayer.Parent = pictureBoxBackground;
@@ -115,10 +117,11 @@ namespace WindowsFormsApp1
 
             generatePlatform(0, Height - 100, 1000);
 
-            generatePlatform(Width / 10, Height / 3, 10);
-            generatePlatform(2 * Width / 5, 2 * Height / 3, 5);
-            generatePlatform(3 * Width / 5, 2 * Height / 5, 10);
-            generatePlatform(Width / 3, Height / 9, 7);
+            generatePlatformRandom(5);
+            //generatePlatform(Width / 10, Height / 3, 10);
+            //generatePlatform(2 * Width / 5, 2 * Height / 3, 5);
+            //generatePlatform(3 * Width / 5, 2 * Height / 5, 10);
+            //generatePlatform(Width / 3, Height / 9, 7);
 
         }
 
@@ -206,19 +209,98 @@ namespace WindowsFormsApp1
         private void generatePlatformRandom(int numberOf)
         {
             Random rand = new Random();
-            int preRan1 = rand.Next(10, 700);
-            int preRan2 = rand.Next(0, 350);
-            int preRan3 = rand.Next(100, 200);
-            int ran1;
-            int ran2; 
-            int ran3;
+
+            int ranX = rand.Next(50,Width-200);
+            int ranY = Height - 100;
+            int ranWidth = 10;
+            int prevRanX = 0;
+            int prevRanY = 0;
+            int prevRanWidth = 0;
+
+
+
+            int jumpDistance = 70;
+
+            int ranXRight;
+            int minY = p.playerBox.Height+60; // ponad glowa gracza
+            int maxY = 180; //wysokosc skoku
+
 
             for (int i = 0; i < numberOf; i++)
             {
-                ran1 = rand.Next(10, 700);
-                ran2 = rand.Next(0, 350);
-                ran3 = rand.Next(100, 200);
-                generatePlatform(ran1, ran2, ran3);
+                //zapamietuje poprzednie wartosci na ktorych bazie tworzymy kolejne
+                prevRanWidth = ranWidth;
+                prevRanX = ranX;
+                prevRanY = ranY;
+
+                ranY = prevRanY - rand.Next(minY, maxY);
+                ///////////////////////////
+
+                //losuje poczatek nowej platformy
+                ranX = rand.Next(10, prevRanX+prevRanWidth*platWidth+jumpDistance);
+
+                //uzupelniamy ewentualna luke szerokoscia platformy          
+                if (ranX < prevRanX) // jesli zaczyna sie przed poprzednia platforma
+                {
+                    System.Diagnostics.Debug.WriteLine("condition 1");
+                    if(prevRanX - jumpDistance > ranX)
+                        ranXRight = rand.Next(prevRanX-jumpDistance,prevRanX+(prevRanWidth-3) * platWidth - jumpDistance);
+                    else
+                    {
+                        System.Diagnostics.Debug.WriteLine("ranX: "+ranX);
+
+                        System.Diagnostics.Debug.WriteLine("prevRanX - jumpDistance + prevRanWidth = " + (prevRanX - jumpDistance + prevRanWidth*platWidth));
+                        //probably tutaj jest blad gdy nastepna platforma zaczyna sie mniej niz jumpdistance przed a konczy za platforma
+                        ranXRight = rand.Next(ranX, prevRanX - jumpDistance + (prevRanWidth - 3) * platWidth);
+
+                    }
+
+                    ranWidth = (ranXRight - ranX )/ platWidth +5;
+                }
+                else if (ranX >= prevRanX) // jesli zaczyna sie na poprzedniej platformie lub za nia
+                {
+
+                    System.Diagnostics.Debug.WriteLine("condition else if");
+                    //ranX = ranX + 100;
+                    if (ranX < prevRanX + prevRanWidth*platWidth + jumpDistance)
+                    {
+                        System.Diagnostics.Debug.WriteLine("ranX: " + ranX);
+
+                        System.Diagnostics.Debug.WriteLine("prevRanX + prevRanWidth*platWidth - jumpDistance = " + (prevRanX - jumpDistance + prevRanWidth*platWidth));
+
+                        ranXRight = rand.Next(ranX, prevRanX + prevRanWidth*platWidth + jumpDistance);
+
+                        ranWidth = (ranXRight - ranX) / platWidth+5;
+                    }
+                    else
+                    {
+                        ranX = prevRanX + prevRanWidth * platWidth + jumpDistance;
+                        ranWidth = rand.Next(7, 10);
+
+                        System.Diagnostics.Debug.WriteLine("condition else");
+                    }
+                }
+
+                for(int n = 0; n < 10; n++)
+                {
+                    if (ranX + ranWidth*platWidth >= Width)
+                    {
+
+                        System.Diagnostics.Debug.WriteLine("too far right");
+                        ranX -= 2*(ranX + ranWidth * platWidth - Width);
+                    }
+
+                }
+
+
+
+                /////////////////////////////////
+                //System.Diagnostics.Debug.WriteLine(prevRanX);
+                System.Diagnostics.Debug.WriteLine("Generated Platform: " + ranX + " " + ranY + " " + ranWidth);
+                //System.Diagnostics.Debug.WriteLine(ranY);
+                //System.Diagnostics.Debug.WriteLine(ranWidth);
+
+                generatePlatform(ranX,ranY,ranWidth);
             }
         }
 

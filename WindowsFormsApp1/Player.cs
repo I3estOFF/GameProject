@@ -89,7 +89,7 @@ namespace WindowsFormsApp1
             {
                 // kolizja gracza z gorna krawedzia zatrzymuje opadanie //dziala
                 if (playerBox.Y + playerBox.Height < hb.Y + 20 && playerBox.Y + playerBox.Height > hb.Y - 4 &&
-                    playerBox.X < hb.X + hb.Width && playerBox.X > hb.X - 50)
+                    playerBox.X < hb.X + hb.Width +20 && playerBox.X > hb.X - 50)
                 {
                     playerBox.Y = hb.Y - playerBox.Height;
                     fallSpeed = 0;
