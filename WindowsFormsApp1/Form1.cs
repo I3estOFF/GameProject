@@ -16,8 +16,9 @@ namespace WindowsFormsApp1
     public partial class Form1 : Form
     {
 
-        int ResolutionWidth = 1;
+        int ResolutionWidth = 1; // zmienne trzymajace rzeczywista rozdzielczosc ekranu
         int ResolutionHeight = 1;
+
         Graphics gBackground;
         Graphics gPlayer;
         Bitmap PlayerBitmap;
@@ -101,7 +102,7 @@ namespace WindowsFormsApp1
         }
         private void onFormLoad(object sender, EventArgs e)
         {
-
+            //inicjalizacja obiektow
             pictureBoxBackground.Image = new Bitmap(this.Width, this.Height);
             gBackground = Graphics.FromImage(pictureBoxBackground.Image);
             pictureBoxPlayer.Image = new Bitmap(this.Width, this.Height);
@@ -109,16 +110,18 @@ namespace WindowsFormsApp1
 
 
             System.Diagnostics.Debug.WriteLine(Width);
-            
+            //przeskalowanie grafik do 100% rozmiaru
             gBackground.ScaleTransform(1f/getScalingFactor(), 1/getScalingFactor());
             gPlayer.ScaleTransform(1f / getScalingFactor(), 1 / getScalingFactor());
             
+            //wyliczenie i zapisanie aktualnej rozdzielczosci ekranu
             ResolutionWidth = Convert.ToInt32(Width * getScalingFactor());
             ResolutionHeight = Convert.ToInt32(Height * getScalingFactor());
             
       
             System.Diagnostics.Debug.WriteLine(ResolutionWidth);
 
+            //umiejscowienie pictureBoxa z graczem 
             pictureBoxPlayer.Dock = DockStyle.Fill;
             pictureBoxPlayer.Parent = pictureBoxBackground;
             pictureBoxPlayer.BackColor = Color.Transparent;
