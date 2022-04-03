@@ -7,33 +7,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
 
 namespace WindowsFormsApp1
 {
 
+
     public partial class Form1 : Form
     {
-        Graphics g;
+
+        int ResolutionWidth = 1;
+        int ResolutionHeight = 1;
+        Graphics gBackground;
+        Graphics gPlayer;
+        Bitmap PlayerBitmap;
         List<Rectangle> PlatformHB = new List<Rectangle>(); // hitboxy platform
         List<Rectangle> CarrotHB = new List<Rectangle>();
         List<Rectangle> EmptyHB = new List<Rectangle>();
-        Rectangle Player = new Rectangle(80, 200, Properties.Resources.Chungus.Width, Properties.Resources.Chungus.Height); //hitbox postaci
-        Bitmap PlayerBitmap;
-        bool playerRight = false;
-        bool playerLeft = false;
-        bool playerUp = false;
-        bool isGrounded = false; // sprawdza czy gracz dotyka ziemi
-        bool faceLeft = false; // zapamietuje ostatni kierunek ruchu
-        bool mar1 = true;
-        
-        const int fallSpeedAcceleration = 9;
-        const int jumpSpeedDeceleration = 20;
-        const int maxJumpSpeed = 300;
-        const int maxFallSpeed = 150;
-        const int maxPlayerSpeed = 7;
-        int fallSpeed = 0;
-        int jumpSpeed = maxJumpSpeed;
-        int playerSpeed = maxPlayerSpeed;
+        Player p;
+
+        public bool mar1 = true;
         int punkty = 0;
         //int scroll = 0;
 
@@ -42,25 +35,47 @@ namespace WindowsFormsApp1
             InitializeComponent();
             FormBorderStyle = FormBorderStyle.None;
             WindowState = FormWindowState.Maximized;
+
             label1.Text = "Punkty: " + punkty;
         }
 
+        //dzieją się rzeczy
+        [DllImport("gdi32.dll")]
+        static extern int GetDeviceCaps(IntPtr hdc, int nIndex);
+        public enum DeviceCap
+        {
+            VERTRES = 10,
+            DESKTOPVERTRES = 117,
+
+        }
+        public float getScalingFactor()
+        {
+            Graphics g = Graphics.FromHwnd(IntPtr.Zero);
+            IntPtr desktop = g.GetHdc();
+            int LogicalScreenHeight = GetDeviceCaps(desktop, (int)DeviceCap.VERTRES);
+            int PhysicalScreenHeight = GetDeviceCaps(desktop, (int)DeviceCap.DESKTOPVERTRES);
+
+            float ScreenScalingFactor = (float)PhysicalScreenHeight / (float)LogicalScreenHeight;
+
+            return ScreenScalingFactor; // 1.25 = 125%
+        }
+        // i dostajemy wspolczynnik skalowania obrazu
 
         private void KeyU(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Left)
             {
-                playerLeft = false;
+                p.playerLeft = false;
             }
             if (e.KeyCode == Keys.Right)
             {
-                playerRight = false;
+                p.playerRight = false;
             }
             if (e.KeyCode == Keys.Up)
             {
-                playerUp = false;
-                jumpSpeed = 200;
-                isGrounded = false;
+                p.playerUp = false;
+                p.jumpSpeed = 200;
+                p.isGrounded = false;
             }
 
         }
@@ -69,70 +84,95 @@ namespace WindowsFormsApp1
         {
             if (e.KeyCode == Keys.Left)
             {
-                playerLeft = true;
-                faceLeft = true;
+                p.playerLeft = true;
+                p.faceLeft = true;
             }
             if (e.KeyCode == Keys.Right)
             {
-                playerRight = true;
-                faceLeft=false;
+                p.playerRight = true;
+                p.faceLeft = false;
             }
-            if (e.KeyCode == Keys.Up && isGrounded)
+            if (e.KeyCode == Keys.Up && p.isGrounded)
             {
-                playerUp = true;
-                fallSpeed = 0;
+                p.playerUp = true;
+                p.fallSpeed = 0;
             }
 
         }
         private void onFormLoad(object sender, EventArgs e)
         {
-            pictureBox1.Image = new Bitmap(this.Width, this.Height);
-            g = Graphics.FromImage(pictureBox1.Image);
+
+            pictureBoxBackground.Image = new Bitmap(this.Width, this.Height);
+            gBackground = Graphics.FromImage(pictureBoxBackground.Image);
+            pictureBoxPlayer.Image = new Bitmap(this.Width, this.Height);
+            gPlayer = Graphics.FromImage(pictureBoxPlayer.Image);
+
+
+            System.Diagnostics.Debug.WriteLine(Width);
+            
+            gBackground.ScaleTransform(1f/getScalingFactor(), 1/getScalingFactor());
+            gPlayer.ScaleTransform(1f / getScalingFactor(), 1 / getScalingFactor());
+            
+            ResolutionWidth = Convert.ToInt32(Width * getScalingFactor());
+            ResolutionHeight = Convert.ToInt32(Height * getScalingFactor());
+            
+      
+            System.Diagnostics.Debug.WriteLine(ResolutionWidth);
+
+            pictureBoxPlayer.Dock = DockStyle.Fill;
+            pictureBoxPlayer.Parent = pictureBoxBackground;
+            pictureBoxPlayer.BackColor = Color.Transparent;
+
+            p = new Player(gPlayer, PlayerBitmap, ResolutionWidth, ResolutionHeight, PlatformHB);
+
+            generatePlatform(0, ResolutionHeight - 100, 1000);
+
+            generatePlatformRandom(5);
+            //generatePlatform(Width / 10, Height / 3, 10);
+            //generatePlatform(2 * Width / 5, 2 * Height / 3, 5);
+            //generatePlatform(3 * Width / 5, 2 * Height / 5, 10);
+            //generatePlatform(Width / 3, Height / 9, 7);
+
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            PlayerMovement();
-            PlatformCollideWith(Player);
+            p.PlayerMovement();
+            p.PlatformPlayerCollision();
 
-            generatePlatform(0, Height - 100, Width);
-
-            generatePlatform(Width / 10, Height / 3, Width / 5);
-            generatePlatform(2 * Width / 5, 2 * Height / 3, Width / 5);
-            generatePlatform(3 * Width / 5, 2 * Height / 5, Width / 20);
-            generatePlatform(Width / 3, Height / 10, Width / 20);
 
 
 
             bool GotIt = false; //Czy ma marchewke?
             foreach (Rectangle cb in CarrotHB)
             {
-               
-                if (Player.Contains(cb) && GotIt == false)
+
+                if (p.playerBox.Contains(cb) && GotIt == false)
                 {
 
                     label1.Text = "Punkty: " + punkty++;
                     GotIt = true;
-                    generateEmpty(2 * Width / 4, 3 * Height / 5, Width / 80);
+                    generateEmpty(2 * ResolutionWidth / 4, 3 * ResolutionHeight / 5, ResolutionWidth / 80);
                     mar1 = false;
                     break;
                 }
                 else
-                break;
+                    break;
 
             }
-            if(mar1 == true)
-            generateCarrot(2 * Width / 4, 3 * Height / 5, Width / 80);
+            if (mar1 == true)
+                generateCarrot(2 * ResolutionWidth / 4, 3 * ResolutionHeight / 5, ResolutionWidth / 80);
 
 
 
-            pictureBox1.Refresh();
-            g.Clear(Color.Transparent);
+            pictureBoxBackground.Refresh();
+            //gBackground.Clear(Color.Transparent);
+            pictureBoxPlayer.Refresh();
+            gPlayer.Clear(Color.Transparent);
 
         }
 
-        int platWidth = Properties.Resources._31.Width;
-        int platHeight = Properties.Resources._31.Height;
+
 
         int CarrotWidth = Properties.Resources.Carrot.Width;
         int CarrotHeight = Properties.Resources.Carrot.Height;
@@ -140,15 +180,20 @@ namespace WindowsFormsApp1
         int EmptyWidth = Properties.Resources.Carrot.Width;
         int EmptyHeight = Properties.Resources.Carrot.Height;
 
+
+        int platWidth = Properties.Resources._311.Width;
+        int platHeight = Properties.Resources._311.Height;
         private void generatePlatform(int posX, int posY, int _width)
         {
 
-            g.DrawImage(Properties.Resources._31, posX, posY);
-            Rectangle rect = new Rectangle(posX, posY, _width + platWidth, 1);
+            gBackground.DrawImage(Properties.Resources._311, posX, posY);
+            Rectangle rect = new Rectangle(posX, posY, platWidth * _width, 1);
             PlatformHB.Add(rect);
-            if (platWidth < _width)
+            int len = 0;
+            for (int i = 0; i < _width; i++)
             {
-                generatePlatform(posX + platWidth, posY, _width - platWidth);
+                gBackground.DrawImage(Properties.Resources._311, posX + len, posY);
+                len += platWidth;
             }
 
         }
@@ -156,104 +201,118 @@ namespace WindowsFormsApp1
         private void generateCarrot(int posX, int posY, int _width)
         {
 
-            g.DrawImage(Properties.Resources.Carrot, posX, posY);
+            gBackground.DrawImage(Properties.Resources.Carrot, posX, posY);
             Rectangle rect = new Rectangle(posX, posY, _width + CarrotWidth, 1);
             CarrotHB.Add(rect);
-            if (CarrotWidth < _width)
-            {
-                generateCarrot(posX + CarrotWidth, posY, _width - CarrotWidth);
-            }
+
         }
 
         private void generateEmpty(int posX, int posY, int _width)
         {
 
-            g.DrawImage(Properties.Resources.Empty, posX, posY);
+            gBackground.DrawImage(Properties.Resources.Empty, posX, posY);
             Rectangle rect = new Rectangle(posX, posY, _width + EmptyWidth, 1);
             EmptyHB.Add(rect);
-            if (EmptyWidth < _width)
-            {
-                generateCarrot(posX + EmptyWidth, posY, _width - EmptyWidth);
-            }
+
         }
 
         private void generatePlatformRandom(int numberOf)
         {
             Random rand = new Random();
+
+            int ranX = rand.Next(50, ResolutionWidth - 200);
+            int ranY = ResolutionHeight - 100;
+            int ranWidth = 10;
+            int prevRanX = 0;
+            int prevRanY = 0;
+            int prevRanWidth = 0;
+
+
+
+            int jumpDistance = 70;
+
+            int ranXRight;
+            int minY = p.playerBox.Height + 40; // ponad glowa gracza
+            int maxY = 200; //wysokosc skoku
+
+
             for (int i = 0; i < numberOf; i++)
             {
-                int ran1 = rand.Next(10, 700);
-                int ran2 = rand.Next(0, 350);
-                int ran3 = rand.Next(100, 200);
-                generatePlatform(ran1, ran2, ran3);
+                //zapamietuje poprzednie wartosci na ktorych bazie tworzymy kolejne
+                prevRanWidth = ranWidth;
+                prevRanX = ranX;
+                prevRanY = ranY;
+
+                ranY = prevRanY - rand.Next(minY, maxY);
+                ///////////////////////////
+
+                //losuje poczatek nowej platformy
+                ranX = rand.Next(10, prevRanX + prevRanWidth * platWidth + jumpDistance);
+
+                //uzupelniamy ewentualna luke szerokoscia platformy          
+                if (ranX < prevRanX) // jesli zaczyna sie przed poprzednia platforma
+                {
+                    System.Diagnostics.Debug.WriteLine("condition 1");
+                    if (prevRanX - jumpDistance > ranX)
+                        ranXRight = rand.Next(prevRanX - jumpDistance, prevRanX + (prevRanWidth - 3) * platWidth - jumpDistance);
+                    else
+                    {
+                        System.Diagnostics.Debug.WriteLine("ranX: " + ranX);
+
+                        System.Diagnostics.Debug.WriteLine("prevRanX - jumpDistance + prevRanWidth = " + (prevRanX - jumpDistance + prevRanWidth * platWidth));
+                        //probably tutaj jest blad gdy nastepna platforma zaczyna sie mniej niz jumpdistance przed a konczy za platforma
+                        ranXRight = rand.Next(ranX, prevRanX - jumpDistance + (prevRanWidth - 3) * platWidth);
+
+                    }
+
+                    ranWidth = (ranXRight - ranX) / platWidth + 5;
+                }
+                else if (ranX >= prevRanX) // jesli zaczyna sie na poprzedniej platformie lub za nia
+                {
+
+                    System.Diagnostics.Debug.WriteLine("condition else if");
+                    //ranX = ranX + 100;
+                    if (ranX < prevRanX + prevRanWidth * platWidth + jumpDistance)
+                    {
+                        System.Diagnostics.Debug.WriteLine("ranX: " + ranX);
+
+                        System.Diagnostics.Debug.WriteLine("prevRanX + prevRanWidth*platWidth - jumpDistance = " + (prevRanX - jumpDistance + prevRanWidth * platWidth));
+
+                        ranXRight = rand.Next(ranX, prevRanX + prevRanWidth * platWidth + jumpDistance);
+
+                        ranWidth = (ranXRight - ranX) / platWidth + 5;
+                    }
+                    else
+                    {
+                        ranX = prevRanX + prevRanWidth * platWidth + jumpDistance;
+                        ranWidth = rand.Next(7, 10);
+
+                        System.Diagnostics.Debug.WriteLine("condition else");
+                    }
+                }
+
+                for (int n = 0; n < 10; n++)
+                {
+                    if (ranX + ranWidth * platWidth >= ResolutionWidth)
+                    {
+
+                        System.Diagnostics.Debug.WriteLine("too far right");
+                        ranX -= 2 * (ranX + ranWidth * platWidth - ResolutionWidth);
+                    }
+
+                }
+
+
+
+                /////////////////////////////////
+                //System.Diagnostics.Debug.WriteLine(prevRanX);
+                System.Diagnostics.Debug.WriteLine("Generated Platform: " + ranX + " " + ranY + " " + ranWidth);
+                //System.Diagnostics.Debug.WriteLine(ranY);
+                //System.Diagnostics.Debug.WriteLine(ranWidth);
+
+                generatePlatform(ranX, ranY, ranWidth);
             }
         }
 
-
-        public void PlayerMovement()
-        {
-            PlayerBitmap = Properties.Resources.Chungus;
-
-            if (faceLeft) // zmienia zwrot postaci
-            {
-                PlayerBitmap.RotateFlip(RotateFlipType.Rotate180FlipY);
-            }
-            g.DrawImage(PlayerBitmap, Player.X, Player.Y);
-
-            if (playerLeft == true)
-            {
-                Player.X -= playerSpeed;
-            }
-            if (playerRight == true && Player.X < this.Width)
-            {
-                Player.X += playerSpeed;
-            }
-            if (playerUp == true && isGrounded)
-            {
-                Player.Y -= jumpSpeed / 10;
-                if (jumpSpeed > 0)
-                    jumpSpeed -= jumpSpeedDeceleration;
-                else if (jumpSpeed <= 0)
-                {
-                    playerUp = false;
-                    fallSpeed += 50;
-                }
-            }
-
-            if (Player.Y < this.Height && playerUp == false)
-            {
-                Player.Y += fallSpeed / 10;
-                if (fallSpeed < maxFallSpeed)
-                    fallSpeed += fallSpeedAcceleration;
-                isGrounded = false;
-            }
-        }
-        public void PlatformCollideWith(Rectangle Rb)
-        {
-            foreach (Rectangle hb in PlatformHB)
-            {
-                // kolizja gracza z gorna krawedzia zatrzymuje opadanie //dziala
-                if (Rb.Y + Rb.Height < hb.Y + 20 && Rb.Y + Rb.Height > hb.Y - 4 &&
-                    Rb.X < hb.X + hb.Width + 50 && Rb.X > hb.X - 50)
-                {
-                    fallSpeed = 0;
-                    jumpSpeed = maxJumpSpeed;
-                    isGrounded = true;
-                }
-                //kolizja z dolna krawedzia zatrzymuje skok // dziala
-                if (Rb.Y < hb.Y + hb.Height + 40 && Rb.Y > hb.Y + hb.Height &&
-                    Rb.X < hb.X + hb.Width && Rb.X > hb.X)
-                {
-                    jumpSpeed = 0;
-                }
-
-                //kolizja z bocznymi krawedziami 
-                if (Rb.Contains(hb.X, hb.Y) || Rb.Contains(hb.X + hb.Width, hb.Y + hb.Height))
-                {
-                    Rb.Y--;
-                }
-
-            }
-        }
     }
 }

@@ -31,14 +31,16 @@
             this.components = new System.ComponentModel.Container();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.label1 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.pictureBoxPlayer = new System.Windows.Forms.PictureBox();
+            this.pictureBoxBackground = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlayer)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBackground)).BeginInit();
             this.SuspendLayout();
             // 
             // timer1
             // 
             this.timer1.Enabled = true;
-            this.timer1.Interval = 30;
+            this.timer1.Interval = 1;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // label1
@@ -50,31 +52,41 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "label1";
             // 
-            // pictureBox1
+            // pictureBoxPlayer
             // 
-            this.pictureBox1.BackColor = System.Drawing.Color.LightBlue;
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1067, 554);
-            this.pictureBox1.TabIndex = 2;
-            this.pictureBox1.TabStop = false;
+            this.pictureBoxPlayer.Location = new System.Drawing.Point(0, 28);
+            this.pictureBoxPlayer.Name = "pictureBoxPlayer";
+            this.pictureBoxPlayer.Size = new System.Drawing.Size(1067, 526);
+            this.pictureBoxPlayer.TabIndex = 4;
+            this.pictureBoxPlayer.TabStop = false;
+            // 
+            // pictureBoxBackground
+            // 
+            this.pictureBoxBackground.BackColor = System.Drawing.Color.LightBlue;
+            this.pictureBoxBackground.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBoxBackground.Location = new System.Drawing.Point(0, 0);
+            this.pictureBoxBackground.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBoxBackground.Name = "pictureBoxBackground";
+            this.pictureBoxBackground.Size = new System.Drawing.Size(1067, 554);
+            this.pictureBoxBackground.TabIndex = 2;
+            this.pictureBoxBackground.TabStop = false;
             // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1067, 554);
+            this.Controls.Add(this.pictureBoxPlayer);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.pictureBoxBackground);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "A Game";
             this.Load += new System.EventHandler(this.onFormLoad);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyDow);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.KeyU);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlayer)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBackground)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -82,8 +94,9 @@
 
         #endregion
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBoxBackground;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.PictureBox pictureBoxPlayer;
     }
 }
 
