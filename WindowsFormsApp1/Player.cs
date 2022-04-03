@@ -28,13 +28,14 @@ namespace WindowsFormsApp1
 
         Graphics gPlayer;
         Bitmap player;
-        public Rectangle playerBox = new Rectangle(80, 200, Properties.Resources.Chungus.Width, Properties.Resources.Chungus.Height); //hitbox postaci
+        public Rectangle playerBox; //hitbox postaci
         List<Rectangle> PlatformHB;
         readonly int Width;
         readonly int Heigth;
 
         public Player(Graphics _g, Bitmap _player, int W, int H, List<Rectangle> hb)
         {
+            playerBox = new Rectangle(80, H - 200, Properties.Resources.Chungus.Width, Properties.Resources.Chungus.Height);
             gPlayer = _g;
             player = _player;
             Width = W;
@@ -57,7 +58,7 @@ namespace WindowsFormsApp1
             {
                 playerBox.X -= playerSpeed;
             }
-            if (playerRight == true && playerBox.X < this.Width && !playerSideCollison)
+            if (playerRight == true && playerBox.X < Width && !playerSideCollison)
             {
                 playerBox.X += playerSpeed;
             }

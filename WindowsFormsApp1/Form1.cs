@@ -15,6 +15,9 @@ namespace WindowsFormsApp1
 
     public partial class Form1 : Form
     {
+
+        int ResolutionWidth = 1;
+        int ResolutionHeight = 1;
         Graphics gBackground;
         Graphics gPlayer;
         Bitmap PlayerBitmap;
@@ -87,7 +90,7 @@ namespace WindowsFormsApp1
             if (e.KeyCode == Keys.Right)
             {
                 p.playerRight = true;
-                p.faceLeft=false;
+                p.faceLeft = false;
             }
             if (e.KeyCode == Keys.Up && p.isGrounded)
             {
@@ -98,24 +101,31 @@ namespace WindowsFormsApp1
         }
         private void onFormLoad(object sender, EventArgs e)
         {
+
             pictureBoxBackground.Image = new Bitmap(this.Width, this.Height);
             gBackground = Graphics.FromImage(pictureBoxBackground.Image);
             pictureBoxPlayer.Image = new Bitmap(this.Width, this.Height);
             gPlayer = Graphics.FromImage(pictureBoxPlayer.Image);
 
 
-            System.Diagnostics.Debug.WriteLine(getScalingFactor());
-
-            Scale(new SizeF(1/ getScalingFactor(),1/ getScalingFactor()));
-            System.Diagnostics.Debug.WriteLine(getScalingFactor());
+            System.Diagnostics.Debug.WriteLine(Width);
+            
+            gBackground.ScaleTransform(1f/getScalingFactor(), 1/getScalingFactor());
+            gPlayer.ScaleTransform(1f / getScalingFactor(), 1 / getScalingFactor());
+            
+            ResolutionWidth = Convert.ToInt32(Width * getScalingFactor());
+            ResolutionHeight = Convert.ToInt32(Height * getScalingFactor());
+            
+      
+            System.Diagnostics.Debug.WriteLine(ResolutionWidth);
 
             pictureBoxPlayer.Dock = DockStyle.Fill;
             pictureBoxPlayer.Parent = pictureBoxBackground;
             pictureBoxPlayer.BackColor = Color.Transparent;
 
-            p = new Player(gPlayer, PlayerBitmap, Width,Height, PlatformHB);
+            p = new Player(gPlayer, PlayerBitmap, ResolutionWidth, ResolutionHeight, PlatformHB);
 
-            generatePlatform(0, Height - 100, 1000);
+            generatePlatform(0, ResolutionHeight - 100, 1000);
 
             generatePlatformRandom(5);
             //generatePlatform(Width / 10, Height / 3, 10);
@@ -136,22 +146,22 @@ namespace WindowsFormsApp1
             bool GotIt = false; //Czy ma marchewke?
             foreach (Rectangle cb in CarrotHB)
             {
-               
+
                 if (p.playerBox.Contains(cb) && GotIt == false)
                 {
 
                     label1.Text = "Punkty: " + punkty++;
                     GotIt = true;
-                    generateEmpty(2 * Width / 4, 3 * Height / 5, Width / 80);
+                    generateEmpty(2 * ResolutionWidth / 4, 3 * ResolutionHeight / 5, ResolutionWidth / 80);
                     mar1 = false;
                     break;
                 }
                 else
-                break;
+                    break;
 
             }
-            if(mar1 == true)
-            generateCarrot(2 * Width / 4, 3 * Height / 5, Width / 80);
+            if (mar1 == true)
+                generateCarrot(2 * ResolutionWidth / 4, 3 * ResolutionHeight / 5, ResolutionWidth / 80);
 
 
 
@@ -177,12 +187,12 @@ namespace WindowsFormsApp1
         {
 
             gBackground.DrawImage(Properties.Resources._311, posX, posY);
-            Rectangle rect = new Rectangle(posX, posY, platWidth*_width, 1);
+            Rectangle rect = new Rectangle(posX, posY, platWidth * _width, 1);
             PlatformHB.Add(rect);
             int len = 0;
-            for(int i=0;i<_width;i++)
+            for (int i = 0; i < _width; i++)
             {
-                gBackground.DrawImage(Properties.Resources._311, posX+len, posY);
+                gBackground.DrawImage(Properties.Resources._311, posX + len, posY);
                 len += platWidth;
             }
 
@@ -210,8 +220,8 @@ namespace WindowsFormsApp1
         {
             Random rand = new Random();
 
-            int ranX = rand.Next(50,Width-200);
-            int ranY = Height - 100;
+            int ranX = rand.Next(50, ResolutionWidth - 200);
+            int ranY = ResolutionHeight - 100;
             int ranWidth = 10;
             int prevRanX = 0;
             int prevRanY = 0;
@@ -222,8 +232,8 @@ namespace WindowsFormsApp1
             int jumpDistance = 70;
 
             int ranXRight;
-            int minY = p.playerBox.Height+60; // ponad glowa gracza
-            int maxY = 180; //wysokosc skoku
+            int minY = p.playerBox.Height + 40; // ponad glowa gracza
+            int maxY = 200; //wysokosc skoku
 
 
             for (int i = 0; i < numberOf; i++)
@@ -237,40 +247,40 @@ namespace WindowsFormsApp1
                 ///////////////////////////
 
                 //losuje poczatek nowej platformy
-                ranX = rand.Next(10, prevRanX+prevRanWidth*platWidth+jumpDistance);
+                ranX = rand.Next(10, prevRanX + prevRanWidth * platWidth + jumpDistance);
 
                 //uzupelniamy ewentualna luke szerokoscia platformy          
                 if (ranX < prevRanX) // jesli zaczyna sie przed poprzednia platforma
                 {
                     System.Diagnostics.Debug.WriteLine("condition 1");
-                    if(prevRanX - jumpDistance > ranX)
-                        ranXRight = rand.Next(prevRanX-jumpDistance,prevRanX+(prevRanWidth-3) * platWidth - jumpDistance);
+                    if (prevRanX - jumpDistance > ranX)
+                        ranXRight = rand.Next(prevRanX - jumpDistance, prevRanX + (prevRanWidth - 3) * platWidth - jumpDistance);
                     else
                     {
-                        System.Diagnostics.Debug.WriteLine("ranX: "+ranX);
+                        System.Diagnostics.Debug.WriteLine("ranX: " + ranX);
 
-                        System.Diagnostics.Debug.WriteLine("prevRanX - jumpDistance + prevRanWidth = " + (prevRanX - jumpDistance + prevRanWidth*platWidth));
+                        System.Diagnostics.Debug.WriteLine("prevRanX - jumpDistance + prevRanWidth = " + (prevRanX - jumpDistance + prevRanWidth * platWidth));
                         //probably tutaj jest blad gdy nastepna platforma zaczyna sie mniej niz jumpdistance przed a konczy za platforma
                         ranXRight = rand.Next(ranX, prevRanX - jumpDistance + (prevRanWidth - 3) * platWidth);
 
                     }
 
-                    ranWidth = (ranXRight - ranX )/ platWidth +5;
+                    ranWidth = (ranXRight - ranX) / platWidth + 5;
                 }
                 else if (ranX >= prevRanX) // jesli zaczyna sie na poprzedniej platformie lub za nia
                 {
 
                     System.Diagnostics.Debug.WriteLine("condition else if");
                     //ranX = ranX + 100;
-                    if (ranX < prevRanX + prevRanWidth*platWidth + jumpDistance)
+                    if (ranX < prevRanX + prevRanWidth * platWidth + jumpDistance)
                     {
                         System.Diagnostics.Debug.WriteLine("ranX: " + ranX);
 
-                        System.Diagnostics.Debug.WriteLine("prevRanX + prevRanWidth*platWidth - jumpDistance = " + (prevRanX - jumpDistance + prevRanWidth*platWidth));
+                        System.Diagnostics.Debug.WriteLine("prevRanX + prevRanWidth*platWidth - jumpDistance = " + (prevRanX - jumpDistance + prevRanWidth * platWidth));
 
-                        ranXRight = rand.Next(ranX, prevRanX + prevRanWidth*platWidth + jumpDistance);
+                        ranXRight = rand.Next(ranX, prevRanX + prevRanWidth * platWidth + jumpDistance);
 
-                        ranWidth = (ranXRight - ranX) / platWidth+5;
+                        ranWidth = (ranXRight - ranX) / platWidth + 5;
                     }
                     else
                     {
@@ -281,13 +291,13 @@ namespace WindowsFormsApp1
                     }
                 }
 
-                for(int n = 0; n < 10; n++)
+                for (int n = 0; n < 10; n++)
                 {
-                    if (ranX + ranWidth*platWidth >= Width)
+                    if (ranX + ranWidth * platWidth >= ResolutionWidth)
                     {
 
                         System.Diagnostics.Debug.WriteLine("too far right");
-                        ranX -= 2*(ranX + ranWidth * platWidth - Width);
+                        ranX -= 2 * (ranX + ranWidth * platWidth - ResolutionWidth);
                     }
 
                 }
@@ -300,11 +310,9 @@ namespace WindowsFormsApp1
                 //System.Diagnostics.Debug.WriteLine(ranY);
                 //System.Diagnostics.Debug.WriteLine(ranWidth);
 
-                generatePlatform(ranX,ranY,ranWidth);
+                generatePlatform(ranX, ranY, ranWidth);
             }
         }
 
-
-      
     }
 }
