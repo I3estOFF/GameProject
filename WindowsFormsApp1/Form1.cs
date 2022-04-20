@@ -29,7 +29,6 @@ namespace WindowsFormsApp1
 
         public bool mar1 = true;
         int punkty = 0;
-        //int scroll = 0;
 
         public Form1()
         {
@@ -168,11 +167,17 @@ namespace WindowsFormsApp1
 
 
 
-            pictureBoxBackground.Refresh();
-            //gBackground.Clear(Color.Transparent);
+            
             pictureBoxPlayer.Refresh();
+
             gPlayer.Clear(Color.Transparent);
 
+        }
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            gBackground.Clear(Color.Transparent);
+            //pictureBoxBackground.Refresh();
+            RenderPlatforms();
         }
 
 
@@ -186,20 +191,7 @@ namespace WindowsFormsApp1
 
         int platWidth = Properties.Resources._311.Width;
         int platHeight = Properties.Resources._311.Height;
-        private void generatePlatform(int posX, int posY, int _width)
-        {
 
-            gBackground.DrawImage(Properties.Resources._311, posX, posY);
-            Rectangle rect = new Rectangle(posX, posY, platWidth * _width, 1);
-            PlatformHB.Add(rect);
-            int len = 0;
-            for (int i = 0; i < _width; i++)
-            {
-                gBackground.DrawImage(Properties.Resources._311, posX + len, posY);
-                len += platWidth;
-            }
-
-        }
 
         private void generateCarrot(int posX, int posY, int _width)
         {
@@ -218,7 +210,49 @@ namespace WindowsFormsApp1
             EmptyHB.Add(rect);
 
         }
+        private void generatePlatform(int posX, int posY, int _width)
+        {
 
+            gBackground.DrawImage(Properties.Resources._311, posX, posY);
+            Rectangle rect = new Rectangle(posX, posY, platWidth * _width, 1);
+            PlatformHB.Add(rect);
+            int len = 0;
+            for (int i = 0; i < _width; i++)
+            {
+                gBackground.DrawImage(Properties.Resources._311, posX + len, posY);
+                len += platWidth;
+            }
+
+        }
+        private void RenderPlatforms()
+        {
+            //przygotowac zestaw platform o roznych rozmiarach
+            Rectangle temp;
+            for(int i=0; i<PlatformHB.Count; i++)
+            {
+                temp =  PlatformHB[i];
+                PlatformHB[i] = new Rectangle(temp.X,temp.Y+5,temp.Width,temp.Height);
+            }
+            p.playerBox.Y +=5;
+
+
+
+            int dlen;
+            int begLen;
+            foreach (Rectangle platform in PlatformHB)
+            {
+                dlen = 0;
+                begLen = platform.Width / platWidth;
+                for (int i = 0; i < begLen; i++)
+                {
+                    gBackground.DrawImage(Properties.Resources._311, platform.Left + dlen, platform.Top);
+                    dlen += platWidth;
+                }       
+            }
+
+            
+        }
+        //adds new platform to the list
         private void generatePlatformRandom(int numberOf)
         {
             Random rand = new Random();
@@ -306,16 +340,12 @@ namespace WindowsFormsApp1
                 }
 
 
-
-                /////////////////////////////////
-                //System.Diagnostics.Debug.WriteLine(prevRanX);
-                System.Diagnostics.Debug.WriteLine("Generated Platform: " + ranX + " " + ranY + " " + ranWidth);
-                //System.Diagnostics.Debug.WriteLine(ranY);
-                //System.Diagnostics.Debug.WriteLine(ranWidth);
-
-                generatePlatform(ranX, ranY, ranWidth);
+                //generatePlatform(ranX, ranY, ranWidth);
+                Rectangle rect = new Rectangle(ranX, ranY, platWidth * ranWidth, 1) ;
+                PlatformHB.Add(rect);
             }
         }
+
 
     }
 }
