@@ -18,7 +18,7 @@ namespace WindowsFormsApp1
         
         
         const int fallSpeedAcceleration = 9;
-        const int jumpSpeedDeceleration = 20;
+        const int jumpSpeedDeceleration = 18;
         const int maxJumpSpeed = 300;
         const int maxFallSpeed = 100;
         const int maxPlayerSpeed = 7;
@@ -64,13 +64,13 @@ namespace WindowsFormsApp1
             }
             if (playerUp == true && isGrounded)
             {
-                playerBox.Y -= jumpSpeed / 10;
+                playerBox.Y -= jumpSpeed/10 ;
                 if (jumpSpeed > 0)
                     jumpSpeed -= jumpSpeedDeceleration;
                 else if (jumpSpeed <= 0)
                 {
                     playerUp = false;
-                    fallSpeed += 50;
+                    fallSpeed += 30;
                 }
             }
 
