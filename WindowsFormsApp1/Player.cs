@@ -42,6 +42,7 @@ namespace WindowsFormsApp1
             Heigth = H;
             PlatformHB = hb;
         }
+        
         public void PlayerMovement()
         {
             player = Properties.Resources.Chungus;

@@ -96,7 +96,7 @@ namespace WindowsFormsApp1
 
             w.generateGround(0, ResolutionHeight - 100, 50);
             w.generatePlatformRandom(4);
-
+            
         }
         private void KeyU(object sender, KeyEventArgs e)
         {
@@ -177,10 +177,18 @@ namespace WindowsFormsApp1
         }
         private void timer2_Tick(object sender, EventArgs e)
         {
-            screenShift++;
-            if(screenShift% 60==1)
+            
+            if(screenShift% 50==1)
+            {
                 w.generatePlatformRandom(1);
+            }
+            else if(screenShift% 250==3)
+            {
+                w.generateCloud();
+            }
+            screenShift++;
             gBackground.Clear(Color.Transparent);
+            w.RenderClouds();
             w.RenderPlatforms();
         }
 
