@@ -64,3 +64,13 @@ C:\Users\macie\Documents\GitStuff\JumpingChungus2\WindowsFormsApp1\obj\Debug\Jum
 C:\Users\macie\Documents\GitStuff\JumpingChungus2\WindowsFormsApp1\obj\Debug\Jumping.csproj.CoreCompileInputs.cache
 C:\Users\macie\Documents\GitStuff\JumpingChungus2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
 C:\Users\macie\Documents\GitStuff\JumpingChungus2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
+C:\Users\StudentPL\Source\Repos\JumpingChungus2\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe.config
+C:\Users\StudentPL\Source\Repos\JumpingChungus2\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe
+C:\Users\StudentPL\Source\Repos\JumpingChungus2\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.pdb
+C:\Users\StudentPL\Source\Repos\JumpingChungus2\WindowsFormsApp1\obj\Debug\Jumping.csproj.AssemblyReference.cache
+C:\Users\StudentPL\Source\Repos\JumpingChungus2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form1.resources
+C:\Users\StudentPL\Source\Repos\JumpingChungus2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
+C:\Users\StudentPL\Source\Repos\JumpingChungus2\WindowsFormsApp1\obj\Debug\Jumping.csproj.GenerateResource.cache
+C:\Users\StudentPL\Source\Repos\JumpingChungus2\WindowsFormsApp1\obj\Debug\Jumping.csproj.CoreCompileInputs.cache
+C:\Users\StudentPL\Source\Repos\JumpingChungus2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
+C:\Users\StudentPL\Source\Repos\JumpingChungus2\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb

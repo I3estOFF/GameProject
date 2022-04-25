@@ -15,41 +15,33 @@ namespace WindowsFormsApp1
 
     public partial class Form1 : Form
     {
-
         int ResolutionWidth = 1; // zmienne trzymajace rzeczywista rozdzielczosc ekranu
         int ResolutionHeight = 1;
+        int screenShift = 0;
+        int punkty = 0;
 
         static Graphics gBackground;
         Graphics gPlayer;
         Bitmap PlayerBitmap;
-        List<Rectangle> CarrotHB = new List<Rectangle>();
-        List<Rectangle> EmptyHB = new List<Rectangle>();
         Player p;
         World w;
-        int screenShift = 0;
 
-        public bool mar1 = true;
-        int punkty = 0;
-
-        public Form1()
+        public Form1()                                                                                                      //inicjalizacja okna
         {
             InitializeComponent();
             FormBorderStyle = FormBorderStyle.None;
             WindowState = FormWindowState.Maximized;
-
-            label1.Text = "Punkty: " + punkty;
+            label1.Text = "Punkty: 0";
         }
 
-        //dzieją się rzeczy
         [DllImport("gdi32.dll")]
         static extern int GetDeviceCaps(IntPtr hdc, int nIndex);
         public enum DeviceCap
         {
             VERTRES = 10,
             DESKTOPVERTRES = 117,
-
         }
-        public float getScalingFactor()
+        public float getScalingFactor()                                                                                 //uzyskiwanie współczynnika skalowania
         {
             Graphics g = Graphics.FromHwnd(IntPtr.Zero);
             IntPtr desktop = g.GetHdc();
@@ -60,8 +52,7 @@ namespace WindowsFormsApp1
 
             return ScreenScalingFactor; // 1.25 = 125%
         }
-        // i dostajemy wspolczynnik skalowania obrazu
-        private void onFormLoad(object sender, EventArgs e)
+        private void onFormLoad(object sender, EventArgs e)                                                            //inicjalizowanie gry
         {
             //inicjalizacja obiektow
             pictureBoxBackground.Image = new Bitmap(this.Width, this.Height);
@@ -69,8 +60,8 @@ namespace WindowsFormsApp1
             pictureBoxPlayer.Image = new Bitmap(this.Width, this.Height);
             gPlayer = Graphics.FromImage(pictureBoxPlayer.Image);
 
-
             System.Diagnostics.Debug.WriteLine(Width);
+
             //przeskalowanie grafik do 100% rozmiaru
             gBackground.ScaleTransform(1f / getScalingFactor(), 1 / getScalingFactor());
             gPlayer.ScaleTransform(1f / getScalingFactor(), 1 / getScalingFactor());
@@ -79,7 +70,6 @@ namespace WindowsFormsApp1
             ResolutionWidth = Convert.ToInt32(Width * getScalingFactor());
             ResolutionHeight = Convert.ToInt32(Height * getScalingFactor());
 
-
             System.Diagnostics.Debug.WriteLine(ResolutionWidth);
 
             //umiejscowienie pictureBoxa z graczem 
@@ -87,18 +77,14 @@ namespace WindowsFormsApp1
             pictureBoxPlayer.Parent = pictureBoxBackground;
             pictureBoxPlayer.BackColor = Color.Transparent;
 
-
             w = new World(gBackground, ResolutionWidth, ResolutionHeight);
             p = new Player(gPlayer, PlayerBitmap, ResolutionWidth, ResolutionHeight, w.PlatformHB);
             w.SetPlayer(p);
 
-         
-
             w.generateGround(0, ResolutionHeight - 100, 50);
-            w.generatePlatformRandom(4);
-            
+            w.generatePlatformRandom(4);    
         }
-        private void KeyU(object sender, KeyEventArgs e)
+        private void KeyU(object sender, KeyEventArgs e)                                                                        //sterowanie
         {
             if (e.KeyCode == Keys.Left)
             {
@@ -114,7 +100,6 @@ namespace WindowsFormsApp1
                 p.jumpSpeed = 200;
                 p.isGrounded = false;
             }
-
         }
 
         private void KeyDow(object sender, KeyEventArgs e)
@@ -134,50 +119,17 @@ namespace WindowsFormsApp1
                 p.playerUp = true;
                 p.fallSpeed = 0;
             }
-
         }
 
-
-        private void timer1_Tick(object sender, EventArgs e)
+        private void timer1_Tick(object sender, EventArgs e)                                                                    //Timery
         {
             p.PlayerMovement();
-            p.PlatformPlayerCollision();
-
-
-
-
-
-            bool GotIt = false; //Czy ma marchewke?
-            foreach (Rectangle cb in CarrotHB)
-            {
-
-                if (p.playerBox.Contains(cb) && GotIt == false)
-                {
-
-                    label1.Text = "Punkty: " + punkty++;
-                    GotIt = true;
-                    generateEmpty(2 * ResolutionWidth / 4, 3 * ResolutionHeight / 5, ResolutionWidth / 80);
-                    mar1 = false;
-                    break;
-                }
-                else
-                    break;
-
-            }
-            if (mar1 == true)
-                generateCarrot(2 * ResolutionWidth / 4, 3 * ResolutionHeight / 5, ResolutionWidth / 80);
-
-
-
-            
+            p.PlatformPlayerCollision();          
             pictureBoxPlayer.Refresh();
-
             gPlayer.Clear(Color.Transparent);
-
         }
         private void timer2_Tick(object sender, EventArgs e)
-        {
-            
+        { 
             if(screenShift% 50==1)
             {
                 w.generatePlatformRandom(1);
@@ -192,33 +144,10 @@ namespace WindowsFormsApp1
             w.RenderPlatforms();
         }
 
-
-
-        int CarrotWidth = Properties.Resources.Carrot.Width;
-        int CarrotHeight = Properties.Resources.Carrot.Height;
-
-        int EmptyWidth = Properties.Resources.Carrot.Width;
-        int EmptyHeight = Properties.Resources.Carrot.Height;
-
-        private void generateCarrot(int posX, int posY, int _width)
+        private void timer3_Tick(object sender, EventArgs e)
         {
-
-            gBackground.DrawImage(Properties.Resources.Carrot, posX, posY);
-            Rectangle rect = new Rectangle(posX, posY, _width + CarrotWidth, 1);
-            CarrotHB.Add(rect);
-
+            punkty = punkty + 10;
+            label1.Text = "Punkty: " + punkty;
         }
-
-        private void generateEmpty(int posX, int posY, int _width)
-        {
-
-            gBackground.DrawImage(Properties.Resources.Empty, posX, posY);
-            Rectangle rect = new Rectangle(posX, posY, _width + EmptyWidth, 1);
-            EmptyHB.Add(rect);
-
-        }
-        
-
-
     }
 }

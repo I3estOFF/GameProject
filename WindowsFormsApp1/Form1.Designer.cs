@@ -34,6 +34,7 @@
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.pictureBoxPlayer = new System.Windows.Forms.PictureBox();
             this.pictureBoxBackground = new System.Windows.Forms.PictureBox();
+            this.timer3 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlayer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBackground)).BeginInit();
             this.SuspendLayout();
@@ -49,7 +50,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(44, 16);
+            this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 3;
             this.label1.Text = "label1";
             // 
@@ -78,6 +79,12 @@
             this.pictureBoxBackground.TabIndex = 2;
             this.pictureBoxBackground.TabStop = false;
             // 
+            // timer3
+            // 
+            this.timer3.Enabled = true;
+            this.timer3.Interval = 1000;
+            this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -105,6 +112,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pictureBoxPlayer;
         private System.Windows.Forms.Timer timer2;
+        private System.Windows.Forms.Timer timer3;
     }
 }
 

@@ -43,7 +43,7 @@ namespace WindowsFormsApp1
             PlatformHB = hb;
         }
         
-        public void PlayerMovement()
+        public void PlayerMovement()                                                                                                //ruch gracza
         {
             player = Properties.Resources.Chungus;
             playerSpeed = maxPlayerSpeed;
@@ -84,7 +84,7 @@ namespace WindowsFormsApp1
             }
         }
 
-        public void PlatformPlayerCollision()
+        public void PlatformPlayerCollision()                                                                                   //kolizja gracza z platformą
         {
             playerSideCollison = false;
             foreach (Rectangle hb in PlatformHB)
@@ -104,16 +104,12 @@ namespace WindowsFormsApp1
                 {
                     jumpSpeed = 0;
                 }
-
                 //kolizja z bocznymi krawedziami 
                 if (playerBox.Contains(hb.X-5, hb.Y + 20) || playerBox.Contains(hb.X + hb.Width+10, hb.Y + 20))
                 {
                     playerSideCollison = true;
                 }
-
             }
         }
-
-
     }
 }

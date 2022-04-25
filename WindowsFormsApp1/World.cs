@@ -21,9 +21,6 @@ namespace WindowsFormsApp1
 
         Player p;
 
-
-
-
         public World(Graphics gBackground, int resoultionWidth, int resolutionHeight)
         {
             this.gBackground = gBackground;
@@ -33,7 +30,7 @@ namespace WindowsFormsApp1
 
         public void SetPlayer(Player p) { this.p = p; }
 
-        public void generateGround(int posX, int posY, int _width)
+        public void generateGround(int posX, int posY, int _width)                                               //generowanie platformy startowej
         {
 
             gBackground.DrawImage(Properties.Resources._311, posX, posY);
@@ -48,9 +45,40 @@ namespace WindowsFormsApp1
             }
 
         }
-        
+
         //adds new platform to the list
-        public void generatePlatformRandom(int numberOf)
+
+        public void RenderPlatforms()                                                                                 //renderowanie platform
+        {
+            //przygotowac zestaw platform o roznych rozmiarach
+            Rectangle temp;
+
+            Bitmap plat = Properties.Resources._311;
+            int dlen;
+            int begLen;
+            for (int i = 0; i < PlatformHB.Count; i++)
+            {
+
+                temp = PlatformHB[i];
+                PlatformHB[i] = new Rectangle(temp.X, temp.Y + screenScrollSpeed, temp.Width, temp.Height);
+                if (temp.Y > resolutionHeight + 100)
+                    PlatformHB.RemoveAt(i);
+                if (temp != null)
+                {
+                    dlen = 0;
+                    begLen = temp.Width / platWidth;
+                    for (int j = 0; j < begLen; j++)
+                    {
+
+                        gBackground.DrawImage(plat, temp.Left + dlen, temp.Top);
+                        dlen += platWidth;
+                    }
+                }
+            }
+            p.playerBox.Y += screenScrollSpeed;
+        }
+
+        public void generatePlatformRandom(int numberOf)                                                            //generowanie platform
         {
             Random rand = new Random();
 
@@ -70,21 +98,18 @@ namespace WindowsFormsApp1
             }
             else
             {
-                ranX = rand.Next(50, resolutionWidth - 200);
+                ranX = rand.Next(50, resolutionWidth/2);
                 ranY = resolutionHeight - 100;
                 ranWidth = 10;
             }
             if (ranY < -200)
                 return;
 
-
-
             int jumpDistance = 70;
 
             int ranXRight;
             int minY = 120; // ponad glowa gracza
             int maxY = 270; //wysokosc skoku
-
 
             for (int i = 0; i < numberOf; i++)
             {
@@ -112,9 +137,7 @@ namespace WindowsFormsApp1
                         System.Diagnostics.Debug.WriteLine("prevRanX - jumpDistance + prevRanWidth = " + (prevRanX - jumpDistance + prevRanWidth * platWidth));
                         //probably tutaj jest blad gdy nastepna platforma zaczyna sie mniej niz jumpdistance przed a konczy za platforma
                         ranXRight = rand.Next(ranX, prevRanX - jumpDistance + (prevRanWidth - 3) * platWidth);
-
                     }
-
                     ranWidth = (ranXRight - ranX) / platWidth + 5;
                 }
                 else if (ranX >= prevRanX) // jesli zaczyna sie na poprzedniej platformie lub za nia
@@ -140,7 +163,6 @@ namespace WindowsFormsApp1
                         System.Diagnostics.Debug.WriteLine("condition else");
                     }
                 }
-
                 for (int n = 0; n < 10; n++)
                 {
                     if (ranX + ranWidth * platWidth >= resolutionWidth)
@@ -149,51 +171,13 @@ namespace WindowsFormsApp1
                         System.Diagnostics.Debug.WriteLine("too far right");
                         ranX -= 2 * (ranX + ranWidth * platWidth - resolutionWidth);
                     }
-
                 }
-
-
                 Rectangle rect = new Rectangle(ranX, ranY, ranWidth*platWidth, 1);
                 PlatformHB.Add(rect);
             }
-
-
-
-
         }
-        public void RenderPlatforms()
-        {
-            //przygotowac zestaw platform o roznych rozmiarach
-            Rectangle temp;
 
-            Bitmap plat = Properties.Resources._311;
-            int dlen;
-            int begLen;
-            for (int i = 0; i < PlatformHB.Count; i++)
-            {
-
-                temp = PlatformHB[i];
-                PlatformHB[i] = new Rectangle(temp.X, temp.Y + screenScrollSpeed, temp.Width, temp.Height);
-                if (temp.Y > resolutionHeight + 100)
-                    PlatformHB.RemoveAt(i);
-                if(temp!=null)
-                {
-                    dlen = 0;
-                    begLen = temp.Width / platWidth;
-                    for (int j = 0; j < begLen; j++)
-                    {
-
-                        gBackground.DrawImage(plat, temp.Left + dlen, temp.Top);
-                        dlen += platWidth;
-                    }
-                }
-
-            }
-            p.playerBox.Y += screenScrollSpeed;
-
-
-        }
-        public void RenderClouds()
+        public void RenderClouds()                                                                                        //renderowanie chmur
         {
             //przygotowac zestaw platform o roznych rozmiarach
             Rectangle temp;
@@ -208,14 +192,9 @@ namespace WindowsFormsApp1
                 if (temp.Top < resolutionHeight && temp!=null)
                     gBackground.DrawImage(cloud, temp.Left, temp.Top);
             }
-
-           
-
-
         }
-        public void generateCloud()
+        public void generateCloud()                                                                                         //generowanie chmur
         {
-
             int cloudWidth = Properties.Resources.cloudsT.Width;
             int cloudHeight = Properties.Resources.cloudsT.Height;
             Random rand = new Random();
@@ -228,8 +207,7 @@ namespace WindowsFormsApp1
            clouds.Add(rect);
            
            ranX = rand.Next((resolutionWidth + 50) / 2 - cloudWidth, (resolutionWidth + 50) / 2+ (resolutionWidth + 50) / 2);
-           ranY = rand.Next(-2 * cloudHeight, -3*cloudHeight/2);
-           
+           ranY = rand.Next(-2 * cloudHeight, -3*cloudHeight/2);  
            
            rect = new Rectangle(ranX, ranY, cloudWidth, 1);
            clouds.Add(rect);
