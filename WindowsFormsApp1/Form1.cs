@@ -19,6 +19,7 @@ namespace WindowsFormsApp1
         int ResolutionHeight = 1;
         int screenShift = 0;
         int punkty = 0;
+        int czas = 0;
 
         static Graphics gBackground;
         Graphics gPlayer;
@@ -78,11 +79,12 @@ namespace WindowsFormsApp1
             pictureBoxPlayer.BackColor = Color.Transparent;
 
             w = new World(gBackground, ResolutionWidth, ResolutionHeight);
-            p = new Player(gPlayer, PlayerBitmap, ResolutionWidth, ResolutionHeight, w.PlatformHB);
+            p = new Player(gPlayer, PlayerBitmap, ResolutionWidth, ResolutionHeight, w.PlatformHB, w.carrots);
             w.SetPlayer(p);
 
             w.generateGround(0, ResolutionHeight - 100, 50);
-            w.generatePlatformRandom(4);    
+            w.generatePlatformRandom(4);
+            w.generateCarrotRandom(3);
         }
         private void KeyU(object sender, KeyEventArgs e)                                                                        //sterowanie
         {
@@ -124,15 +126,18 @@ namespace WindowsFormsApp1
         private void timer1_Tick(object sender, EventArgs e)                                                                    //Timery
         {
             p.PlayerMovement();
-            p.PlatformPlayerCollision();          
+            p.PlatformPlayerCollision();
+            p.CarrotPlayerCollision();
             pictureBoxPlayer.Refresh();
             gPlayer.Clear(Color.Transparent);
+            label1.Text = "Punkty: " + punkty + " Punkty za marchewki: " + p.pkt;
         }
         private void timer2_Tick(object sender, EventArgs e)
         { 
             if(screenShift% 50==1)
             {
                 w.generatePlatformRandom(1);
+                w.generateCarrotRandom(1);
             }
             else if(screenShift% 250==3)
             {
@@ -142,12 +147,22 @@ namespace WindowsFormsApp1
             gBackground.Clear(Color.Transparent);
             w.RenderClouds();
             w.RenderPlatforms();
+            w.RenderCarrots();
+
+            
         }
 
         private void timer3_Tick(object sender, EventArgs e)
         {
+            if(w.screenScrollSpeed == 3)
             punkty = punkty + 10;
-            label1.Text = "Punkty: " + punkty;
+            
+            czas = czas + 10;
+            if (czas >= 30) w.screenScrollSpeed = 3;
+            if (czas >= 30) w.screenScrollSpeed2 = 2;
+            if (punkty >= 150) w.screenScrollSpeed = 4;
+            if (punkty >= 400) w.screenScrollSpeed = 5;
+            if (punkty >= 700) w.screenScrollSpeed = 6;
         }
     }
 }

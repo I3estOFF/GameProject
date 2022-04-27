@@ -11,13 +11,16 @@ namespace WindowsFormsApp1
     {
         public List<Rectangle> PlatformHB = new List<Rectangle>(); // hitboxy platform
         public List<Rectangle> clouds = new List<Rectangle>(); // hitboxy platform
+        public List<Rectangle> carrots = new List<Rectangle>();
 
+        int carrotWidth = Properties.Resources.Carrot.Width;
         int platWidth = Properties.Resources._311.Width;
         private Graphics gBackground;
         private int resolutionWidth;
         private int resolutionHeight;
-
-        private int screenScrollSpeed = 3;
+        
+        public int screenScrollSpeed = 0;
+        public int screenScrollSpeed2 = 0;
 
         Player p;
 
@@ -177,6 +180,96 @@ namespace WindowsFormsApp1
             }
         }
 
+        public void RenderCarrots()
+        {
+            Rectangle temp;
+
+            Bitmap plat = Properties.Resources.Carrot;
+            int dlen;
+            int begLen;
+            for (int i = 0; i < carrots.Count; i++)
+            {
+
+                temp = carrots[i];
+                carrots[i] = new Rectangle(temp.X, temp.Y + screenScrollSpeed, temp.Width, temp.Height);
+                if (temp.Y > resolutionHeight + 100)
+                    carrots.RemoveAt(i);
+                if (temp != null)
+                {
+                    dlen = 0;
+                    begLen = temp.Width / carrotWidth;
+                    for (int j = 0; j < begLen; j++)
+                    {
+
+                        gBackground.DrawImage(plat, temp.Left + dlen, temp.Top);
+                        dlen += carrotWidth;
+                    }
+                }
+
+            }
+            p.playerBox.Y += screenScrollSpeed;
+
+
+        }
+
+        public void generateCarrotRandom(int numberOf)
+        {
+            Random rand = new Random();
+
+            int ranX = 0;
+            int ranY = 0;
+            int ranWidth = 0;
+
+            int prevRanX = 0;
+            int prevRanY = 0;
+            int prevRanWidth = 0;
+
+            if (carrots.Count > 1)
+            {
+                ranX = carrots.LastOrDefault().X;
+                ranY = carrots.LastOrDefault().Y;
+                ranWidth = carrots.LastOrDefault().Width / carrotWidth;
+            }
+            else
+            {
+                ranX = rand.Next(50, resolutionWidth - 200);
+                ranY = resolutionHeight - 150;
+                ranWidth = 1;
+            }
+            if (ranY < -200)
+                return;
+
+            int jumpDistance = 70;
+            int minY = 120; // ponad glowa gracza
+            int maxY = 270; //wysokosc skoku
+
+
+            for (int i = 0; i < numberOf; i++)
+            {
+                //zapamietuje poprzednie wartosci na ktorych bazie tworzymy kolejne
+                prevRanWidth = ranWidth;
+                prevRanX = ranX;
+                prevRanY = ranY;
+
+                ranY = prevRanY - rand.Next(minY, maxY);
+
+                //losuje poczatek nowej platformy
+                ranX = rand.Next(10, prevRanX + prevRanWidth * carrotWidth + jumpDistance);
+
+                for (int n = 0; n < 10; n++)
+                {
+                    if (ranX + ranWidth * carrotWidth >= resolutionWidth)
+                    {
+                        ranX -= 2 * (ranX + ranWidth * carrotWidth - resolutionWidth);
+                    }
+                }
+
+                Rectangle rect = new Rectangle(ranX, ranY, ranWidth * carrotWidth, 1);
+                carrots.Add(rect);
+            }
+
+        }
+
         public void RenderClouds()                                                                                        //renderowanie chmur
         {
             //przygotowac zestaw platform o roznych rozmiarach
@@ -185,7 +278,7 @@ namespace WindowsFormsApp1
             for (int i = 0; i < clouds.Count; i++)
             {
                 temp = clouds[i];
-                clouds[i] = new Rectangle(temp.X, temp.Y + screenScrollSpeed, temp.Width, temp.Height);
+                clouds[i] = new Rectangle(temp.X, temp.Y + screenScrollSpeed2, temp.Width, temp.Height);
                 if (temp.Y > resolutionHeight)
                     clouds.RemoveAt(i);
 

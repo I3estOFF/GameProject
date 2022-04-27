@@ -15,6 +15,7 @@ namespace WindowsFormsApp1
         public bool isGrounded = false; // sprawdza czy gracz dotyka ziemi
         public bool faceLeft = false; // zapamietuje ostatni kierunek ruchu
         bool playerSideCollison = false;
+        bool haveit = false;
         
         
         const int fallSpeedAcceleration = 9;
@@ -30,10 +31,12 @@ namespace WindowsFormsApp1
         Bitmap player;
         public Rectangle playerBox; //hitbox postaci
         List<Rectangle> PlatformHB;
+        List<Rectangle> carrots;
         readonly int Width;
         readonly int Heigth;
+        public int pkt = 0;
 
-        public Player(Graphics _g, Bitmap _player, int W, int H, List<Rectangle> hb)
+        public Player(Graphics _g, Bitmap _player, int W, int H, List<Rectangle> hb, List<Rectangle> tt)
         {
             playerBox = new Rectangle(80, H - 200, Properties.Resources.Chungus.Width, Properties.Resources.Chungus.Height);
             gPlayer = _g;
@@ -41,6 +44,7 @@ namespace WindowsFormsApp1
             Width = W;
             Heigth = H;
             PlatformHB = hb;
+            carrots = tt;
         }
         
         public void PlayerMovement()                                                                                                //ruch gracza
@@ -108,6 +112,20 @@ namespace WindowsFormsApp1
                 if (playerBox.Contains(hb.X-5, hb.Y + 20) || playerBox.Contains(hb.X + hb.Width+10, hb.Y + 20))
                 {
                     playerSideCollison = true;
+                }
+            }
+        }
+
+        public void CarrotPlayerCollision()                                                                                   //kolizja gracza z platformą
+        {            
+            foreach (Rectangle tt in carrots)
+            {
+                if (playerBox.Contains(tt) && haveit == false)
+                {
+                    
+                    pkt = pkt + 50;
+                    haveit = true;
+
                 }
             }
         }
