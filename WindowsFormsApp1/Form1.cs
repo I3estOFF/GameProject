@@ -84,7 +84,6 @@ namespace WindowsFormsApp1
 
             w.generateGround(0, ResolutionHeight - 100, 50);
             w.generatePlatformRandom(4);
-            w.generateCarrotRandom(3);
         }
         private void KeyU(object sender, KeyEventArgs e)                                                                        //sterowanie
         {

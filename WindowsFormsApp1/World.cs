@@ -12,7 +12,7 @@ namespace WindowsFormsApp1
         public List<Rectangle> PlatformHB = new List<Rectangle>(); // hitboxy platform
         public List<Rectangle> clouds = new List<Rectangle>(); // hitboxy platform
         public List<Rectangle> carrots = new List<Rectangle>();
-
+        
         int carrotWidth = Properties.Resources.Carrot.Width;
         int platWidth = Properties.Resources._311.Width;
         private Graphics gBackground;
@@ -21,6 +21,10 @@ namespace WindowsFormsApp1
         
         public int screenScrollSpeed = 0;
         public int screenScrollSpeed2 = 0;
+
+        public int xplat;
+        public int yplat;
+        public int platw;
 
         Player p;
 
@@ -92,7 +96,9 @@ namespace WindowsFormsApp1
             int prevRanX = 0;
             int prevRanY = 0;
             int prevRanWidth = 0;
-
+            xplat = PlatformHB.LastOrDefault().X;
+            yplat = ranY = PlatformHB.LastOrDefault().Y;
+            platw = PlatformHB.LastOrDefault().Width / platWidth;
             if (PlatformHB.Count > 1)
             {
                 ranX = PlatformHB.LastOrDefault().X;
@@ -180,11 +186,11 @@ namespace WindowsFormsApp1
             }
         }
 
-        public void RenderCarrots()
+        public void RenderCarrots()                                                                                         //renderowanie marchewek
         {
             Rectangle temp;
 
-            Bitmap plat = Properties.Resources.Carrot;
+            Bitmap carrot = Properties.Resources.Carrot;
             int dlen;
             int begLen;
             for (int i = 0; i < carrots.Count; i++)
@@ -201,71 +207,37 @@ namespace WindowsFormsApp1
                     for (int j = 0; j < begLen; j++)
                     {
 
-                        gBackground.DrawImage(plat, temp.Left + dlen, temp.Top);
+                        gBackground.DrawImage(carrot, temp.Left + dlen, temp.Top);
                         dlen += carrotWidth;
                     }
                 }
-
             }
             p.playerBox.Y += screenScrollSpeed;
 
-
         }
 
-        public void generateCarrotRandom(int numberOf)
+        public void generateCarrotRandom(int numberOf)                                                                    //generowanie marchewek
         {
             Random rand = new Random();
 
             int ranX = 0;
-            int ranY = 0;
-            int ranWidth = 0;
-
-            int prevRanX = 0;
-            int prevRanY = 0;
-            int prevRanWidth = 0;
 
             if (carrots.Count > 1)
             {
-                ranX = carrots.LastOrDefault().X;
-                ranY = carrots.LastOrDefault().Y;
-                ranWidth = carrots.LastOrDefault().Width / carrotWidth;
+                ranX = carrots.LastOrDefault().X;             
             }
             else
             {
-                ranX = rand.Next(50, resolutionWidth - 200);
-                ranY = resolutionHeight - 150;
-                ranWidth = 1;
+                ranX = rand.Next(xplat, xplat + platw);
             }
-            if (ranY < -200)
-                return;
-
-            int jumpDistance = 70;
-            int minY = 120; // ponad glowa gracza
-            int maxY = 270; //wysokosc skoku
-
 
             for (int i = 0; i < numberOf; i++)
             {
-                //zapamietuje poprzednie wartosci na ktorych bazie tworzymy kolejne
-                prevRanWidth = ranWidth;
-                prevRanX = ranX;
-                prevRanY = ranY;
+                ranX = rand.Next(xplat, xplat + platw);
 
-                ranY = prevRanY - rand.Next(minY, maxY);
-
-                //losuje poczatek nowej platformy
-                ranX = rand.Next(10, prevRanX + prevRanWidth * carrotWidth + jumpDistance);
-
-                for (int n = 0; n < 10; n++)
-                {
-                    if (ranX + ranWidth * carrotWidth >= resolutionWidth)
-                    {
-                        ranX -= 2 * (ranX + ranWidth * carrotWidth - resolutionWidth);
-                    }
-                }
-
-                Rectangle rect = new Rectangle(ranX, ranY, ranWidth * carrotWidth, 1);
+                Rectangle rect = new Rectangle(xplat + ranX, yplat - 50,carrotWidth, 1);
                 carrots.Add(rect);
+
             }
 
         }
