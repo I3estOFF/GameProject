@@ -160,7 +160,7 @@ namespace WindowsFormsApp1
 
         private void timer3_Tick(object sender, EventArgs e)
         {
-            if(w.screenScrollSpeed == 3)
+            if(w.screenScrollSpeed >= 3)
             punkty = punkty + 10;
             
             czas = czas + 10;
