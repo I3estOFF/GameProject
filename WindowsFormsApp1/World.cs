@@ -12,7 +12,8 @@ namespace WindowsFormsApp1
         public List<Rectangle> PlatformHB = new List<Rectangle>(); // hitboxy platform
         public List<Rectangle> clouds = new List<Rectangle>(); // hitboxy platform
         public List<Rectangle> carrots = new List<Rectangle>();
-        
+        public List<Rectangle> emptys = new List<Rectangle>();
+
         int carrotWidth = Properties.Resources.Carrot.Width;
         int platWidth = Properties.Resources._311.Width;
         private Graphics gBackground;
@@ -240,6 +241,42 @@ namespace WindowsFormsApp1
 
             }
 
+        }
+
+        public void RenderEmpty()                                                                                         //renderowanie marchewek
+        {
+            Rectangle temp;
+
+            Bitmap carrot = Properties.Resources.Empty;
+            int dlen;
+            int begLen;
+            for (int i = 0; i < emptys.Count; i++)
+            {
+
+                temp = emptys[i];
+                emptys[i] = new Rectangle(temp.X, temp.Y + screenScrollSpeed, temp.Width, temp.Height);
+                if (temp.Y > resolutionHeight + 100)
+                    emptys.RemoveAt(i);
+                if (temp != null)
+                {
+                    dlen = 0;
+                    begLen = temp.Width / carrotWidth;
+                    for (int j = 0; j < begLen; j++)
+                    {
+
+                        gBackground.DrawImage(carrot, temp.Left + dlen, temp.Top);
+                        dlen += carrotWidth;
+                    }
+                }
+            }
+            p.playerBox.Y += screenScrollSpeed;
+
+        }
+
+        public void generateEmpty(int numberOf)                                                                    //generowanie marchewek
+        {
+                Rectangle rect = new Rectangle(p.ttx,p.tty, carrotWidth, 1);
+            emptys.Add(rect);
         }
 
         public void RenderClouds()                                                                                        //renderowanie chmur

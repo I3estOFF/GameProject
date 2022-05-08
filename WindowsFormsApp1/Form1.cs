@@ -142,12 +142,19 @@ namespace WindowsFormsApp1
             {
                 w.generateCloud();
             }
+
+            if (p.hv == true)
+            {
+                p.pkt = p.pkt + 50;
+                w.generateEmpty(1);
+                p.hv = false;
+            }
             screenShift++;
             gBackground.Clear(Color.Transparent);
             w.RenderClouds();
             w.RenderPlatforms();
             w.RenderCarrots();
-
+            w.RenderEmpty();
             
         }
 

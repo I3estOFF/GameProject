@@ -15,7 +15,6 @@ namespace WindowsFormsApp1
         public bool isGrounded = false; // sprawdza czy gracz dotyka ziemi
         public bool faceLeft = false; // zapamietuje ostatni kierunek ruchu
         bool playerSideCollison = false;
-        bool haveit = false;
         
         
         const int fallSpeedAcceleration = 9;
@@ -115,16 +114,18 @@ namespace WindowsFormsApp1
                 }
             }
         }
-
-        public void CarrotPlayerCollision()                                                                                   //kolizja gracza z platformą
+        public int ttx = 0;
+        public int tty = 0;
+        public bool hv = false; //don't have it
+        public void CarrotPlayerCollision()                                                                                   //kolizja gracza z marchewką
         {            
             foreach (Rectangle tt in carrots)
             {
-                if (playerBox.Contains(tt) && haveit == false)
-                {
-                    
-                    pkt = pkt + 50;
-                    haveit = true;
+                if (playerBox.Contains(tt) && hv == false)
+                {                
+                    ttx = tt.X;
+                    tty = tt.Y;
+                    hv = true; //have it
 
                 }
             }
