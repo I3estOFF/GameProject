@@ -213,7 +213,6 @@ namespace WindowsFormsApp1
                     }
                 }
             }
-            p.playerBox.Y += screenScrollSpeed;
 
         }
 
@@ -269,7 +268,7 @@ namespace WindowsFormsApp1
                     }
                 }
             }
-            p.playerBox.Y += screenScrollSpeed;
+
 
         }
 

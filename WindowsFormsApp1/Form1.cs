@@ -145,9 +145,9 @@ namespace WindowsFormsApp1
 
             if (p.hv == true)
             {
-                p.pkt = p.pkt + 50;
                 w.generateEmpty(1);
                 p.hv = false;
+                p.pkt = p.pkt + 50;
             }
             screenShift++;
             gBackground.Clear(Color.Transparent);

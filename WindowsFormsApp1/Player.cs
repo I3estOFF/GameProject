@@ -118,13 +118,15 @@ namespace WindowsFormsApp1
         public int tty = 0;
         public bool hv = false; //don't have it
         public void CarrotPlayerCollision()                                                                                   //kolizja gracza z marchewką
-        {            
+        {     
+            if(hv == false)
             foreach (Rectangle tt in carrots)
             {
                 if (playerBox.Contains(tt) && hv == false)
                 {                
                     ttx = tt.X;
                     tty = tt.Y;
+
                     hv = true; //have it
 
                 }
