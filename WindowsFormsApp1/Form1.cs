@@ -164,9 +164,9 @@ namespace WindowsFormsApp1
                 w.screenScrollSpeed = 2;
          
             }
-            if (punkty == 150) w.screenScrollSpeed = 4;
-            if (punkty == 400) w.screenScrollSpeed = 5;
-            if (punkty == 700) w.screenScrollSpeed = 6;
+            if (punkty == 150) w.screenScrollSpeed = 3;
+            if (punkty == 400) w.screenScrollSpeed = 4;
+            if (punkty == 700) w.screenScrollSpeed = 5;
         }
     }
 }
