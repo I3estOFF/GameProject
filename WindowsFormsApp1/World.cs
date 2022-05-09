@@ -192,7 +192,7 @@ namespace WindowsFormsApp1
 
         }
 
-        public void generateCarrotRandom(int numberOf)                                                                    //generowanie marchewek
+        public void generateCarrotRandom()                                                                    //generowanie marchewek
         {
             Random rand = new Random();
 
@@ -207,15 +207,9 @@ namespace WindowsFormsApp1
                 ranX = rand.Next(xplat, xplat + platw);
             }
 
-            for (int i = 0; i < numberOf; i++)
-            {
                 ranX = rand.Next(xplat, xplat + platw);
-
                 Rectangle rect = new Rectangle(xplat + ranX, yplat - 50,carrotWidth, 1);
                 carrots.Add(rect);
-
-            }
-
         }
 
         public void generateEmpty(int numberOf)                                                                    //generowanie marchewek

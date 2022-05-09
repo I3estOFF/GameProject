@@ -134,6 +134,7 @@ namespace WindowsFormsApp1
             }
             if (e.KeyCode == Keys.Escape)
                 this.Close();
+
         }
 
         private void timer1_Tick(object sender, EventArgs e)                                                                    //Timery
@@ -150,11 +151,15 @@ namespace WindowsFormsApp1
             if(screenShift% 20==1)
             {
                 w.generatePlatformRandom(1);
-                w.generateCarrotRandom(1);
+                
             }
             else if(screenShift% 250==3)
             {
                 w.generateCloud();
+            }
+            else if(screenShift% 110==1)
+            {
+                w.generateCarrotRandom();
             }
 
             screenShift++;
