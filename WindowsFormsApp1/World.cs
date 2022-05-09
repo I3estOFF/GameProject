@@ -192,8 +192,6 @@ namespace WindowsFormsApp1
             Rectangle temp;
 
             Bitmap carrot = Properties.Resources.Carrot;
-            int dlen;
-            int begLen;
             for (int i = 0; i < carrots.Count; i++)
             {
 
@@ -203,14 +201,7 @@ namespace WindowsFormsApp1
                     carrots.RemoveAt(i);
                 if (temp != null)
                 {
-                    dlen = 0;
-                    begLen = temp.Width / carrotWidth;
-                    for (int j = 0; j < begLen; j++)
-                    {
-
-                        gBackground.DrawImage(carrot, temp.Left + dlen, temp.Top);
-                        dlen += carrotWidth;
-                    }
+                   gBackground.DrawImage(carrot, temp.Left, temp.Top);
                 }
             }
 
@@ -239,36 +230,6 @@ namespace WindowsFormsApp1
                 carrots.Add(rect);
 
             }
-
-        }
-
-        public void RenderEmpty()                                                                                         //renderowanie marchewek
-        {
-            Rectangle temp;
-
-            Bitmap carrot = Properties.Resources.Empty;
-            int dlen;
-            int begLen;
-            for (int i = 0; i < emptys.Count; i++)
-            {
-
-                temp = emptys[i];
-                emptys[i] = new Rectangle(temp.X, temp.Y + screenScrollSpeed, temp.Width, temp.Height);
-                if (temp.Y > resolutionHeight + 100)
-                    emptys.RemoveAt(i);
-                if (temp != null)
-                {
-                    dlen = 0;
-                    begLen = temp.Width / carrotWidth;
-                    for (int j = 0; j < begLen; j++)
-                    {
-
-                        gBackground.DrawImage(carrot, temp.Left + dlen, temp.Top);
-                        dlen += carrotWidth;
-                    }
-                }
-            }
-
 
         }
 

@@ -143,32 +143,30 @@ namespace WindowsFormsApp1
                 w.generateCloud();
             }
 
-            if (p.hv == true)
-            {
-                w.generateEmpty(1);
-                p.hv = false;
-                p.pkt = p.pkt + 50;
-            }
             screenShift++;
+
             gBackground.Clear(Color.Transparent);
             w.RenderClouds();
             w.RenderPlatforms();
             w.RenderCarrots();
-            w.RenderEmpty();
             
         }
 
         private void timer3_Tick(object sender, EventArgs e)
         {
-            if(w.screenScrollSpeed >= 3)
-            punkty = punkty + 10;
+            if(w.screenScrollSpeed >= 2)
+                punkty = punkty + 10;
             
             czas = czas + 10;
-            if (czas >= 30) w.screenScrollSpeed = 3;
-            if (czas >= 30) w.screenScrollSpeed2 = 2;
-            if (punkty >= 150) w.screenScrollSpeed = 4;
-            if (punkty >= 400) w.screenScrollSpeed = 5;
-            if (punkty >= 700) w.screenScrollSpeed = 6;
+            if (czas == 30)
+            {
+                w.screenScrollSpeed2 = 3;
+                w.screenScrollSpeed = 2;
+         
+            }
+            if (punkty == 150) w.screenScrollSpeed = 4;
+            if (punkty == 400) w.screenScrollSpeed = 5;
+            if (punkty == 700) w.screenScrollSpeed = 6;
         }
     }
 }
