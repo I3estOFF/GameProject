@@ -137,30 +137,19 @@ namespace WindowsFormsApp1
                 //uzupelniamy ewentualna luke szerokoscia platformy          
                 if (ranX < prevRanX) // jesli zaczyna sie przed poprzednia platforma
                 {
-                    System.Diagnostics.Debug.WriteLine("condition 1");
                     if (prevRanX - jumpDistance > ranX)
                         ranXRight = rand.Next(prevRanX - jumpDistance, prevRanX + (prevRanWidth - 3) * platWidth - jumpDistance);
                     else
                     {
-                        System.Diagnostics.Debug.WriteLine("ranX: " + ranX);
-
-                        System.Diagnostics.Debug.WriteLine("prevRanX - jumpDistance + prevRanWidth = " + (prevRanX - jumpDistance + prevRanWidth * platWidth));
-                        //probably tutaj jest blad gdy nastepna platforma zaczyna sie mniej niz jumpdistance przed a konczy za platforma
                         ranXRight = rand.Next(ranX, prevRanX - jumpDistance + (prevRanWidth - 3) * platWidth);
                     }
                     ranWidth = (ranXRight - ranX) / platWidth + 5;
                 }
                 else if (ranX >= prevRanX) // jesli zaczyna sie na poprzedniej platformie lub za nia
                 {
-
-                    System.Diagnostics.Debug.WriteLine("condition else if");
                     //ranX = ranX + 100;
                     if (ranX < prevRanX + prevRanWidth * platWidth + jumpDistance)
                     {
-                        System.Diagnostics.Debug.WriteLine("ranX: " + ranX);
-
-                        System.Diagnostics.Debug.WriteLine("prevRanX + prevRanWidth*platWidth - jumpDistance = " + (prevRanX - jumpDistance + prevRanWidth * platWidth));
-
                         ranXRight = rand.Next(ranX, prevRanX + prevRanWidth * platWidth + jumpDistance);
 
                         ranWidth = (ranXRight - ranX) / platWidth + 5;
@@ -169,16 +158,12 @@ namespace WindowsFormsApp1
                     {
                         ranX = prevRanX + prevRanWidth * platWidth + jumpDistance;
                         ranWidth = rand.Next(7, 10);
-
-                        System.Diagnostics.Debug.WriteLine("condition else");
                     }
                 }
                 for (int n = 0; n < 10; n++)
                 {
                     if (ranX + ranWidth * platWidth >= resolutionWidth)
                     {
-
-                        System.Diagnostics.Debug.WriteLine("too far right");
                         ranX -= 2 * (ranX + ranWidth * platWidth - resolutionWidth);
                     }
                 }

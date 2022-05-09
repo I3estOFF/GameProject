@@ -120,6 +120,20 @@ namespace WindowsFormsApp1
                 p.playerUp = true;
                 p.fallSpeed = 0;
             }
+            if (e.KeyCode == Keys.Space && timer1.Enabled == true)
+            {
+                timer1.Enabled = false;
+                timer2.Enabled = false;
+                timer3.Enabled = false;
+            }
+            else
+            {
+                timer1.Enabled = true;
+                timer2.Enabled = true;
+                timer3.Enabled = true;
+            }
+            if (e.KeyCode == Keys.Escape)
+                this.Close();
         }
 
         private void timer1_Tick(object sender, EventArgs e)                                                                    //Timery
@@ -133,7 +147,7 @@ namespace WindowsFormsApp1
         }
         private void timer2_Tick(object sender, EventArgs e)
         { 
-            if(screenShift% 50==1)
+            if(screenShift% 20==1)
             {
                 w.generatePlatformRandom(1);
                 w.generateCarrotRandom(1);
