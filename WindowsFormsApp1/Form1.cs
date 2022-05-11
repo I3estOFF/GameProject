@@ -21,6 +21,7 @@ namespace WindowsFormsApp1
         int punkty = 0;
         int czas = 0;
 
+
         static Graphics gBackground;
         Graphics gPlayer;
         Bitmap PlayerBitmap;
@@ -79,7 +80,7 @@ namespace WindowsFormsApp1
             pictureBoxPlayer.BackColor = Color.Transparent;
 
             w = new World(gBackground, ResolutionWidth, ResolutionHeight);
-            p = new Player(gPlayer, PlayerBitmap, ResolutionWidth, ResolutionHeight, w.PlatformHB, w.carrots, w.gcarrots);
+            p = new Player(gPlayer, PlayerBitmap, ResolutionWidth, ResolutionHeight, w.PlatformHB, w.carrots, w.gcarrots, w.kuboty);
             w.SetPlayer(p);
 
             w.generateGround(0, ResolutionHeight - 100, 50);
@@ -143,6 +144,7 @@ namespace WindowsFormsApp1
             p.PlatformPlayerCollision();
             p.CarrotPlayerCollision();
             p.GoldenCarrotPlayerCollision();
+            p.KubotyPlayerCollision();
             pictureBoxPlayer.Refresh();
             gPlayer.Clear(Color.Transparent);
             label1.Text = "   Punkty: " + punkty + "   " + p.pkt + "x    " + p.gpkt + "x      ";
@@ -170,6 +172,7 @@ namespace WindowsFormsApp1
             w.RenderPlatforms();
             w.RenderCarrots();
             w.RenderGoldenCarrots();
+            w.RenderKubots();
             
         }
 
@@ -190,14 +193,19 @@ namespace WindowsFormsApp1
             if (punkty == 700) w.screenScrollSpeed = 5;
         }
 
-        private void timer4_Tick(object sender, EventArgs e)                                                   //losowanie szansy na wystąpienie złotej marchewki
+        private void timer4_Tick(object sender, EventArgs e)                                                   //losowanie szansy na wystąpienie power-up'ów
         {
             Random rand = new Random();
             int chance = rand.Next(1, 101);
 
-            if (chance <= 5 && w.screenScrollSpeed >= 3)             //5% szans co 3 sekundy
+            if (chance <= 10 && w.screenScrollSpeed >= 3)             //10% szans co 3 sekundy
             {
                 w.generateGoldenCarrotRandom();
+            }
+            
+            if (chance <= 30 && w.screenScrollSpeed >= 3)             //30% szans co 3 sekundy
+            {
+                w.generateKubotsRandom();
             }
         }
     }

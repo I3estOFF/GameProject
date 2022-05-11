@@ -20,11 +20,11 @@ namespace WindowsFormsApp1
         const int fallSpeedAcceleration = 9;
         const int jumpSpeedDeceleration = 18;
         const int maxFallSpeed = 100;
-        const int maxPlayerSpeed = 7;
+        int maxPlayerSpeed = 7;
         public int maxJumpSpeed = 300;
         public int fallSpeed = 0;
         public int jumpSpeed;
-        public int playerSpeed = maxPlayerSpeed;
+        public int playerSpeed;
         public int pkt = 0;
         public int gpkt = 0;
         readonly int Width;
@@ -36,9 +36,10 @@ namespace WindowsFormsApp1
         List<Rectangle> PlatformHB;
         List<Rectangle> carrots;
         List<Rectangle> gcarrots;
+        List<Rectangle> kuboty;
 
 
-        public Player(Graphics _g, Bitmap _player, int W, int H, List<Rectangle> hb, List<Rectangle> tt, List<Rectangle> gt)
+        public Player(Graphics _g, Bitmap _player, int W, int H, List<Rectangle> hb, List<Rectangle> tt, List<Rectangle> gt, List<Rectangle> kb)
         {
             playerBox = new Rectangle(80, H - 200, Properties.Resources.Chungus.Width, Properties.Resources.Chungus.Height);
             gPlayer = _g;
@@ -48,6 +49,7 @@ namespace WindowsFormsApp1
             PlatformHB = hb;
             carrots = tt;
             gcarrots = gt;
+            kuboty = kb;
         }
         
         public void PlayerMovement()                                                                                                //ruch gracza
@@ -156,6 +158,25 @@ namespace WindowsFormsApp1
                 maxJumpSpeed = 400;
                 await Task.Delay(3000);                          //daje zwiększony skok na 3 sekundy
                 maxJumpSpeed = 300;
+            }
+        }
+
+        public async void KubotyPlayerCollision()                                                                       //kolizja gracza z kubotami
+        {
+            Rectangle toDeleteg = new Rectangle();
+            foreach (Rectangle kb in kuboty)
+            {
+                if (playerBox.Contains(kb))
+                {
+                    toDeleteg = kb;
+                }
+            }
+            if (!toDeleteg.IsEmpty)
+            {
+                kuboty.Remove(toDeleteg);
+                maxPlayerSpeed = 9;
+                await Task.Delay(5000);                          //daje przyspieszenie na 5 sekund
+                maxPlayerSpeed = 7;
             }
         }
     }

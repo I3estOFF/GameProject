@@ -14,7 +14,9 @@ namespace WindowsFormsApp1
         public List<Rectangle> carrots = new List<Rectangle>();
         public List<Rectangle> emptys = new List<Rectangle>();
         public List<Rectangle> gcarrots = new List<Rectangle>();
+        public List<Rectangle> kuboty = new List<Rectangle>();
 
+        int kubotyWidth = Properties.Resources.Kuboty.Width;
         int carrotWidth = Properties.Resources.carrotnew.Width;
         int platWidth = Properties.Resources._311.Width;
         private Graphics gBackground;
@@ -241,6 +243,44 @@ namespace WindowsFormsApp1
             ranX = rand.Next(xplat, xplat + platw);
             Rectangle rect = new Rectangle(xplat + ranX - 40, yplat - 30, carrotWidth, 1);
             gcarrots.Add(rect);
+        }
+
+        public void RenderKubots()                                                                                  //renderowanie złotych marchewek
+        {
+            Rectangle temp;
+            Bitmap kubot = Properties.Resources.Kuboty;
+            for (int i = 0; i < kuboty.Count; i++)
+            {
+                temp = kuboty[i];
+                kuboty[i] = new Rectangle(temp.X, temp.Y + screenScrollSpeed, temp.Width, temp.Height);
+                if (temp.Y > resolutionHeight + 100)
+                    kuboty.RemoveAt(i);
+                if (temp != null)
+                {
+                    gBackground.DrawImage(kubot, temp.Left, temp.Top);
+                }
+            }
+        }
+
+        public void generateKubotsRandom()                                                                          //generowanie złotych marchewek
+        {
+            Random rand = new Random();
+
+            int ranX = 0;
+            int ranHunit = 0;
+            ranHunit = rand.Next(50, 400);
+            if (kuboty.Count > 1)
+            {
+                ranX = kuboty.LastOrDefault().X;
+            }
+            else
+            {
+                ranX = rand.Next(xplat, xplat + platw);
+            }
+
+            ranX = rand.Next(xplat, xplat + platw);
+            Rectangle rect = new Rectangle(xplat + ranX - ranHunit, yplat - 30, carrotWidth, 1);
+            kuboty.Add(rect);
         }
 
 
