@@ -197,16 +197,22 @@ namespace WindowsFormsApp1
         {
             Random rand = new Random();
             int chance = rand.Next(1, 101);
-
-            if (chance <= 10 && w.screenScrollSpeed >= 3)             //10% szans co 3 sekundy
-            {
-                w.generateGoldenCarrotRandom();
-            }
             
             if (chance <= 30 && w.screenScrollSpeed >= 3)             //30% szans co 3 sekundy
             {
                 w.generateKubotsRandom();
             }
+        }
+
+        private void timer5_Tick(object sender, EventArgs e)
+        {
+            Random rand = new Random();
+            int chance = rand.Next(1, 101);
+            if (chance <= 10 && w.screenScrollSpeed >= 3)             //10% szans co 2,5 sekundy
+            {
+                w.generateGoldenCarrotRandom();
+            }
+
         }
     }
 }

@@ -36,6 +36,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBoxPlayer = new System.Windows.Forms.PictureBox();
             this.pictureBoxBackground = new System.Windows.Forms.PictureBox();
+            this.timer5 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlayer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBackground)).BeginInit();
             this.SuspendLayout();
@@ -96,6 +97,12 @@
             this.pictureBoxBackground.TabIndex = 2;
             this.pictureBoxBackground.TabStop = false;
             // 
+            // timer5
+            // 
+            this.timer5.Enabled = true;
+            this.timer5.Interval = 2500;
+            this.timer5.Tick += new System.EventHandler(this.timer5_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -124,6 +131,7 @@
         private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.Timer timer3;
         private System.Windows.Forms.Timer timer4;
+        private System.Windows.Forms.Timer timer5;
     }
 }
 

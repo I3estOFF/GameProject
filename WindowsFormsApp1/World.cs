@@ -192,7 +192,8 @@ namespace WindowsFormsApp1
         public void generateCarrotRandom()                                                                                 //generowanie marchewek
         {
             Random rand = new Random();
-
+            int ranHunit;
+            ranHunit = rand.Next(1, 400);
             int ranX = 0;
 
             if (carrots.Count > 1)
@@ -204,7 +205,7 @@ namespace WindowsFormsApp1
                 ranX = rand.Next(xplat, xplat + platw);
             }
                 ranX = rand.Next(xplat, xplat + platw);
-                Rectangle rect = new Rectangle(xplat + ranX, yplat - 30,carrotWidth, 1);
+                Rectangle rect = new Rectangle(xplat + ranHunit, yplat - 30,carrotWidth, 1);
                 carrots.Add(rect);
         }
 
@@ -230,7 +231,8 @@ namespace WindowsFormsApp1
             Random rand = new Random();
 
             int ranX = 0;
-
+            int ranHunit;
+            ranHunit = rand.Next(30, 350);
             if (gcarrots.Count > 1)
             {
                 ranX = gcarrots.LastOrDefault().X;
@@ -241,7 +243,7 @@ namespace WindowsFormsApp1
             }
 
             ranX = rand.Next(xplat, xplat + platw);
-            Rectangle rect = new Rectangle(xplat + ranX - 40, yplat - 30, carrotWidth, 1);
+            Rectangle rect = new Rectangle(xplat + ranHunit, yplat - 30, carrotWidth, 1);
             gcarrots.Add(rect);
         }
 
@@ -268,7 +270,7 @@ namespace WindowsFormsApp1
 
             int ranX = 0;
             int ranHunit = 0;
-            ranHunit = rand.Next(50, 400);
+            ranHunit = rand.Next(20, 400);
             if (kuboty.Count > 1)
             {
                 ranX = kuboty.LastOrDefault().X;
@@ -279,7 +281,7 @@ namespace WindowsFormsApp1
             }
 
             ranX = rand.Next(xplat, xplat + platw);
-            Rectangle rect = new Rectangle(xplat + ranX - ranHunit, yplat - 30, carrotWidth, 1);
+            Rectangle rect = new Rectangle(xplat + ranHunit, yplat - 30, carrotWidth, 1);
             kuboty.Add(rect);
         }
 
@@ -305,7 +307,6 @@ namespace WindowsFormsApp1
             int cloudWidth = Properties.Resources.cloudsT.Width;
             int cloudHeight = Properties.Resources.cloudsT.Height;
             Random rand = new Random();
-
             int ranX = rand.Next(-50, (resolutionWidth + 50)/2-cloudWidth);
             int ranY = -cloudHeight;
 
