@@ -145,7 +145,7 @@ namespace WindowsFormsApp1
             p.GoldenCarrotPlayerCollision();
             pictureBoxPlayer.Refresh();
             gPlayer.Clear(Color.Transparent);
-            label1.Text = "Punkty: " + punkty + " Punkty za marchewki: " + p.pkt;
+            label1.Text = "   Punkty: " + punkty + "   " + p.pkt + "x    " + p.gpkt + "x      ";
         }
         private void timer2_Tick(object sender, EventArgs e)
         {

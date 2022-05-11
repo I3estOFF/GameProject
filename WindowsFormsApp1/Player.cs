@@ -26,6 +26,7 @@ namespace WindowsFormsApp1
         public int jumpSpeed;
         public int playerSpeed = maxPlayerSpeed;
         public int pkt = 0;
+        public int gpkt = 0;
         readonly int Width;
         readonly int Heigth;
 
@@ -134,7 +135,7 @@ namespace WindowsFormsApp1
             if(!toDelete.IsEmpty)
             {
                 carrots.Remove(toDelete);
-                pkt += 50;
+                pkt += 1;
             }                    
         }
 
@@ -151,7 +152,7 @@ namespace WindowsFormsApp1
             if (!toDeleteg.IsEmpty)
             {
                 gcarrots.Remove(toDeleteg);
-                pkt += 200;
+                gpkt += 1;
                 maxJumpSpeed = 400;
                 await Task.Delay(3000);                          //daje zwiększony skok na 3 sekundy
                 maxJumpSpeed = 300;
