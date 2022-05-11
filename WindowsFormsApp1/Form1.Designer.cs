@@ -32,9 +32,10 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.timer3 = new System.Windows.Forms.Timer(this.components);
             this.pictureBoxPlayer = new System.Windows.Forms.PictureBox();
             this.pictureBoxBackground = new System.Windows.Forms.PictureBox();
-            this.timer3 = new System.Windows.Forms.Timer(this.components);
+            this.timer4 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlayer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBackground)).BeginInit();
             this.SuspendLayout();
@@ -60,6 +61,12 @@
             this.timer2.Interval = 20;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
+            // timer3
+            // 
+            this.timer3.Enabled = true;
+            this.timer3.Interval = 1000;
+            this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
+            // 
             // pictureBoxPlayer
             // 
             this.pictureBoxPlayer.Location = new System.Drawing.Point(0, 28);
@@ -79,11 +86,11 @@
             this.pictureBoxBackground.TabIndex = 2;
             this.pictureBoxBackground.TabStop = false;
             // 
-            // timer3
+            // timer4
             // 
-            this.timer3.Enabled = true;
-            this.timer3.Interval = 1000;
-            this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
+            this.timer4.Enabled = true;
+            this.timer4.Interval = 3000;
+            this.timer4.Tick += new System.EventHandler(this.timer4_Tick);
             // 
             // Form1
             // 
@@ -113,6 +120,7 @@
         private System.Windows.Forms.PictureBox pictureBoxPlayer;
         private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.Timer timer3;
+        private System.Windows.Forms.Timer timer4;
     }
 }
 

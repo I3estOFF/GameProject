@@ -19,23 +19,25 @@ namespace WindowsFormsApp1
         
         const int fallSpeedAcceleration = 9;
         const int jumpSpeedDeceleration = 18;
-        const int maxJumpSpeed = 300;
         const int maxFallSpeed = 100;
         const int maxPlayerSpeed = 7;
+        public int maxJumpSpeed = 300;
         public int fallSpeed = 0;
-        public int jumpSpeed = maxJumpSpeed;
+        public int jumpSpeed;
         public int playerSpeed = maxPlayerSpeed;
+        public int pkt = 0;
+        readonly int Width;
+        readonly int Heigth;
 
         Graphics gPlayer;
         Bitmap player;
         public Rectangle playerBox; //hitbox postaci
         List<Rectangle> PlatformHB;
         List<Rectangle> carrots;
-        readonly int Width;
-        readonly int Heigth;
-        public int pkt = 0;
+        List<Rectangle> gcarrots;
 
-        public Player(Graphics _g, Bitmap _player, int W, int H, List<Rectangle> hb, List<Rectangle> tt)
+
+        public Player(Graphics _g, Bitmap _player, int W, int H, List<Rectangle> hb, List<Rectangle> tt, List<Rectangle> gt)
         {
             playerBox = new Rectangle(80, H - 200, Properties.Resources.Chungus.Width, Properties.Resources.Chungus.Height);
             gPlayer = _g;
@@ -44,6 +46,7 @@ namespace WindowsFormsApp1
             Heigth = H;
             PlatformHB = hb;
             carrots = tt;
+            gcarrots = gt;
         }
         
         public void PlayerMovement()                                                                                                //ruch gracza
@@ -62,10 +65,12 @@ namespace WindowsFormsApp1
             {
                 playerBox.X -= playerSpeed;
             }
+
             if (playerRight == true && playerBox.X < Width && !playerSideCollison)
             {
                 playerBox.X += playerSpeed;
             }
+
             if (playerUp == true && isGrounded)
             {
                 playerBox.Y -= jumpSpeed/10 ;
@@ -116,8 +121,6 @@ namespace WindowsFormsApp1
         }
 
 
-        public int ttx = 0;
-        public int tty = 0;
         public void CarrotPlayerCollision()                                                                                   //kolizja gracza z marchewką
         {
             Rectangle toDelete = new Rectangle();
@@ -126,18 +129,33 @@ namespace WindowsFormsApp1
                 if (playerBox.Contains(tt))
                 {                
                     toDelete = tt;
-                    ttx = tt.X;
-                    tty = tt.Y;
-
                 }
             }
             if(!toDelete.IsEmpty)
             {
                 carrots.Remove(toDelete);
                 pkt += 50;
+            }                    
+        }
+
+        public async void GoldenCarrotPlayerCollision()                                                                       //kolizja gracza ze złotą marchewką
+        {
+            Rectangle toDeleteg = new Rectangle();
+            foreach (Rectangle gt in gcarrots)
+            {
+                if (playerBox.Contains(gt))
+                {
+                    toDeleteg = gt;
+                }
             }
-            
-            
+            if (!toDeleteg.IsEmpty)
+            {
+                gcarrots.Remove(toDeleteg);
+                pkt += 200;
+                maxJumpSpeed = 400;
+                await Task.Delay(3000);                          //daje zwiększony skok na 3 sekundy
+                maxJumpSpeed = 300;
+            }
         }
     }
 }

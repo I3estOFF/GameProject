@@ -13,8 +13,9 @@ namespace WindowsFormsApp1
         public List<Rectangle> clouds = new List<Rectangle>(); // hitboxy platform
         public List<Rectangle> carrots = new List<Rectangle>();
         public List<Rectangle> emptys = new List<Rectangle>();
+        public List<Rectangle> gcarrots = new List<Rectangle>();
 
-        int carrotWidth = Properties.Resources.Carrot.Width;
+        int carrotWidth = Properties.Resources.carrotnew.Width;
         int platWidth = Properties.Resources._311.Width;
         private Graphics gBackground;
         private int resolutionWidth;
@@ -22,7 +23,6 @@ namespace WindowsFormsApp1
         
         public int screenScrollSpeed = 0;
         public int screenScrollSpeed2 = 0;
-
         public int xplat;
         public int yplat;
         public int platw;
@@ -40,7 +40,6 @@ namespace WindowsFormsApp1
 
         public void generateGround(int posX, int posY, int _width)                                               //generowanie platformy startowej
         {
-
             gBackground.DrawImage(Properties.Resources._311, posX, posY);
             Rectangle rect = new Rectangle(posX, posY, platWidth * _width, 1);
             PlatformHB.Add(rect);
@@ -51,7 +50,6 @@ namespace WindowsFormsApp1
                 gBackground.DrawImage(plat, posX + len, posY);
                 len += platWidth;
             }
-
         }
 
         //adds new platform to the list
@@ -175,11 +173,9 @@ namespace WindowsFormsApp1
         public void RenderCarrots()                                                                                         //renderowanie marchewek
         {
             Rectangle temp;
-
-            Bitmap carrot = Properties.Resources.Carrot;
+            Bitmap carrot = Properties.Resources.carrotnew;
             for (int i = 0; i < carrots.Count; i++)
             {
-
                 temp = carrots[i];
                 carrots[i] = new Rectangle(temp.X, temp.Y + screenScrollSpeed, temp.Width, temp.Height);
                 if (temp.Y > resolutionHeight + 100)
@@ -189,10 +185,9 @@ namespace WindowsFormsApp1
                    gBackground.DrawImage(carrot, temp.Left, temp.Top);
                 }
             }
-
         }
 
-        public void generateCarrotRandom()                                                                    //generowanie marchewek
+        public void generateCarrotRandom()                                                                                 //generowanie marchewek
         {
             Random rand = new Random();
 
@@ -206,17 +201,48 @@ namespace WindowsFormsApp1
             {
                 ranX = rand.Next(xplat, xplat + platw);
             }
-
                 ranX = rand.Next(xplat, xplat + platw);
-                Rectangle rect = new Rectangle(xplat + ranX, yplat - 50,carrotWidth, 1);
+                Rectangle rect = new Rectangle(xplat + ranX, yplat - 30,carrotWidth, 1);
                 carrots.Add(rect);
         }
 
-        public void generateEmpty(int numberOf)                                                                    //generowanie marchewek
+        public void RenderGoldenCarrots()                                                                                  //renderowanie złotych marchewek
         {
-                Rectangle rect = new Rectangle(p.ttx,p.tty, carrotWidth, 1);
-            emptys.Add(rect);
+            Rectangle temp;
+            Bitmap gcarrot = Properties.Resources.goldencarrot;
+            for (int i = 0; i < gcarrots.Count; i++)
+            {
+                temp = gcarrots[i];
+                gcarrots[i] = new Rectangle(temp.X, temp.Y + screenScrollSpeed, temp.Width, temp.Height);
+                if (temp.Y > resolutionHeight + 100)
+                    gcarrots.RemoveAt(i);
+                if (temp != null)
+                {
+                    gBackground.DrawImage(gcarrot, temp.Left, temp.Top);
+                }
+            }
         }
+
+        public void generateGoldenCarrotRandom()                                                                          //generowanie złotych marchewek
+        {
+            Random rand = new Random();
+
+            int ranX = 0;
+
+            if (gcarrots.Count > 1)
+            {
+                ranX = gcarrots.LastOrDefault().X;
+            }
+            else
+            {
+                ranX = rand.Next(xplat, xplat + platw);
+            }
+
+            ranX = rand.Next(xplat, xplat + platw);
+            Rectangle rect = new Rectangle(xplat + ranX - 40, yplat - 30, carrotWidth, 1);
+            gcarrots.Add(rect);
+        }
+
 
         public void RenderClouds()                                                                                        //renderowanie chmur
         {
@@ -242,7 +268,6 @@ namespace WindowsFormsApp1
 
             int ranX = rand.Next(-50, (resolutionWidth + 50)/2-cloudWidth);
             int ranY = -cloudHeight;
-
 
            Rectangle rect = new Rectangle(ranX, ranY, cloudWidth, 1);
            clouds.Add(rect);

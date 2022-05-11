@@ -79,7 +79,7 @@ namespace WindowsFormsApp1
             pictureBoxPlayer.BackColor = Color.Transparent;
 
             w = new World(gBackground, ResolutionWidth, ResolutionHeight);
-            p = new Player(gPlayer, PlayerBitmap, ResolutionWidth, ResolutionHeight, w.PlatformHB, w.carrots);
+            p = new Player(gPlayer, PlayerBitmap, ResolutionWidth, ResolutionHeight, w.PlatformHB, w.carrots, w.gcarrots);
             w.SetPlayer(p);
 
             w.generateGround(0, ResolutionHeight - 100, 50);
@@ -142,12 +142,13 @@ namespace WindowsFormsApp1
             p.PlayerMovement();
             p.PlatformPlayerCollision();
             p.CarrotPlayerCollision();
+            p.GoldenCarrotPlayerCollision();
             pictureBoxPlayer.Refresh();
             gPlayer.Clear(Color.Transparent);
             label1.Text = "Punkty: " + punkty + " Punkty za marchewki: " + p.pkt;
         }
         private void timer2_Tick(object sender, EventArgs e)
-        { 
+        {
             if(screenShift% 20==1)
             {
                 w.generatePlatformRandom(1);
@@ -155,9 +156,9 @@ namespace WindowsFormsApp1
             }
             else if(screenShift% 250==3)
             {
-                w.generateCloud();
+               // w.generateCloud();                                                            tymczasowo wyłączone chmury
             }
-            else if(screenShift% 110==1)
+            else if(screenShift% 111==1)
             {
                 w.generateCarrotRandom();
             }
@@ -165,9 +166,10 @@ namespace WindowsFormsApp1
             screenShift++;
 
             gBackground.Clear(Color.Transparent);
-            w.RenderClouds();
+            // w.RenderClouds();                                                                tymczasowo wyłączone chmury
             w.RenderPlatforms();
             w.RenderCarrots();
+            w.RenderGoldenCarrots();
             
         }
 
@@ -183,9 +185,20 @@ namespace WindowsFormsApp1
                 w.screenScrollSpeed = 2;
          
             }
-            if (punkty == 150) w.screenScrollSpeed = 3;
+            if (punkty == 100) w.screenScrollSpeed = 3;
             if (punkty == 400) w.screenScrollSpeed = 4;
             if (punkty == 700) w.screenScrollSpeed = 5;
+        }
+
+        private void timer4_Tick(object sender, EventArgs e)                                                   //losowanie szansy na wystąpienie złotej marchewki
+        {
+            Random rand = new Random();
+            int chance = rand.Next(1, 101);
+
+            if (chance <= 5 && w.screenScrollSpeed >= 3)             //5% szans co 3 sekundy
+            {
+                w.generateGoldenCarrotRandom();
+            }
         }
     }
 }
