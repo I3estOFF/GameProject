@@ -56,7 +56,7 @@
             // timer3
             // 
             this.timer3.Enabled = true;
-            this.timer3.Interval = 1000;
+            this.timer3.Interval = 20;
             this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
             // 
             // timer4
@@ -67,7 +67,7 @@
             // 
             // label1
             // 
-            this.label1.BackColor = System.Drawing.Color.LightBlue;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.label1.Image = global::WindowsFormsApp1.Properties.Resources.punkty;

@@ -111,7 +111,7 @@ namespace WindowsFormsApp1
                 }
                 //kolizja z dolna krawedzia zatrzymuje skok // dziala
                 if (playerBox.Y < hb.Y + hb.Height + 40 && playerBox.Y > hb.Y + hb.Height &&
-                    playerBox.X < hb.X + hb.Width+20 && playerBox.X > hb.X-40)
+                    playerBox.X < hb.X + hb.Width +5 && playerBox.X > hb.X -40)
                 {
                     jumpSpeed = 0;
                 }
@@ -174,7 +174,7 @@ namespace WindowsFormsApp1
             if (!toDeleteg.IsEmpty)
             {
                 kuboty.Remove(toDeleteg);
-                maxPlayerSpeed = 9;
+                maxPlayerSpeed = 11;
                 await Task.Delay(5000);                          //daje przyspieszenie na 5 sekund
                 maxPlayerSpeed = 7;
             }

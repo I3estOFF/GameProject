@@ -78,6 +78,9 @@ namespace WindowsFormsApp1
             pictureBoxPlayer.Dock = DockStyle.Fill;
             pictureBoxPlayer.Parent = pictureBoxBackground;
             pictureBoxPlayer.BackColor = Color.Transparent;
+            label1.Parent = pictureBoxBackground;
+            pictureBoxPlayer.BackColor = Color.Transparent;
+            label1.BringToFront();
 
             w = new World(gBackground, ResolutionWidth, ResolutionHeight);
             p = new Player(gPlayer, PlayerBitmap, ResolutionWidth, ResolutionHeight, w.PlatformHB, w.carrots, w.gcarrots, w.kuboty);
@@ -88,15 +91,15 @@ namespace WindowsFormsApp1
         }
         private void KeyU(object sender, KeyEventArgs e)                                                                        //sterowanie
         {
-            if (e.KeyCode == Keys.Left)
+            if (e.KeyCode == Keys.A)
             {
                 p.playerLeft = false;
             }
-            if (e.KeyCode == Keys.Right)
+            if (e.KeyCode == Keys.D)
             {
                 p.playerRight = false;
             }
-            if (e.KeyCode == Keys.Up)
+            if (e.KeyCode == Keys.W)
             {
                 p.playerUp = false;
                 p.jumpSpeed = 200;
@@ -106,17 +109,17 @@ namespace WindowsFormsApp1
 
         private void KeyDow(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Left)
+            if (e.KeyCode == Keys.A)
             {
                 p.playerLeft = true;
                 p.faceLeft = true;
             }
-            if (e.KeyCode == Keys.Right)
+            if (e.KeyCode == Keys.D)
             {
                 p.playerRight = true;
                 p.faceLeft = false;
             }
-            if (e.KeyCode == Keys.Up && p.isGrounded)
+            if (e.KeyCode == Keys.W && p.isGrounded)
             {
                 p.playerUp = true;
                 p.fallSpeed = 0;
@@ -156,9 +159,9 @@ namespace WindowsFormsApp1
                 w.generatePlatformRandom(1);
                 
             }
-            else if(screenShift% 250==3)
+            else if(screenShift% 400==0)
             {
-               // w.generateCloud();                                                            tymczasowo wyłączone chmury
+                w.generateCloud();                                                           
             }
             else if(screenShift% 111==1)
             {
@@ -168,7 +171,7 @@ namespace WindowsFormsApp1
             screenShift++;
 
             gBackground.Clear(Color.Transparent);
-            // w.RenderClouds();                                                                tymczasowo wyłączone chmury
+            w.RenderClouds();                                                               
             w.RenderPlatforms();
             w.RenderCarrots();
             w.RenderGoldenCarrots();
@@ -178,19 +181,19 @@ namespace WindowsFormsApp1
 
         private void timer3_Tick(object sender, EventArgs e)
         {
-            if(w.screenScrollSpeed >= 2)
-                punkty = punkty + 10;
+            if(w.screenScrollSpeed >=2)
+                punkty = punkty + 1;
             
-            czas = czas + 10;
+            czas = czas + 1;
             if (czas == 30)
             {
                 w.screenScrollSpeed2 = 3;
                 w.screenScrollSpeed = 2;
-         
+            
             }
-            if (punkty == 100) w.screenScrollSpeed = 3;
-            if (punkty == 400) w.screenScrollSpeed = 4;
-            if (punkty == 700) w.screenScrollSpeed = 5;
+            if (punkty == 400) w.screenScrollSpeed = 3;
+            if (punkty == 800) w.screenScrollSpeed = 4;
+            if (punkty == 1200) w.screenScrollSpeed = 5;
         }
 
         private void timer4_Tick(object sender, EventArgs e)                                                   //losowanie szansy na wystąpienie power-up'ów

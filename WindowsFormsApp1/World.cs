@@ -288,18 +288,18 @@ namespace WindowsFormsApp1
 
         public void RenderClouds()                                                                                        //renderowanie chmur
         {
-            //przygotowac zestaw platform o roznych rozmiarach
             Rectangle temp;
             Bitmap cloud = Properties.Resources.cloudsT;
             for (int i = 0; i < clouds.Count; i++)
             {
                 temp = clouds[i];
                 clouds[i] = new Rectangle(temp.X, temp.Y + screenScrollSpeed2, temp.Width, temp.Height);
-                if (temp.Y > resolutionHeight)
+                if (temp.Y > resolutionHeight + cloud.Height)
+                {
                     clouds.RemoveAt(i);
-
-                if (temp.Top < resolutionHeight && temp!=null)
-                    gBackground.DrawImage(cloud, temp.Left, temp.Top);
+                }
+                if (temp.Top < resolutionHeight+cloud.Height && temp!=null)
+                    gBackground.DrawImage(cloud, temp.Left, temp.Top - cloud.Height);
             }
         }
         public void generateCloud()                                                                                         //generowanie chmur
