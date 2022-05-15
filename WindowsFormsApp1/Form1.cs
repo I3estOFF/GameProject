@@ -109,6 +109,7 @@ namespace WindowsFormsApp1
 
         private void KeyDow(object sender, KeyEventArgs e)
         {
+
             if (e.KeyCode == Keys.A)
             {
                 p.playerLeft = true;
@@ -176,6 +177,9 @@ namespace WindowsFormsApp1
             w.RenderCarrots();
             w.RenderGoldenCarrots();
             w.RenderKubots();
+
+            if(w.boomed)
+                w.renderExplosion();
             
         }
 
@@ -216,6 +220,19 @@ namespace WindowsFormsApp1
                 w.generateGoldenCarrotRandom();
             }
 
+        }
+
+        private async void setBoom()
+        {
+            w.boomed = true;
+            await Task.Delay(1000);
+            w.boomed = false;
+        }
+
+        private void pictureBoxPlayer_MouseClick(object sender, MouseEventArgs e)
+        {
+            w.explosion = Cursor.Position;
+            setBoom();
         }
     }
 }

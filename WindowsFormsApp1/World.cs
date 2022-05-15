@@ -15,6 +15,8 @@ namespace WindowsFormsApp1
         public List<Rectangle> emptys = new List<Rectangle>();
         public List<Rectangle> gcarrots = new List<Rectangle>();
         public List<Rectangle> kuboty = new List<Rectangle>();
+        public Point explosion = new Point();
+        public Boolean boomed = false;
 
         int kubotyWidth = Properties.Resources.Kuboty.Width;
         int carrotWidth = Properties.Resources.carrotnew.Width;
@@ -318,6 +320,14 @@ namespace WindowsFormsApp1
            
            rect = new Rectangle(ranX, ranY, cloudWidth, 1);
            clouds.Add(rect);
+        }
+
+        public void renderExplosion()
+        {
+            Bitmap boom = Properties.Resources.exploooosion;
+
+
+            gBackground.DrawImage(boom, explosion.X,explosion.Y);
         }
     }
 }

@@ -33,10 +33,10 @@
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.timer3 = new System.Windows.Forms.Timer(this.components);
             this.timer4 = new System.Windows.Forms.Timer(this.components);
+            this.timer5 = new System.Windows.Forms.Timer(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBoxPlayer = new System.Windows.Forms.PictureBox();
             this.pictureBoxBackground = new System.Windows.Forms.PictureBox();
-            this.timer5 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlayer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBackground)).BeginInit();
             this.SuspendLayout();
@@ -65,6 +65,12 @@
             this.timer4.Interval = 3000;
             this.timer4.Tick += new System.EventHandler(this.timer4_Tick);
             // 
+            // timer5
+            // 
+            this.timer5.Enabled = true;
+            this.timer5.Interval = 2500;
+            this.timer5.Tick += new System.EventHandler(this.timer5_Tick);
+            // 
             // label1
             // 
             this.label1.BackColor = System.Drawing.Color.Transparent;
@@ -85,6 +91,7 @@
             this.pictureBoxPlayer.Size = new System.Drawing.Size(1067, 526);
             this.pictureBoxPlayer.TabIndex = 4;
             this.pictureBoxPlayer.TabStop = false;
+            this.pictureBoxPlayer.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxPlayer_MouseClick);
             // 
             // pictureBoxBackground
             // 
@@ -96,12 +103,6 @@
             this.pictureBoxBackground.Size = new System.Drawing.Size(1067, 554);
             this.pictureBoxBackground.TabIndex = 2;
             this.pictureBoxBackground.TabStop = false;
-            // 
-            // timer5
-            // 
-            this.timer5.Enabled = true;
-            this.timer5.Interval = 2500;
-            this.timer5.Tick += new System.EventHandler(this.timer5_Tick);
             // 
             // Form1
             // 
