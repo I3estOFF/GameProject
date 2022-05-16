@@ -243,7 +243,8 @@ namespace WindowsFormsApp1
 
         private void pictureBoxPlayer_MouseClick(object sender, MouseEventArgs e)
         {
-            w.explosion = Cursor.Position;
+            w.explosion.X = (int)((float)Cursor.Position.X * getScalingFactor());
+            w.explosion.Y = (int)((float)Cursor.Position.Y * getScalingFactor());
             setBoom();
         }
     }
