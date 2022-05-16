@@ -157,10 +157,19 @@
   <data name="Kuboty" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Kuboty.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Meteoritesmall" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Meteoritesmall.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="goldencarrot" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\goldencarrot.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Meteoritesmall" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Meteoritesmall.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="chunguskuboty" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\chunguskuboty.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="goldChunguscarrot" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\goldChunguscarrot.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="goldChunguscarrotkuboty" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\goldChunguscarrotkuboty.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

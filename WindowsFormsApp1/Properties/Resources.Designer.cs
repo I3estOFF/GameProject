@@ -103,6 +103,16 @@ namespace WindowsFormsApp1.Properties {
         /// <summary>
         ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap chunguskuboty {
+            get {
+                object obj = ResourceManager.GetObject("chunguskuboty", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap cloud {
             get {
                 object obj = ResourceManager.GetObject("cloud", resourceCulture);
@@ -156,6 +166,26 @@ namespace WindowsFormsApp1.Properties {
         internal static System.Drawing.Bitmap exploooosion {
             get {
                 object obj = ResourceManager.GetObject("exploooosion", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap goldChunguscarrot {
+            get {
+                object obj = ResourceManager.GetObject("goldChunguscarrot", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap goldChunguscarrotkuboty {
+            get {
+                object obj = ResourceManager.GetObject("goldChunguscarrotkuboty", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

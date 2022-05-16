@@ -124,5 +124,14 @@
   <ItemGroup>
     <None Include="Resources\Meteoritesmall.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chunguskuboty.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\goldChunguscarrot.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\goldChunguscarrotkuboty.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

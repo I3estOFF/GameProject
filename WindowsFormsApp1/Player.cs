@@ -27,7 +27,8 @@ namespace WindowsFormsApp1
         public int playerSpeed;
         public int pkt = 0;
         public int gpkt = 0;
-        public bool playeriscarrot = false;
+        public bool playereatgold = false;
+        public bool playerhavekuboty = false;
         readonly int Width;
         readonly int Heigth;
 
@@ -55,8 +56,12 @@ namespace WindowsFormsApp1
         
         public void PlayerMovement()                                                                                                //ruch gracza
         {
-            if(playeriscarrot == true)
-            player = Properties.Resources.carrotnew;
+            if (playereatgold == true && playerhavekuboty ==true)
+            player = Properties.Resources.goldChunguscarrotkuboty;
+            else if(playereatgold == true && playerhavekuboty == false)
+            player = Properties.Resources.goldChunguscarrot;
+            else if (playerhavekuboty == true && playereatgold == false)
+            player = Properties.Resources.chunguskuboty;
             else
             player = Properties.Resources.Chungus;
 
@@ -161,10 +166,10 @@ namespace WindowsFormsApp1
                 gcarrots.Remove(toDeleteg);
                 gpkt += 1;
                 maxJumpSpeed = 400;
-                playeriscarrot = true;
+                playereatgold = true;
                 await Task.Delay(3000);                          //daje zwiększony skok na 3 sekundy
                 maxJumpSpeed = 300;
-                playeriscarrot = false;
+                playereatgold = false;
             }
         }
 
@@ -182,7 +187,9 @@ namespace WindowsFormsApp1
             {
                 kuboty.Remove(toDeleteg);
                 maxPlayerSpeed = 11;
+                playerhavekuboty = true;
                 await Task.Delay(5000);                          //daje przyspieszenie na 5 sekund
+                playerhavekuboty = false;
                 maxPlayerSpeed = 7;
             }
         }
