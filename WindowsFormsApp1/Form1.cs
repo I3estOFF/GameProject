@@ -234,18 +234,12 @@ namespace WindowsFormsApp1
 
         }
 
-        private async void setBoom()
-        {
-            w.boomed = true;
-            await Task.Delay(1000);
-            w.boomed = false;
-        }
-
         private void pictureBoxPlayer_MouseClick(object sender, MouseEventArgs e)
         {
             w.explosion.X = (int)((float)Cursor.Position.X * getScalingFactor());
             w.explosion.Y = (int)((float)Cursor.Position.Y * getScalingFactor());
-            setBoom();
+            w.popMeteorite();
+            
         }
     }
 }

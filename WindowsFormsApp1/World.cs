@@ -348,14 +348,34 @@ namespace WindowsFormsApp1
             int ranX = rand.Next(50, (resolutionWidth - 50));
             int ranY = -meteoriteHeight;
 
-            Rectangle rect = new Rectangle(ranX, ranY, meteoriteWidth, 1);
+            Rectangle rect = new Rectangle(ranX, ranY, meteoriteWidth, meteoriteHeight);
             meteorites.Add(rect);
 
             ranX = rand.Next(50, (resolutionWidth - 50));
             ranY = rand.Next(-2 * meteoriteHeight, -3 * meteoriteHeight / 2);
 
-            rect = new Rectangle(ranX, ranY, meteoriteWidth, 1);
+            rect = new Rectangle(ranX, ranY, meteoriteWidth, meteoriteHeight);
             meteorites.Add(rect);
+        }
+
+        public void popMeteorite()
+        {
+            Rectangle temp;
+            for (int i = 0; i < meteorites.Count; i++)
+            {
+                temp = meteorites[i];
+                if (temp.Contains(explosion.X,explosion.Y+200))
+                {
+                    setBoom();
+                    meteorites.RemoveAt(i);
+                }
+            }
+        }
+        private async void setBoom()
+        {
+            boomed = true;
+            await Task.Delay(1000);
+            boomed = false;
         }
 
         public void renderExplosion()
