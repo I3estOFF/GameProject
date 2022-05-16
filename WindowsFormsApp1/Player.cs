@@ -56,14 +56,18 @@ namespace WindowsFormsApp1
         
         public void PlayerMovement()                                                                                                //ruch gracza
         {
-            if (playereatgold == true && playerhavekuboty ==true)
-            player = Properties.Resources.goldChunguscarrotkuboty;
-            else if(playereatgold == true && playerhavekuboty == false)
-            player = Properties.Resources.goldChunguscarrot;
+            if (playereatgold == true && playerhavekuboty == true)
+            {
+                player = Properties.Resources.goldenchunguskuboty;
+            }
+            else if (playereatgold == true && playerhavekuboty == false)
+            {
+                player = Properties.Resources.goldenchungus;
+            }
             else if (playerhavekuboty == true && playereatgold == false)
-            player = Properties.Resources.chunguskuboty;
+                player = Properties.Resources.chunguskuboty;
             else
-            player = Properties.Resources.Chungus;
+                player = Properties.Resources.Chungus;
 
             playerSpeed = maxPlayerSpeed;
 

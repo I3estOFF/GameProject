@@ -133,5 +133,17 @@
   <ItemGroup>
     <None Include="Resources\goldChunguscarrotkuboty.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Chunguseatcarrot.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Chunguseatgoldencarrot.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\goldenchungus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\goldenchunguskuboty.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

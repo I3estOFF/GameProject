@@ -103,6 +103,26 @@ namespace WindowsFormsApp1.Properties {
         /// <summary>
         ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Chunguseatcarrot {
+            get {
+                object obj = ResourceManager.GetObject("Chunguseatcarrot", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Chunguseatgoldencarrot {
+            get {
+                object obj = ResourceManager.GetObject("Chunguseatgoldencarrot", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap chunguskuboty {
             get {
                 object obj = ResourceManager.GetObject("chunguskuboty", resourceCulture);
@@ -196,6 +216,26 @@ namespace WindowsFormsApp1.Properties {
         internal static System.Drawing.Bitmap goldencarrot {
             get {
                 object obj = ResourceManager.GetObject("goldencarrot", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap goldenchungus {
+            get {
+                object obj = ResourceManager.GetObject("goldenchungus", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap goldenchunguskuboty {
+            get {
+                object obj = ResourceManager.GetObject("goldenchunguskuboty", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
