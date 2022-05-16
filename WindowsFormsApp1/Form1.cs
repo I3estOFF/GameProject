@@ -155,7 +155,7 @@ namespace WindowsFormsApp1
         }
         private void timer2_Tick(object sender, EventArgs e)
         {
-            if(screenShift% 20==1)
+            if (screenShift% 20==1)
             {
                 w.generatePlatformRandom(1);
                 
@@ -172,6 +172,7 @@ namespace WindowsFormsApp1
             screenShift++;
 
             gBackground.Clear(Color.Transparent);
+            w.RenderMeteorite();
             w.RenderClouds();                                                               
             w.RenderPlatforms();
             w.RenderCarrots();
@@ -198,6 +199,17 @@ namespace WindowsFormsApp1
             if (punkty == 400) w.screenScrollSpeed = 3;
             if (punkty == 800) w.screenScrollSpeed = 4;
             if (punkty == 1200) w.screenScrollSpeed = 5;
+            Random rand = new Random();
+            int chance = rand.Next(1, 101);
+            if (chance <= 6 && punkty > 550 && punkty < 700)
+            {
+                w.generateMeteorite();
+            }
+
+            else if (chance <= 6 && punkty > 1250 && punkty < 1500)
+            {
+                w.generateMeteorite();
+            }
         }
 
         private void timer4_Tick(object sender, EventArgs e)                                                   //losowanie szansy na wystąpienie power-up'ów

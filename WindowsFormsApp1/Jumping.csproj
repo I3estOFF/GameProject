@@ -118,5 +118,11 @@
   <ItemGroup>
     <None Include="Resources\exploooosion.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\meteorite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Meteoritesmall.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

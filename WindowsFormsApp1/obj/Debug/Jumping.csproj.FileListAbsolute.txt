@@ -118,3 +118,14 @@ C:\Users\Jurek\Source\Repos\JumpingChungus1\WindowsFormsApp1\obj\Debug\Jumping.c
 C:\Users\Jurek\Source\Repos\JumpingChungus1\WindowsFormsApp1\obj\Debug\Jumping.csproj.CoreCompileInputs.cache
 C:\Users\Jurek\Source\Repos\JumpingChungus1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
 C:\Users\Jurek\Source\Repos\JumpingChungus1\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
+C:\Users\Czarek\Source\Repos\JumpingChungus7\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe.config
+C:\Users\Czarek\Source\Repos\JumpingChungus7\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe
+C:\Users\Czarek\Source\Repos\JumpingChungus7\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.pdb
+C:\Users\Czarek\Source\Repos\JumpingChungus7\WindowsFormsApp1\obj\Debug\Jumping.csproj.AssemblyReference.cache
+C:\Users\Czarek\Source\Repos\JumpingChungus7\WindowsFormsApp1\obj\Debug\Jumping.csproj.SuggestedBindingRedirects.cache
+C:\Users\Czarek\Source\Repos\JumpingChungus7\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Form1.resources
+C:\Users\Czarek\Source\Repos\JumpingChungus7\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
+C:\Users\Czarek\Source\Repos\JumpingChungus7\WindowsFormsApp1\obj\Debug\Jumping.csproj.GenerateResource.cache
+C:\Users\Czarek\Source\Repos\JumpingChungus7\WindowsFormsApp1\obj\Debug\Jumping.csproj.CoreCompileInputs.cache
+C:\Users\Czarek\Source\Repos\JumpingChungus7\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
+C:\Users\Czarek\Source\Repos\JumpingChungus7\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb

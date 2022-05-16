@@ -15,6 +15,7 @@ namespace WindowsFormsApp1
         public List<Rectangle> emptys = new List<Rectangle>();
         public List<Rectangle> gcarrots = new List<Rectangle>();
         public List<Rectangle> kuboty = new List<Rectangle>();
+        public List<Rectangle> meteorites = new List<Rectangle>();
         public Point explosion = new Point();
         public Boolean boomed = false;
 
@@ -27,6 +28,7 @@ namespace WindowsFormsApp1
         
         public int screenScrollSpeed = 0;
         public int screenScrollSpeed2 = 0;
+        public int screenScrollSpeed3 = 6;
         public int xplat;
         public int yplat;
         public int platw;
@@ -322,12 +324,46 @@ namespace WindowsFormsApp1
            clouds.Add(rect);
         }
 
+        public void RenderMeteorite()                                                                                        //renderowanie chmur
+        {
+            Rectangle temp;
+            Bitmap meteorite = Properties.Resources.Meteoritesmall;
+            for (int i = 0; i < meteorites.Count; i++)
+            {
+                temp = meteorites[i];
+                meteorites[i] = new Rectangle(temp.X, temp.Y + screenScrollSpeed3, temp.Width, temp.Height);
+                if (temp.Y > resolutionHeight + meteorite.Height)
+                {
+                    meteorites.RemoveAt(i);
+                }
+                if (temp.Top < resolutionHeight + meteorite.Height && temp != null)
+                    gBackground.DrawImage(meteorite, temp.Left, temp.Top - meteorite.Height);
+            }
+        }
+        public void generateMeteorite()                                                                                         //generowanie chmur
+        {
+            int meteoriteWidth = Properties.Resources.Meteoritesmall.Width;
+            int meteoriteHeight = Properties.Resources.Meteoritesmall.Height;
+            Random rand = new Random();
+            int ranX = rand.Next(50, (resolutionWidth - 50));
+            int ranY = -meteoriteHeight;
+
+            Rectangle rect = new Rectangle(ranX, ranY, meteoriteWidth, 1);
+            meteorites.Add(rect);
+
+            ranX = rand.Next(50, (resolutionWidth - 50));
+            ranY = rand.Next(-2 * meteoriteHeight, -3 * meteoriteHeight / 2);
+
+            rect = new Rectangle(ranX, ranY, meteoriteWidth, 1);
+            meteorites.Add(rect);
+        }
+
         public void renderExplosion()
         {
             Bitmap boom = Properties.Resources.exploooosion;
 
 
-            gBackground.DrawImage(boom, explosion.X,explosion.Y);
+            gBackground.DrawImage(boom, explosion.X - 70,explosion.Y - 70);
         }
     }
 }
