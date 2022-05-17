@@ -18,7 +18,7 @@ namespace WindowsFormsApp1
         int ResolutionWidth = 1; // zmienne trzymajace rzeczywista rozdzielczosc ekranu
         int ResolutionHeight = 1;
         int screenShift = 0;
-        int punkty = 0;
+        static int punkty = 0;
         int czas = 0;
 
 
@@ -26,7 +26,9 @@ namespace WindowsFormsApp1
         Graphics gPlayer;
         Bitmap PlayerBitmap;
         Player p;
+        Overlay overlay;
         World w;
+        ObjectCollection objectCollection;
 
         public Form1()                                                                                                      //inicjalizacja okna
         {
@@ -73,7 +75,8 @@ namespace WindowsFormsApp1
             ResolutionHeight = Convert.ToInt32(Height * getScalingFactor());
 
             System.Diagnostics.Debug.WriteLine(ResolutionWidth);
-
+            ///////////////////////////////
+            
             //umiejscowienie pictureBoxa z graczem 
             pictureBoxPlayer.Dock = DockStyle.Fill;
             pictureBoxPlayer.Parent = pictureBoxBackground;
@@ -82,9 +85,23 @@ namespace WindowsFormsApp1
             pictureBoxPlayer.BackColor = Color.Transparent;
             label1.BringToFront();
 
+            //setup pictureboxa z GameOver
+            OverlayLayer.Parent = pictureBoxPlayer;
+            OverlayLayer.BackColor = Color.Transparent;
+            OverlayLayer.BringToFront();
+            OverlayLayer.Visible = false;
+
+
+            objectCollection = new ObjectCollection(timer1, timer2, timer3, timer4, timer5, pictureBoxBackground, pictureBoxPlayer);
+            overlay = new Overlay(OverlayLayer, objectCollection);
             w = new World(gBackground, ResolutionWidth, ResolutionHeight);
-            p = new Player(gPlayer, PlayerBitmap, ResolutionWidth, ResolutionHeight, w.PlatformHB, w.carrots, w.gcarrots, w.kuboty);
+            p = new Player(gPlayer, PlayerBitmap, ResolutionWidth, ResolutionHeight, overlay);
             w.SetPlayer(p);
+            p.setWorld(w);
+
+            
+
+
 
             w.generateGround(0, ResolutionHeight - 100, 50);
             w.generatePlatformRandom(4);
@@ -196,9 +213,9 @@ namespace WindowsFormsApp1
                 w.screenScrollSpeed = 2;
             
             }
-            if (punkty == 400) w.screenScrollSpeed = 3;
-            if (punkty == 800) w.screenScrollSpeed = 4;
-            if (punkty == 1200) w.screenScrollSpeed = 5;
+            if (punkty >= 400) w.screenScrollSpeed = 3;
+            if (punkty >= 800) w.screenScrollSpeed = 4;
+            if (punkty >= 1200) w.screenScrollSpeed = 5;
             Random rand = new Random();
             int chance = rand.Next(1, 101);
             if (chance <= 6 && punkty > 550 && punkty < 700)

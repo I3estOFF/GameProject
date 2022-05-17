@@ -34,9 +34,11 @@
             this.timer3 = new System.Windows.Forms.Timer(this.components);
             this.timer4 = new System.Windows.Forms.Timer(this.components);
             this.timer5 = new System.Windows.Forms.Timer(this.components);
+            this.OverlayLayer = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBoxPlayer = new System.Windows.Forms.PictureBox();
             this.pictureBoxBackground = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.OverlayLayer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlayer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBackground)).BeginInit();
             this.SuspendLayout();
@@ -71,6 +73,16 @@
             this.timer5.Interval = 2500;
             this.timer5.Tick += new System.EventHandler(this.timer5_Tick);
             // 
+            // OverlayLayer
+            // 
+            this.OverlayLayer.BackColor = System.Drawing.Color.Transparent;
+            this.OverlayLayer.Image = global::WindowsFormsApp1.Properties.Resources.game_over1;
+            this.OverlayLayer.Location = new System.Drawing.Point(362, 163);
+            this.OverlayLayer.Name = "OverlayLayer";
+            this.OverlayLayer.Size = new System.Drawing.Size(340, 224);
+            this.OverlayLayer.TabIndex = 5;
+            this.OverlayLayer.TabStop = false;
+            // 
             // label1
             // 
             this.label1.BackColor = System.Drawing.Color.Transparent;
@@ -86,7 +98,7 @@
             // 
             // pictureBoxPlayer
             // 
-            this.pictureBoxPlayer.Location = new System.Drawing.Point(0, 28);
+            this.pictureBoxPlayer.Location = new System.Drawing.Point(12, 42);
             this.pictureBoxPlayer.Name = "pictureBoxPlayer";
             this.pictureBoxPlayer.Size = new System.Drawing.Size(1067, 526);
             this.pictureBoxPlayer.TabIndex = 4;
@@ -109,6 +121,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1067, 554);
+            this.Controls.Add(this.OverlayLayer);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBoxPlayer);
             this.Controls.Add(this.pictureBoxBackground);
@@ -118,6 +131,7 @@
             this.Load += new System.EventHandler(this.onFormLoad);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyDow);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.KeyU);
+            ((System.ComponentModel.ISupportInitialize)(this.OverlayLayer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlayer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBackground)).EndInit();
             this.ResumeLayout(false);
@@ -125,10 +139,11 @@
         }
 
         #endregion
-        private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.PictureBox pictureBoxBackground;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pictureBoxPlayer;
+        public System.Windows.Forms.PictureBox OverlayLayer;
+        private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.Timer timer3;
         private System.Windows.Forms.Timer timer4;

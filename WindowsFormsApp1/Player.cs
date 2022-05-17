@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace WindowsFormsApp1
 {
@@ -34,28 +35,30 @@ namespace WindowsFormsApp1
 
         Graphics gPlayer;
         Bitmap player;
+        World w;
         public Rectangle playerBox; //hitbox postaci
-        List<Rectangle> PlatformHB;
-        List<Rectangle> carrots;
-        List<Rectangle> gcarrots;
-        List<Rectangle> kuboty;
+        Overlay overlay;
 
 
-        public Player(Graphics _g, Bitmap _player, int W, int H, List<Rectangle> hb, List<Rectangle> tt, List<Rectangle> gt, List<Rectangle> kb)
+
+        public Player(Graphics _g, Bitmap _player, int W, int H, Overlay overlay)
         {
             playerBox = new Rectangle(80, H - 200, Properties.Resources.Chungus.Width, Properties.Resources.Chungus.Height);
             gPlayer = _g;
             player = _player;
             Width = W;
             Heigth = H;
-            PlatformHB = hb;
-            carrots = tt;
-            gcarrots = gt;
-            kuboty = kb;
+            this.overlay = overlay;
+
+        }
+        public void setWorld(World w)
+        {
+            this.w = w;
         }
         
         public void PlayerMovement()                                                                                                //ruch gracza
         {
+            //buffy
             if (playereatgold == true && playerhavekuboty == true)
             {
                 player = Properties.Resources.goldenchunguskuboty;
@@ -72,6 +75,8 @@ namespace WindowsFormsApp1
             playerSpeed = maxPlayerSpeed;
 
 
+
+            // podstawowy ruch
             if (faceLeft) // zmienia zwrot postaci
             {
                 player.RotateFlip(RotateFlipType.Rotate180FlipY);
@@ -107,12 +112,23 @@ namespace WindowsFormsApp1
                     fallSpeed += fallSpeedAcceleration;
                 isGrounded = false;
             }
+            if (playerBox.Top > Heigth)
+                overlay.GameOver();
+
+            if (playerBox.Top < 200)
+            {
+                w.screenScrollSpeed = 8;
+                w.screenScrollSpeed = 13;
+
+            }
+            else
+                w.screenScrollSpeed = 3;
         }
 
         public void PlatformPlayerCollision()                                                                                   //kolizja gracza z platformą
         {
             playerSideCollison = false;
-            foreach (Rectangle hb in PlatformHB)
+            foreach (Rectangle hb in w.PlatformHB)
             {
                 // kolizja gracza z gorna krawedzia zatrzymuje opadanie //dziala
                 if (playerBox.Y + playerBox.Height < hb.Y + 20 && playerBox.Y + playerBox.Height > hb.Y - 4 &&
@@ -141,7 +157,7 @@ namespace WindowsFormsApp1
         public void CarrotPlayerCollision()                                                                                   //kolizja gracza z marchewką
         {
             Rectangle toDelete = new Rectangle();
-            foreach (Rectangle tt in carrots)
+            foreach (Rectangle tt in w.carrots)
             {
                 if (playerBox.Contains(tt))
                 {                
@@ -150,15 +166,16 @@ namespace WindowsFormsApp1
             }
             if(!toDelete.IsEmpty)
             {
-                carrots.Remove(toDelete);
+                w.carrots.Remove(toDelete);
                 pkt += 1;
             }                    
         }
 
+
         public async void GoldenCarrotPlayerCollision()                                                                       //kolizja gracza ze złotą marchewką
         {
             Rectangle toDeleteg = new Rectangle();
-            foreach (Rectangle gt in gcarrots)
+            foreach (Rectangle gt in w.gcarrots)
             {
                 if (playerBox.Contains(gt))
                 {
@@ -167,7 +184,7 @@ namespace WindowsFormsApp1
             }
             if (!toDeleteg.IsEmpty)
             {
-                gcarrots.Remove(toDeleteg);
+                w.gcarrots.Remove(toDeleteg);
                 gpkt += 1;
                 maxJumpSpeed = 400;
                 playereatgold = true;
@@ -180,7 +197,7 @@ namespace WindowsFormsApp1
         public async void KubotyPlayerCollision()                                                                       //kolizja gracza z kubotami
         {
             Rectangle toDeleteg = new Rectangle();
-            foreach (Rectangle kb in kuboty)
+            foreach (Rectangle kb in w.kuboty)
             {
                 if (playerBox.Contains(kb))
                 {
@@ -189,12 +206,28 @@ namespace WindowsFormsApp1
             }
             if (!toDeleteg.IsEmpty)
             {
-                kuboty.Remove(toDeleteg);
+                w.kuboty.Remove(toDeleteg);
                 maxPlayerSpeed = 11;
                 playerhavekuboty = true;
                 await Task.Delay(5000);                          //daje przyspieszenie na 5 sekund
                 playerhavekuboty = false;
                 maxPlayerSpeed = 7;
+            }
+        }
+        public void MeteorPlayerCollision()                                                                                   //kolizja gracza z marchewką
+        {
+            Rectangle toDelete = new Rectangle();
+            foreach (Rectangle tt in w.meteorites)
+            {
+                if (playerBox.Contains(tt))
+                {
+                    overlay.GameOver();
+                }
+            }
+            if (!toDelete.IsEmpty)
+            {
+                w.carrots.Remove(toDelete);
+                pkt += 1;
             }
         }
     }
