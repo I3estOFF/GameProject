@@ -67,8 +67,9 @@ namespace WindowsFormsApp1
             System.Diagnostics.Debug.WriteLine(Width);
 
             //przeskalowanie grafik do 100% rozmiaru
-            gBackground.ScaleTransform(1f / getScalingFactor(), 1 / getScalingFactor());
-            gPlayer.ScaleTransform(1f / getScalingFactor(), 1 / getScalingFactor());
+            float scalingFactor = getScalingFactor();
+            gBackground.ScaleTransform(1f / scalingFactor, 1 / scalingFactor);
+            gPlayer.ScaleTransform(1f / scalingFactor, 1 / scalingFactor);
 
             //wyliczenie i zapisanie aktualnej rozdzielczosci ekranu
             ResolutionWidth = Convert.ToInt32(Width * getScalingFactor());
@@ -91,23 +92,32 @@ namespace WindowsFormsApp1
             OverlayLayer.BringToFront();
             OverlayLayer.Visible = false;
 
+            label1.Visible = false;
 
-            objectCollection = new ObjectCollection(timer1, timer2, timer3, timer4, timer5, gBackground, gPlayer);
-            overlay = new Overlay(OverlayLayer, objectCollection);
+
+            objectCollection = new ObjectCollection(timer1, timer2, timer3, timer4, timer5,menuTimer, gBackground, gPlayer, label1, ResolutionWidth,ResolutionHeight);
+            
             w = new World(gBackground, ResolutionWidth, ResolutionHeight);
-            p = new Player(gPlayer, PlayerBitmap, ResolutionWidth, ResolutionHeight, overlay,objectCollection);
+            p = new Player(gPlayer, PlayerBitmap, ResolutionWidth, ResolutionHeight,objectCollection);
             w.SetPlayer(p);
             p.setWorld(w);
+            overlay = new Overlay(OverlayLayer, objectCollection, p);
+            overlay.scaleGraphics(getScalingFactor());
+            overlay.gimmeForm(this);
+            overlay.MainMenu();
+            p.setOverlay(overlay);
 
-            
 
 
 
             w.generateGround(0, ResolutionHeight - 100, 50);
             w.generatePlatformRandom(4);
+            //overlay.StartGame();
         }
         private void KeyU(object sender, KeyEventArgs e)                                                                        //sterowanie
         {
+            if (!p.canMove)
+                return;
             if (e.KeyCode == Keys.A)
             {
                 p.playerLeft = false;
@@ -126,7 +136,10 @@ namespace WindowsFormsApp1
 
         private void KeyDow(object sender, KeyEventArgs e)
         {
-
+            if (e.KeyCode == Keys.Escape)
+                overlay.MainMenu();
+            if (!p.canMove)
+                return;
             if (e.KeyCode == Keys.A)
             {
                 p.playerLeft = true;
@@ -154,13 +167,14 @@ namespace WindowsFormsApp1
                 timer2.Enabled = true;
                 timer3.Enabled = true;
             }
-            if (e.KeyCode == Keys.Escape)
-                this.Close();
+
 
         }
 
         private void timer1_Tick(object sender, EventArgs e)                                                                    //Timery
         {
+            if (!p.canMove)
+                return;
             p.PlayerMovement();
             p.PlatformPlayerCollision();
             p.MeteorPlayerCollision();
@@ -173,6 +187,8 @@ namespace WindowsFormsApp1
         }
         private void timer2_Tick(object sender, EventArgs e)
         {
+            if (!p.canMove)
+                return;
             if (screenShift% 20==1)
             {
                 w.generatePlatformRandom(1);
@@ -205,6 +221,8 @@ namespace WindowsFormsApp1
 
         private void timer3_Tick(object sender, EventArgs e)
         {
+            if (!p.canMove)
+                return;
             if(w.screenScrollSpeed >=2)
                 punkty = punkty + 1;
             
@@ -255,10 +273,23 @@ namespace WindowsFormsApp1
 
         private void pictureBoxPlayer_MouseClick(object sender, MouseEventArgs e)
         {
+            
             w.explosion.X = (int)((float)Cursor.Position.X * getScalingFactor());
             w.explosion.Y = (int)((float)Cursor.Position.Y * getScalingFactor());
             w.popMeteorite();
             
+        }
+
+        private void OverlayLayer_MouseClick(object sender, MouseEventArgs e)
+        {
+            overlay.mousePosition.X = (int)((float)Cursor.Position.X * getScalingFactor());
+            overlay.mousePosition.Y = (int)((float)Cursor.Position.Y * getScalingFactor());
+        }
+
+        private void menuTimer_Tick(object sender, EventArgs e)
+        {
+            overlay.checkMenuInput(w);
+          
         }
     }
 }

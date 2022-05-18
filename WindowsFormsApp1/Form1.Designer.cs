@@ -38,6 +38,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBoxPlayer = new System.Windows.Forms.PictureBox();
             this.pictureBoxBackground = new System.Windows.Forms.PictureBox();
+            this.menuTimer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.OverlayLayer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlayer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBackground)).BeginInit();
@@ -45,19 +46,16 @@
             // 
             // timer1
             // 
-            this.timer1.Enabled = true;
             this.timer1.Interval = 10;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // timer2
             // 
-            this.timer2.Enabled = true;
             this.timer2.Interval = 20;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
             // timer3
             // 
-            this.timer3.Enabled = true;
             this.timer3.Interval = 20;
             this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
             // 
@@ -75,13 +73,13 @@
             // 
             // OverlayLayer
             // 
-            this.OverlayLayer.BackColor = System.Drawing.Color.Transparent;
-            this.OverlayLayer.Image = global::WindowsFormsApp1.Properties.Resources.game_over1;
+            this.OverlayLayer.BackColor = System.Drawing.Color.Gray;
             this.OverlayLayer.Location = new System.Drawing.Point(362, 163);
             this.OverlayLayer.Name = "OverlayLayer";
-            this.OverlayLayer.Size = new System.Drawing.Size(340, 224);
+            this.OverlayLayer.Size = new System.Drawing.Size(407, 247);
             this.OverlayLayer.TabIndex = 5;
             this.OverlayLayer.TabStop = false;
+            this.OverlayLayer.MouseClick += new System.Windows.Forms.MouseEventHandler(this.OverlayLayer_MouseClick);
             // 
             // label1
             // 
@@ -94,7 +92,7 @@
             this.label1.Size = new System.Drawing.Size(300, 43);
             this.label1.TabIndex = 3;
             this.label1.Text = "label1";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pictureBoxPlayer
             // 
@@ -115,6 +113,12 @@
             this.pictureBoxBackground.Size = new System.Drawing.Size(1067, 554);
             this.pictureBoxBackground.TabIndex = 2;
             this.pictureBoxBackground.TabStop = false;
+            // 
+            // menuTimer
+            // 
+            this.menuTimer.Enabled = true;
+            this.menuTimer.Interval = 50;
+            this.menuTimer.Tick += new System.EventHandler(this.menuTimer_Tick);
             // 
             // Form1
             // 
@@ -148,6 +152,7 @@
         private System.Windows.Forms.Timer timer3;
         private System.Windows.Forms.Timer timer4;
         private System.Windows.Forms.Timer timer5;
+        private System.Windows.Forms.Timer menuTimer;
     }
 }
 

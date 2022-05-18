@@ -33,6 +33,8 @@ namespace WindowsFormsApp1
         public int yplat;
         public int platw;
 
+        public bool gamePaused = true;
+
         Player p;
 
         public World(Graphics gBackground, int resoultionWidth, int resolutionHeight)

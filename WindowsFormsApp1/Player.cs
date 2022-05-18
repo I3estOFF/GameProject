@@ -10,7 +10,7 @@ namespace WindowsFormsApp1
 {
     internal class Player
     {
-        public bool canMove = true;
+        public bool canMove = false;
 
         public bool playerRight = false;
         public bool playerLeft = false;
@@ -44,20 +44,23 @@ namespace WindowsFormsApp1
 
 
 
-        public Player(Graphics _g, Bitmap _player, int W, int H, Overlay overlay, ObjectCollection objectCollection)
+        public Player(Graphics _g, Bitmap _player, int W, int H, ObjectCollection objectCollection)
         {
             playerBox = new Rectangle(80, H - 200, Properties.Resources.Chungus.Width, Properties.Resources.Chungus.Height);
             gPlayer = _g;
             player = _player;
             Width = W;
             Heigth = H;
-            this.overlay = overlay;
             this.objectCollection = objectCollection;
 
         }
         public void setWorld(World w)
         {
             this.w = w;
+        }
+        public void setOverlay(Overlay overlay)
+        {
+            this.overlay = overlay;
         }
         
         public void PlayerMovement()                                                                                                //ruch gracza

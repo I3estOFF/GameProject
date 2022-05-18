@@ -150,5 +150,11 @@
   <ItemGroup>
     <None Include="Resources\game over.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\jumping.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\main menu.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
