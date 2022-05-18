@@ -92,10 +92,10 @@ namespace WindowsFormsApp1
             OverlayLayer.Visible = false;
 
 
-            objectCollection = new ObjectCollection(timer1, timer2, timer3, timer4, timer5, pictureBoxBackground, pictureBoxPlayer);
+            objectCollection = new ObjectCollection(timer1, timer2, timer3, timer4, timer5, gBackground, gPlayer);
             overlay = new Overlay(OverlayLayer, objectCollection);
             w = new World(gBackground, ResolutionWidth, ResolutionHeight);
-            p = new Player(gPlayer, PlayerBitmap, ResolutionWidth, ResolutionHeight, overlay);
+            p = new Player(gPlayer, PlayerBitmap, ResolutionWidth, ResolutionHeight, overlay,objectCollection);
             w.SetPlayer(p);
             p.setWorld(w);
 
@@ -163,6 +163,7 @@ namespace WindowsFormsApp1
         {
             p.PlayerMovement();
             p.PlatformPlayerCollision();
+            p.MeteorPlayerCollision();
             p.CarrotPlayerCollision();
             p.GoldenCarrotPlayerCollision();
             p.KubotyPlayerCollision();
@@ -189,16 +190,17 @@ namespace WindowsFormsApp1
             screenShift++;
 
             gBackground.Clear(Color.Transparent);
-            w.RenderMeteorite();
+            
             w.RenderClouds();                                                               
             w.RenderPlatforms();
             w.RenderCarrots();
             w.RenderGoldenCarrots();
             w.RenderKubots();
+            w.RenderMeteorite();
 
-            if(w.boomed)
+            if (w.boomed)
                 w.renderExplosion();
-            
+            gBackground.DrawRectangle(new Pen(Brushes.Blue),p.playerBox);
         }
 
         private void timer3_Tick(object sender, EventArgs e)
@@ -213,12 +215,12 @@ namespace WindowsFormsApp1
                 w.screenScrollSpeed = 2;
             
             }
-            if (punkty >= 400) w.screenScrollSpeed = 3;
-            if (punkty >= 800) w.screenScrollSpeed = 4;
-            if (punkty >= 1200) w.screenScrollSpeed = 5;
+            if (punkty == 400) w.screenScrollSpeed++;
+            if (punkty == 800) w.screenScrollSpeed++;
+            if (punkty == 1200) w.screenScrollSpeed++;
             Random rand = new Random();
             int chance = rand.Next(1, 101);
-            if (chance <= 6 && punkty > 550 && punkty < 700)
+            if (chance <= 6 && punkty > 50 && punkty < 200)
             {
                 w.generateMeteorite();
             }

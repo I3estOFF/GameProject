@@ -10,6 +10,8 @@ namespace WindowsFormsApp1
 {
     internal class Player
     {
+        public bool canMove = true;
+
         public bool playerRight = false;
         public bool playerLeft = false;
         public bool playerUp = false;
@@ -38,10 +40,11 @@ namespace WindowsFormsApp1
         World w;
         public Rectangle playerBox; //hitbox postaci
         Overlay overlay;
+        ObjectCollection objectCollection;
 
 
 
-        public Player(Graphics _g, Bitmap _player, int W, int H, Overlay overlay)
+        public Player(Graphics _g, Bitmap _player, int W, int H, Overlay overlay, ObjectCollection objectCollection)
         {
             playerBox = new Rectangle(80, H - 200, Properties.Resources.Chungus.Width, Properties.Resources.Chungus.Height);
             gPlayer = _g;
@@ -49,6 +52,7 @@ namespace WindowsFormsApp1
             Width = W;
             Heigth = H;
             this.overlay = overlay;
+            this.objectCollection = objectCollection;
 
         }
         public void setWorld(World w)
@@ -58,6 +62,9 @@ namespace WindowsFormsApp1
         
         public void PlayerMovement()                                                                                                //ruch gracza
         {
+            if (!canMove)
+                return;
+
             //buffy
             if (playereatgold == true && playerhavekuboty == true)
             {
@@ -117,12 +124,9 @@ namespace WindowsFormsApp1
 
             if (playerBox.Top < 200)
             {
-                w.screenScrollSpeed = 8;
-                w.screenScrollSpeed = 13;
+               //if(pk)
 
             }
-            else
-                w.screenScrollSpeed = 3;
         }
 
         public void PlatformPlayerCollision()                                                                                   //kolizja gracza z platformą
@@ -219,15 +223,14 @@ namespace WindowsFormsApp1
             Rectangle toDelete = new Rectangle();
             foreach (Rectangle tt in w.meteorites)
             {
-                if (playerBox.Contains(tt))
+                Rectangle temp = new Rectangle(tt.X+12, tt.Y+8, 25, 25);
+                objectCollection.Background.DrawRectangle(new Pen(Brushes.DarkGreen), temp);
+                if (playerBox.IntersectsWith(temp))
                 {
+                    canMove = false;
                     overlay.GameOver();
+                    toDelete = tt;
                 }
-            }
-            if (!toDelete.IsEmpty)
-            {
-                w.carrots.Remove(toDelete);
-                pkt += 1;
             }
         }
     }

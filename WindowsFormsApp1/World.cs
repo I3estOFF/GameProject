@@ -247,7 +247,7 @@ namespace WindowsFormsApp1
             }
 
             ranX = rand.Next(xplat, xplat + platw);
-            Rectangle rect = new Rectangle(xplat + ranHunit, yplat - 30, carrotWidth, 1);
+            Rectangle rect = new Rectangle(xplat + ranHunit, yplat - 30, carrotWidth,1);
             gcarrots.Add(rect);
         }
 
@@ -296,6 +296,7 @@ namespace WindowsFormsApp1
             Bitmap cloud = Properties.Resources.cloudsT;
             for (int i = 0; i < clouds.Count; i++)
             {
+
                 temp = clouds[i];
                 clouds[i] = new Rectangle(temp.X, temp.Y + screenScrollSpeed2, temp.Width, temp.Height);
                 if (temp.Y > resolutionHeight + cloud.Height)
@@ -331,24 +332,27 @@ namespace WindowsFormsApp1
             for (int i = 0; i < meteorites.Count; i++)
             {
                 temp = meteorites[i];
+                
                 meteorites[i] = new Rectangle(temp.X, temp.Y + screenScrollSpeed3, temp.Width, temp.Height);
                 if (temp.Y > resolutionHeight + meteorite.Height)
                 {
                     meteorites.RemoveAt(i);
                 }
                 if (temp.Top < resolutionHeight + meteorite.Height && temp != null)
-                    gBackground.DrawImage(meteorite, temp.Left, temp.Top - meteorite.Height);
+                   gBackground.DrawImage(meteorite, temp.Left+5, temp.Top+5);
+                gBackground.DrawRectangle(new Pen(Brushes.Red),temp);
             }
         }
         public void generateMeteorite()                                                                                         //generowanie chmur
         {
-            int meteoriteWidth = Properties.Resources.Meteoritesmall.Width;
-            int meteoriteHeight = Properties.Resources.Meteoritesmall.Height;
+            int meteoriteWidth = 50;
+            int meteoriteHeight = 50;
             Random rand = new Random();
             int ranX = rand.Next(50, (resolutionWidth - 50));
             int ranY = -meteoriteHeight;
 
             Rectangle rect = new Rectangle(ranX, ranY, meteoriteWidth, meteoriteHeight);
+            
             meteorites.Add(rect);
 
             ranX = rand.Next(50, (resolutionWidth - 50));
@@ -364,7 +368,7 @@ namespace WindowsFormsApp1
             for (int i = 0; i < meteorites.Count; i++)
             {
                 temp = meteorites[i];
-                if (temp.Contains(explosion.X,explosion.Y+200))
+                if (temp.Contains(explosion.X,explosion.Y))
                 {
                     setBoom();
                     meteorites.RemoveAt(i);
