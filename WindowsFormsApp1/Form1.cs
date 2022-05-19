@@ -181,6 +181,7 @@ namespace WindowsFormsApp1
             p.CarrotPlayerCollision();
             p.GoldenCarrotPlayerCollision();
             p.KubotyPlayerCollision();
+            p.HelmetPlayerCollision();
             pictureBoxPlayer.Refresh();
             gPlayer.Clear(Color.Transparent);
             label1.Text = "   Punkty: " + punkty + "   " + p.pkt + "x    " + p.gpkt + "x      ";
@@ -212,6 +213,7 @@ namespace WindowsFormsApp1
             w.RenderCarrots();
             w.RenderGoldenCarrots();
             w.RenderKubots();
+            w.RenderHelmet();
             w.RenderMeteorite();
 
             if (w.boomed)
@@ -257,6 +259,10 @@ namespace WindowsFormsApp1
             if (chance <= 30 && w.screenScrollSpeed >= 3)             //30% szans co 3 sekundy
             {
                 w.generateKubotsRandom();
+            }
+            if (chance <= 80 && w.screenScrollSpeed >= 3)             //30% szans co 3 sekundy
+            {
+                w.generateHelmetRandom();
             }
         }
 

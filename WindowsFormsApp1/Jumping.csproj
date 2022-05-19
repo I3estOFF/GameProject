@@ -156,5 +156,20 @@
   <ItemGroup>
     <None Include="Resources\main menu.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Chungushelmet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chunguskubotyhelmet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\goldenchungushelmet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\goldenchunguskubotyhelmet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\helmet.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

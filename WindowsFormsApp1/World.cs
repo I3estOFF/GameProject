@@ -16,10 +16,10 @@ namespace WindowsFormsApp1
         public List<Rectangle> gcarrots = new List<Rectangle>();
         public List<Rectangle> kuboty = new List<Rectangle>();
         public List<Rectangle> meteorites = new List<Rectangle>();
+        public List<Rectangle> helmets = new List<Rectangle>();
         public Point explosion = new Point();
         public Boolean boomed = false;
 
-        int kubotyWidth = Properties.Resources.Kuboty.Width;
         int carrotWidth = Properties.Resources.carrotnew.Width;
         int platWidth = Properties.Resources._311.Width;
         private Graphics gBackground;
@@ -289,6 +289,44 @@ namespace WindowsFormsApp1
             ranX = rand.Next(xplat, xplat + platw);
             Rectangle rect = new Rectangle(xplat + ranHunit, yplat - 30, carrotWidth, 1);
             kuboty.Add(rect);
+        }
+
+        public void RenderHelmet()                                                                                  //renderowanie złotych marchewek
+        {
+            Rectangle temp;
+            Bitmap helmet = Properties.Resources.helmet;
+            for (int i = 0; i < helmets.Count; i++)
+            {
+                temp = helmets[i];
+                helmets[i] = new Rectangle(temp.X, temp.Y + screenScrollSpeed, temp.Width, temp.Height);
+                if (temp.Y > resolutionHeight + 100)
+                    helmets.RemoveAt(i);
+                if (temp != null)
+                {
+                    gBackground.DrawImage(helmet, temp.Left, temp.Top);
+                }
+            }
+        }
+
+        public void generateHelmetRandom()                                                                          //generowanie złotych marchewek
+        {
+            Random rand = new Random();
+
+            int ranX = 0;
+            int ranHunit = 0;
+            ranHunit = rand.Next(20, 400);
+            if (helmets.Count > 1)
+            {
+                ranX = helmets.LastOrDefault().X;
+            }
+            else
+            {
+                ranX = rand.Next(xplat, xplat + platw);
+            }
+
+            ranX = rand.Next(xplat, xplat + platw);
+            Rectangle rect = new Rectangle(xplat + ranHunit, yplat - 30, carrotWidth, 1);
+            helmets.Add(rect);
         }
 
 

@@ -34,11 +34,11 @@
             this.timer3 = new System.Windows.Forms.Timer(this.components);
             this.timer4 = new System.Windows.Forms.Timer(this.components);
             this.timer5 = new System.Windows.Forms.Timer(this.components);
+            this.menuTimer = new System.Windows.Forms.Timer(this.components);
             this.OverlayLayer = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBoxPlayer = new System.Windows.Forms.PictureBox();
             this.pictureBoxBackground = new System.Windows.Forms.PictureBox();
-            this.menuTimer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.OverlayLayer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlayer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBackground)).BeginInit();
@@ -70,6 +70,12 @@
             this.timer5.Enabled = true;
             this.timer5.Interval = 2500;
             this.timer5.Tick += new System.EventHandler(this.timer5_Tick);
+            // 
+            // menuTimer
+            // 
+            this.menuTimer.Enabled = true;
+            this.menuTimer.Interval = 50;
+            this.menuTimer.Tick += new System.EventHandler(this.menuTimer_Tick);
             // 
             // OverlayLayer
             // 
@@ -113,12 +119,6 @@
             this.pictureBoxBackground.Size = new System.Drawing.Size(1067, 554);
             this.pictureBoxBackground.TabIndex = 2;
             this.pictureBoxBackground.TabStop = false;
-            // 
-            // menuTimer
-            // 
-            this.menuTimer.Enabled = true;
-            this.menuTimer.Interval = 50;
-            this.menuTimer.Tick += new System.EventHandler(this.menuTimer_Tick);
             // 
             // Form1
             // 

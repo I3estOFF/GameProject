@@ -32,6 +32,7 @@ namespace WindowsFormsApp1
         public int gpkt = 0;
         public bool playereatgold = false;
         public bool playerhavekuboty = false;
+        public bool playerhavehelmet = false;
         readonly int Width;
         readonly int Heigth;
 
@@ -69,16 +70,34 @@ namespace WindowsFormsApp1
                 return;
 
             //buffy
-            if (playereatgold == true && playerhavekuboty == true)
+            if (playereatgold == true && playerhavekuboty == true && playerhavehelmet == false)
             {
                 player = Properties.Resources.goldenchunguskuboty;
             }
-            else if (playereatgold == true && playerhavekuboty == false)
+            else if (playereatgold == true && playerhavekuboty == false && playerhavehelmet == false)
             {
                 player = Properties.Resources.goldenchungus;
             }
-            else if (playerhavekuboty == true && playereatgold == false)
+            else if (playerhavekuboty == true && playereatgold == false && playerhavehelmet == false)
+            {
                 player = Properties.Resources.chunguskuboty;
+            }
+            else if (playerhavehelmet == true && playerhavekuboty == false && playereatgold == false)
+            {
+                player = Properties.Resources.Chungushelmet;
+            }
+            else if (playerhavehelmet == true && playereatgold ==true && playerhavekuboty == false)
+            {
+                player = Properties.Resources.goldenchungushelmet;
+            }
+            else if (playerhavehelmet == true && playereatgold == true && playerhavekuboty == true)
+            {
+                player = Properties.Resources.goldenchunguskubotyhelmet;
+            }
+            else if (playerhavehelmet == true && playerhavekuboty == true && playereatgold == false)
+            {
+                player = Properties.Resources.chunguskubotyhelmet;
+            }
             else
                 player = Properties.Resources.Chungus;
 
@@ -219,6 +238,24 @@ namespace WindowsFormsApp1
                 await Task.Delay(5000);                          //daje przyspieszenie na 5 sekund
                 playerhavekuboty = false;
                 maxPlayerSpeed = 7;
+            }
+        }
+
+        public void HelmetPlayerCollision()                                                                       //kolizja gracza z kubotami
+        {
+            Rectangle toDeleteg = new Rectangle();
+            foreach (Rectangle hm in w.helmets)
+            {
+                if (playerBox.Contains(hm))
+                {
+                    toDeleteg = hm;
+                }
+            }
+            if (!toDeleteg.IsEmpty)
+            {
+                w.helmets.Remove(toDeleteg);
+                playerhavehelmet = true;
+
             }
         }
         public void MeteorPlayerCollision()                                                                                   //kolizja gracza z marchewką
