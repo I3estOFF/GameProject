@@ -33,7 +33,7 @@ namespace WindowsFormsApp1
             OverlayLayer.Dock = DockStyle.Fill;
         }
 
-        public void MainMenu()
+        public void MainMenu()                                                                                  //MainMenu
         {
             player.canMove = false;
             OverlayLayer.Visible = true;
@@ -49,13 +49,10 @@ namespace WindowsFormsApp1
             OverlayLayer.BringToFront();
             var t = Task.Run(() => waitForInput(start,exit));
             t.Wait();
-
-
-
         }
         private async void waitForInput(Rectangle start, Rectangle exit)
         {
-            while (true)
+            while (true)                                                                                            //Start/Exit
             {
                 if (start.Contains(mousePosition))
                 {
@@ -72,7 +69,7 @@ namespace WindowsFormsApp1
                 await Task.Delay(10);
             }
         }
-        public void checkMenuInput(World w)
+        public void checkMenuInput(World w)                                                                          
         {
             if (gameStarted)
             {
@@ -85,14 +82,11 @@ namespace WindowsFormsApp1
                 closeGame();
             }
         }
-        private void RenderMenu()
+        private void RenderMenu()                                                                                       //Renderowanie Manu
         {
             OverlayLayer.Visible = true;
             OverlayLayer.BringToFront();
-
-            g.DrawImage(Properties.Resources.main_menu,objectCollection.resolutionWidth/3,objectCollection.resolutionHeight/3);
-        
-        
+            g.DrawImage(Properties.Resources.main_menu,objectCollection.resolutionWidth/3,objectCollection.resolutionHeight/3);      
         }
 
         public void scaleGraphics(float scalingFactor)
@@ -100,7 +94,7 @@ namespace WindowsFormsApp1
             g.ScaleTransform(1f / scalingFactor, 1 / scalingFactor);
         }
 
-        public void StartGame()
+        public void StartGame()                                                                                     //Uruchamianie gry
         {
             player.canMove = true;
             objectCollection.label.Visible = true;
@@ -109,21 +103,20 @@ namespace WindowsFormsApp1
             objectCollection.timer2.Enabled = true;
             objectCollection.timer3.Enabled = true;
             OverlayLayer.Visible = false;
-
         }
 
-
-        public async void GameOver()
+        public async void GameOver()                                                                                //GameOver
         {
             player.playerLeft = false;
             player.playerRight = false;
             player.playerLeft = false;
             player.playerUp = false;
+            player.canMove = false;
+
             player.jumpSpeed = 0;
             player.fallSpeed = 0;
             player.playerSpeed = 0;
 
-            player.canMove = false;
             g.Clear(Color.Transparent);
             g.DrawImage(Properties.Resources.game_over, 500,500);
             OverlayLayer.Visible = true;
@@ -134,7 +127,7 @@ namespace WindowsFormsApp1
             MainMenu();
         }
 
-        public void closeGame()
+        public void closeGame()                                                                                 //Wychodzenie z gry
         {
             form.Close();
         }
@@ -143,8 +136,5 @@ namespace WindowsFormsApp1
         {
             form = f;
         }
-
-
-
     }
 }

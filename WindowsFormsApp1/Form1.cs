@@ -271,7 +271,7 @@ namespace WindowsFormsApp1
             {
                 w.generateKubotsRandom();
             }
-            if (chance <= 80 && w.screenScrollSpeed >= 3)             //30% szans co 3 sekundy
+            if (chance <= 80 && w.screenScrollSpeed >= 3)             //do testów 80% szans na pojawienie się hełmu co 3 sekundy
             {
                 w.generateHelmetRandom();
             }

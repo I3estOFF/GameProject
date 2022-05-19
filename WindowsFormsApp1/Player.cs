@@ -70,7 +70,7 @@ namespace WindowsFormsApp1
             if (!canMove)
                 return;
 
-            //buffy
+                                                                                                                                //zmiana skina zależnie od power-upów
             if (playereatgold == true && playerhavekuboty == true && playerhavehelmet == false)
             {
                 player = Properties.Resources.goldenchunguskuboty;
@@ -105,9 +105,9 @@ namespace WindowsFormsApp1
             playerSpeed = maxPlayerSpeed;
 
 
-
-            // podstawowy ruch
-            if (faceLeft) // zmienia zwrot postaci
+                    
+                                                                                                                   // podstawowy ruch
+            if (faceLeft)                            // zmienia zwrot postaci
             {
                 player.RotateFlip(RotateFlipType.Rotate180FlipY);
             }
@@ -242,7 +242,7 @@ namespace WindowsFormsApp1
             }
         }
 
-        public void HelmetPlayerCollision()                                                                       //kolizja gracza z kubotami
+        public void HelmetPlayerCollision()                                                                          //kolizja gracza z hełmem
         {
             Rectangle toDeleteg = new Rectangle();
             foreach (Rectangle hm in w.helmets)
@@ -250,7 +250,7 @@ namespace WindowsFormsApp1
                 if (playerBox.Contains(hm))
                 {
                     toDeleteg = hm;
-                    hearts = 4;
+                    hearts = 4;                                 //tymczasowo regeneruje życia i daje +1
                 }
             }
             if (!toDeleteg.IsEmpty)
@@ -260,7 +260,8 @@ namespace WindowsFormsApp1
 
             }
         }
-        public void MeteorPlayerCollision()                                                                                   //kolizja gracza z marchewką
+
+        public void MeteorPlayerCollision()                                                                          //kolizja gracza z meteorytem
         {
             Rectangle toDelete = new Rectangle();
             foreach (Rectangle mt in w.meteorites)
@@ -270,10 +271,10 @@ namespace WindowsFormsApp1
                 if (playerBox.IntersectsWith(temp))
                 {
                     canMove = false;
-                    hearts -= 1;
-                    if (hearts == 0)
-                    overlay.GameOver();
-                    toDelete = mt;
+                    hearts -= 1;                  //meteoryt nie znika więc wykonuje się cały czas
+                    if (hearts == 0)                  //usunąć by zatrzymać grę po kolizji
+                    overlay.GameOver();                             
+                    toDelete = mt;                      //powinno usunąć meteoryt po kolizji
                 }
             }
         }

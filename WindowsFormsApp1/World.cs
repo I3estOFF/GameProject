@@ -253,7 +253,7 @@ namespace WindowsFormsApp1
             gcarrots.Add(rect);
         }
 
-        public void RenderKubots()                                                                                  //renderowanie złotych marchewek
+        public void RenderKubots()                                                                                  //renderowanie kubotów
         {
             Rectangle temp;
             Bitmap kubot = Properties.Resources.Kuboty;
@@ -270,7 +270,7 @@ namespace WindowsFormsApp1
             }
         }
 
-        public void generateKubotsRandom()                                                                          //generowanie złotych marchewek
+        public void generateKubotsRandom()                                                                          //generowanie kubotów
         {
             Random rand = new Random();
 
@@ -291,7 +291,7 @@ namespace WindowsFormsApp1
             kuboty.Add(rect);
         }
 
-        public void RenderHelmet()                                                                                  //renderowanie złotych marchewek
+        public void RenderHelmet()                                                                                  //renderowanie hełmu
         {
             Rectangle temp;
             Bitmap helmet = Properties.Resources.helmet;
@@ -308,7 +308,7 @@ namespace WindowsFormsApp1
             }
         }
 
-        public void generateHelmetRandom()                                                                          //generowanie złotych marchewek
+        public void generateHelmetRandom()                                                                          //generowanie hełmu
         {
             Random rand = new Random();
 
@@ -365,7 +365,7 @@ namespace WindowsFormsApp1
            clouds.Add(rect);
         }
 
-        public void RenderMeteorite()                                                                                        //renderowanie chmur
+        public void RenderMeteorite()                                                                                        //renderowanie meteorytów
         {
             Rectangle temp;
             Bitmap meteorite = Properties.Resources.Meteoritesmall;
@@ -383,7 +383,7 @@ namespace WindowsFormsApp1
                 gBackground.DrawRectangle(new Pen(Brushes.Red),temp);
             }
         }
-        public void generateMeteorite()                                                                                         //generowanie chmur
+        public void generateMeteorite()                                                                                         //generowanie meteorytów
         {
             int meteoriteWidth = 50;
             int meteoriteHeight = 50;
@@ -402,7 +402,7 @@ namespace WindowsFormsApp1
             meteorites.Add(rect);
         }
 
-        public void popMeteorite()
+        public void popMeteorite()                                                                                      //trafienie meteorytu
         {
             Rectangle temp;
             for (int i = 0; i < meteorites.Count; i++)
@@ -415,14 +415,14 @@ namespace WindowsFormsApp1
                 }
             }
         }
-        private async void setBoom()
+        private async void setBoom()                                                                //wybuch
         {
             boomed = true;
             await Task.Delay(1000);
             boomed = false;
         }
 
-        public void renderExplosion()
+        public void renderExplosion()                                                           //renderowanie eksplozji
         {
             Bitmap boom = Properties.Resources.exploooosion;
 
