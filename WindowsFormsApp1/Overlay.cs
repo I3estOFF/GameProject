@@ -104,6 +104,7 @@ namespace WindowsFormsApp1
         {
             player.canMove = true;
             objectCollection.label.Visible = true;
+            objectCollection.picturebox2.Visible = true;
             objectCollection.timer1.Enabled = true;
             objectCollection.timer2.Enabled = true;
             objectCollection.timer3.Enabled = true;

@@ -35,6 +35,7 @@ namespace WindowsFormsApp1
         public bool playerhavehelmet = false;
         readonly int Width;
         readonly int Heigth;
+        public int hearts = 3;
 
         Graphics gPlayer;
         Bitmap player;
@@ -249,6 +250,7 @@ namespace WindowsFormsApp1
                 if (playerBox.Contains(hm))
                 {
                     toDeleteg = hm;
+                    hearts = 4;
                 }
             }
             if (!toDeleteg.IsEmpty)
@@ -261,15 +263,17 @@ namespace WindowsFormsApp1
         public void MeteorPlayerCollision()                                                                                   //kolizja gracza z marchewką
         {
             Rectangle toDelete = new Rectangle();
-            foreach (Rectangle tt in w.meteorites)
+            foreach (Rectangle mt in w.meteorites)
             {
-                Rectangle temp = new Rectangle(tt.X+12, tt.Y+8, 25, 25);
+                Rectangle temp = new Rectangle(mt.X+12, mt.Y+8, 25, 25);
                 objectCollection.Background.DrawRectangle(new Pen(Brushes.DarkGreen), temp);
                 if (playerBox.IntersectsWith(temp))
                 {
                     canMove = false;
+                    hearts -= 1;
+                    if (hearts == 0)
                     overlay.GameOver();
-                    toDelete = tt;
+                    toDelete = mt;
                 }
             }
         }

@@ -83,8 +83,10 @@ namespace WindowsFormsApp1
             pictureBoxPlayer.Parent = pictureBoxBackground;
             pictureBoxPlayer.BackColor = Color.Transparent;
             label1.Parent = pictureBoxBackground;
+            pictureBox2.Parent = pictureBoxBackground;
             pictureBoxPlayer.BackColor = Color.Transparent;
             label1.BringToFront();
+            pictureBox2.BringToFront();
 
             //setup pictureboxa z GameOver
             OverlayLayer.Parent = pictureBoxPlayer;
@@ -93,9 +95,9 @@ namespace WindowsFormsApp1
             OverlayLayer.Visible = false;
 
             label1.Visible = false;
+            pictureBox2.Visible = false;
 
-
-            objectCollection = new ObjectCollection(timer1, timer2, timer3, timer4, timer5,menuTimer, gBackground, gPlayer, label1, ResolutionWidth,ResolutionHeight);
+            objectCollection = new ObjectCollection(timer1, timer2, timer3, timer4, timer5, menuTimer, gBackground, gPlayer, label1, pictureBox2, ResolutionWidth, ResolutionHeight);
             
             w = new World(gBackground, ResolutionWidth, ResolutionHeight);
             p = new Player(gPlayer, PlayerBitmap, ResolutionWidth, ResolutionHeight,objectCollection);
@@ -185,6 +187,15 @@ namespace WindowsFormsApp1
             pictureBoxPlayer.Refresh();
             gPlayer.Clear(Color.Transparent);
             label1.Text = "   Punkty: " + punkty + "   " + p.pkt + "x    " + p.gpkt + "x      ";
+
+            if (p.hearts == 3)
+                pictureBox2.Image = Properties.Resources.hearts3;
+            else if (p.hearts == 4)
+                pictureBox2.Image = Properties.Resources.hearts4;
+            else if (p.hearts == 2)
+                pictureBox2.Image = Properties.Resources.hearts2;
+            else if (p.hearts == 1)
+                pictureBox2.Image = Properties.Resources.hearts1;
         }
         private void timer2_Tick(object sender, EventArgs e)
         {
