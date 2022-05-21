@@ -186,5 +186,8 @@
   <ItemGroup>
     <None Include="Resources\jumping1.gif" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\main menu continue.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

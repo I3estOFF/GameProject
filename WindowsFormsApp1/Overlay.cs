@@ -1,6 +1,7 @@
 ﻿using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WindowsFormsApp1;
 
 namespace WindowsFormsApp1
 {
@@ -15,6 +16,7 @@ namespace WindowsFormsApp1
         public bool gameStarted = false;
         public bool gameExited = false;
         public bool gamePaused = false;
+        public bool gameContinue = false;
 
         public Overlay(PictureBox OverlayLayer, ObjectCollection objectCollection, Player player)
         {
@@ -35,13 +37,8 @@ namespace WindowsFormsApp1
             gamePaused = true;
             OverlayLayer.Visible = true;
             objectCollection.timer1.Stop();
-            System.Diagnostics.Debug.WriteLine("timer 1 stopped");
             objectCollection.timer2.Stop();
-
-            System.Diagnostics.Debug.WriteLine("timer 2 stopped");
             objectCollection.timer3.Stop();
-
-            System.Diagnostics.Debug.WriteLine("timer 3 stopped");
             RenderMenu();
             Rectangle start = new Rectangle(860, 430, 190, 60);
             Rectangle exit = new Rectangle(860, 550, 190, 70);
@@ -50,6 +47,26 @@ namespace WindowsFormsApp1
             g.DrawRectangle(new Pen(Brushes.Black), exit);
             OverlayLayer.BringToFront();
             var t = Task.Run(() => waitForInput(start, exit));
+            t.Wait();
+        }
+
+        public void PauseMenu()
+        {
+            gamePaused = true;
+            OverlayLayer.Visible = true;
+            objectCollection.timer1.Stop();
+            objectCollection.timer2.Stop();
+            objectCollection.timer3.Stop();
+            RenderPauseMenu();
+            Rectangle cont = new Rectangle(840, 440, 300, 70);
+            Rectangle start = new Rectangle(900, 520, 190, 60);
+            Rectangle exit = new Rectangle(900, 600, 190, 70);
+
+            g.DrawRectangle(new Pen(Brushes.Black), start);
+            g.DrawRectangle(new Pen(Brushes.Black), exit);
+            g.DrawRectangle(new Pen(Brushes.Black), cont);
+            OverlayLayer.BringToFront();
+            var t = Task.Run(() => waitForInput(cont,start, exit));
             t.Wait();
         }
         private async void waitForInput(Rectangle start, Rectangle exit)
@@ -68,11 +85,41 @@ namespace WindowsFormsApp1
 
                 }
                 await Task.Delay(10);
-                
+
+            }
+        }
+        private async void waitForInput(Rectangle cont, Rectangle start, Rectangle exit)
+        {
+            while (true)                                                                                            //Start/Exit
+            {
+                if (cont.Contains(mousePosition))
+                {
+                    gameContinue = true;
+                    break;
+                }
+                if (start.Contains(mousePosition))
+                {
+                    gameStarted = true;
+                    break;
+                }
+                if (exit.Contains(mousePosition))
+                {
+                    gameExited = true;
+                    break;
+
+                }
+                await Task.Delay(10);
+
             }
         }
         public void checkMenuInput(World w)
         {
+            if (gameContinue)
+            {
+                gamePaused = false;
+                ContinueGame();
+            }
+
             if (gameStarted)
             {
                 gamePaused = false;
@@ -89,7 +136,15 @@ namespace WindowsFormsApp1
             OverlayLayer.Visible = true;
             OverlayLayer.BringToFront();
             g.DrawImage(Properties.Resources.main_menu, objectCollection.resolutionWidth / 3, objectCollection.resolutionHeight / 3);
-           
+
+        }
+
+        private void RenderPauseMenu()
+        {
+            OverlayLayer.Visible = true;
+            OverlayLayer.BringToFront();
+            g.DrawImage(Properties.Resources.main_menu_continue, objectCollection.resolutionWidth / 3, objectCollection.resolutionHeight / 3);
+
         }
 
         public void scaleGraphics(float scalingFactor)
@@ -99,10 +154,10 @@ namespace WindowsFormsApp1
 
         public void StartGame()                                                                                     //Uruchamianie gry
         {
-            
-            if(gameStarted && gamePaused == false)
+
+            if (gameStarted && gamePaused == false)
             {
-                
+                restartGame();
 
                 System.Diagnostics.Debug.WriteLine("game started");
                 objectCollection.label.Visible = true;
@@ -112,8 +167,22 @@ namespace WindowsFormsApp1
                 objectCollection.timer3.Start();
                 OverlayLayer.Visible = false;
                 gameStarted = false;
-                mousePosition = new Point(0, 0);    
+                mousePosition = new Point(0, 0);
             }
+        }
+
+        public void ContinueGame()
+        {
+                objectCollection.label.Visible = true;
+                objectCollection.picturebox2.Visible = true;
+                objectCollection.timer1.Start();
+                objectCollection.timer2.Start();
+                objectCollection.timer3.Start();
+                OverlayLayer.Visible = false;
+                gameStarted = false;
+                gameContinue = false;
+                mousePosition = new Point(0, 0);
+                System.Diagnostics.Debug.WriteLine("game Continued");
         }
 
         public void GameOver()                                                                                //GameOver
@@ -132,6 +201,13 @@ namespace WindowsFormsApp1
             objectCollection.timer3.Enabled = false;
 
              MainMenu();
+        }
+
+        public void restartGame()
+        {
+            
+            objectCollection.world.Reset();
+            objectCollection.player.Reset();
         }
 
         public void closeGame()                                                                                 //Wychodzenie z gry

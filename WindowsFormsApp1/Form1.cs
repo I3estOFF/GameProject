@@ -98,6 +98,8 @@ namespace WindowsFormsApp1
             p = new Player(gPlayer, PlayerBitmap, ResolutionWidth, ResolutionHeight, objectCollection);
             w.SetPlayer(p);
             p.setWorld(w);
+            objectCollection.SetWorld(w);
+            objectCollection.SetPlayer(p);
             overlay = new Overlay(OverlayLayer, objectCollection, p);
             overlay.scaleGraphics(getScalingFactor());
             overlay.gimmeForm(this);
@@ -143,7 +145,7 @@ namespace WindowsFormsApp1
             {
                 overlay.gamePaused = true;
                 System.Diagnostics.Debug.WriteLine("game paused");
-                overlay.MainMenu();
+                overlay.PauseMenu();
             }
 
             if (e.KeyCode == Keys.A)
@@ -254,9 +256,12 @@ namespace WindowsFormsApp1
                 w.actualScrollSpeed = 2;
 
             }
-            if (punkty == 1200) w.screenScrollSpeed = 5;
-            else if (punkty == 800) w.screenScrollSpeed = 4;
-            else if (punkty == 400) w.screenScrollSpeed = 3;
+            if (punkty == 2800) w.actualScrollSpeed = 9;
+            else if (punkty == 2400) w.actualScrollSpeed = 8;
+            else if (punkty == 2000) w.actualScrollSpeed = 7;
+            else if (punkty == 1600) w.actualScrollSpeed = 6;
+            else if (punkty == 800) w.actualScrollSpeed = 4;
+            else if (punkty == 400) w.actualScrollSpeed = 3;
             Random rand = new Random();
             int chance = rand.Next(1, 101);
             if (chance <= 6 && punkty > 50 && punkty < 200)

@@ -26,7 +26,7 @@ namespace WindowsFormsApp1
         private int resolutionHeight;
 
         public int screenScrollSpeed = 0;
-        public int actualScrollSpeed = 0;
+        public int actualScrollSpeed = 0; // zapamietuje predkosc przed przyspieszeniem
         public int boostedScrollSpeed = 6;
         public int screenScrollSpeed2 = 0;
         public int screenScrollSpeed3 = 6;
@@ -44,6 +44,22 @@ namespace WindowsFormsApp1
         }
 
         public void SetPlayer(Player p) { this.p = p; }
+
+        public void Reset()
+        {
+            PlatformHB.Clear();
+            clouds.Clear();
+            carrots.Clear();
+            emptys.Clear();
+            gcarrots.Clear();
+            kuboty.Clear();
+            meteorites.Clear();
+            helmets.Clear();
+
+            generateGround(0, resolutionHeight - 100, 50);
+            generatePlatformRandom(4);
+
+        }
 
         public void generateGround(int posX, int posY, int _width)                                               //generowanie platformy startowej
         {

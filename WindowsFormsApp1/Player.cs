@@ -52,6 +52,12 @@ namespace WindowsFormsApp1
             this.objectCollection = objectCollection;
 
         }
+
+        public void Reset()
+        {
+            playerBox.X = 80;
+            playerBox.Y = Heigth - 200;
+        }
         public void setWorld(World w)
         {
             this.w = w;
@@ -100,6 +106,8 @@ namespace WindowsFormsApp1
             //check czy sprintuje
             if (sprinting)
                 maxPlayerSpeed = 12;
+            else if (playerhavekuboty)
+                maxPlayerSpeed = 15;
             else
                 maxPlayerSpeed = 7;
 

@@ -17,6 +17,8 @@ namespace WindowsFormsApp1
         public PictureBox picturebox2;
         public int resolutionHeight;
         public int resolutionWidth;
+        public Player player;
+        public World world;
 
         public ObjectCollection(Timer timer1, Timer timer2, Timer timer3, Timer timer4, Timer timer5, Timer timer6, Graphics backgroundgraphics, Graphics playerGraphics, Label label1, PictureBox pictureBox2, int width, int height)
         {
@@ -32,6 +34,15 @@ namespace WindowsFormsApp1
             this.picturebox2 = pictureBox2;
             this.resolutionHeight = height;
             this.resolutionWidth = width;
+        }
+
+        public void SetPlayer(Player p)
+        {
+            player = p;
+        }
+        public void SetWorld(World w)
+        {
+            world = w;
         }
     }
 }

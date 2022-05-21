@@ -383,6 +383,16 @@ namespace WindowsFormsApp1.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap main_menu_continue {
+            get {
+                object obj = ResourceManager.GetObject("main menu continue", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap meteorite {
             get {
                 object obj = ResourceManager.GetObject("meteorite", resourceCulture);

@@ -40,10 +40,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBoxPlayer = new System.Windows.Forms.PictureBox();
             this.pictureBoxBackground = new System.Windows.Forms.PictureBox();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.OverlayLayer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlayer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBackground)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // timer1
@@ -152,6 +154,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.OverlayLayer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlayer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBackground)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -169,6 +172,7 @@
         private System.Windows.Forms.Timer timer5;
         private System.Windows.Forms.Timer menuTimer;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.BindingSource bindingSource1;
     }
 }
 
