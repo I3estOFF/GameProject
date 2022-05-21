@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 namespace WindowsFormsApp1
 {
@@ -77,13 +71,14 @@ namespace WindowsFormsApp1
 
             System.Diagnostics.Debug.WriteLine(ResolutionWidth);
             ///////////////////////////////
-            
+
             //umiejscowienie pictureBoxa z graczem 
             pictureBoxPlayer.Dock = DockStyle.Fill;
             pictureBoxPlayer.Parent = pictureBoxBackground;
             pictureBoxPlayer.BackColor = Color.Transparent;
             label1.Parent = pictureBoxBackground;
             pictureBox2.Parent = pictureBoxBackground;
+            pictureBox2.BackColor = Color.Transparent;
             pictureBoxPlayer.BackColor = Color.Transparent;
             label1.BringToFront();
             pictureBox2.BringToFront();
@@ -98,9 +93,9 @@ namespace WindowsFormsApp1
             pictureBox2.Visible = false;
 
             objectCollection = new ObjectCollection(timer1, timer2, timer3, timer4, timer5, menuTimer, gBackground, gPlayer, label1, pictureBox2, ResolutionWidth, ResolutionHeight);
-            
+
             w = new World(gBackground, ResolutionWidth, ResolutionHeight);
-            p = new Player(gPlayer, PlayerBitmap, ResolutionWidth, ResolutionHeight,objectCollection);
+            p = new Player(gPlayer, PlayerBitmap, ResolutionWidth, ResolutionHeight, objectCollection);
             w.SetPlayer(p);
             p.setWorld(w);
             overlay = new Overlay(OverlayLayer, objectCollection, p);
@@ -118,7 +113,7 @@ namespace WindowsFormsApp1
         }
         private void KeyU(object sender, KeyEventArgs e)                                                                        //sterowanie
         {
-            if (!p.canMove)
+            if (overlay.gamePaused)
                 return;
             if (e.KeyCode == Keys.A)
             {
@@ -134,14 +129,23 @@ namespace WindowsFormsApp1
                 p.jumpSpeed = 200;
                 p.isGrounded = false;
             }
+            if (e.KeyCode == Keys.ShiftKey)
+            {
+                p.sprinting = false;
+            }
         }
 
         private void KeyDow(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Escape)
-                overlay.MainMenu();
-            if (!p.canMove)
+            if (overlay.gamePaused)
                 return;
+            if (e.KeyCode == Keys.Escape)
+            {
+                overlay.gamePaused = true;
+                System.Diagnostics.Debug.WriteLine("game paused");
+                overlay.MainMenu();
+            }
+
             if (e.KeyCode == Keys.A)
             {
                 p.playerLeft = true;
@@ -156,6 +160,10 @@ namespace WindowsFormsApp1
             {
                 p.playerUp = true;
                 p.fallSpeed = 0;
+            }
+            if(e.KeyCode == Keys.ShiftKey)
+            {
+                p.sprinting = true;
             }
             if (e.KeyCode == Keys.Space && timer1.Enabled == true)
             {
@@ -175,7 +183,7 @@ namespace WindowsFormsApp1
 
         private void timer1_Tick(object sender, EventArgs e)                                                                    //Timery
         {
-            if (!p.canMove)
+            if (overlay.gamePaused)
                 return;
             p.PlayerMovement();
             p.PlatformPlayerCollision();
@@ -199,18 +207,18 @@ namespace WindowsFormsApp1
         }
         private void timer2_Tick(object sender, EventArgs e)
         {
-            if (!p.canMove)
+            if (overlay.gamePaused)
                 return;
-            if (screenShift% 20==1)
+            if (screenShift % 20 == 1)
             {
                 w.generatePlatformRandom(1);
-                
+
             }
-            else if(screenShift% 400==0)
+            else if (screenShift % 400 == 0)
             {
-                w.generateCloud();                                                           
+                w.generateCloud();
             }
-            else if(screenShift% 111==1)
+            else if (screenShift % 111 == 1)
             {
                 w.generateCarrotRandom();
             }
@@ -218,8 +226,8 @@ namespace WindowsFormsApp1
             screenShift++;
 
             gBackground.Clear(Color.Transparent);
-            
-            w.RenderClouds();                                                               
+
+            w.RenderClouds();
             w.RenderPlatforms();
             w.RenderCarrots();
             w.RenderGoldenCarrots();
@@ -229,26 +237,26 @@ namespace WindowsFormsApp1
 
             if (w.boomed)
                 w.renderExplosion();
-            gBackground.DrawRectangle(new Pen(Brushes.Blue),p.playerBox);
         }
 
         private void timer3_Tick(object sender, EventArgs e)
         {
-            if (!p.canMove)
+            if (overlay.gamePaused)
                 return;
-            if(w.screenScrollSpeed >=2)
+            if (w.screenScrollSpeed >= 2)
                 punkty = punkty + 1;
-            
+
             czas = czas + 1;
             if (czas == 30)
             {
                 w.screenScrollSpeed2 = 3;
                 w.screenScrollSpeed = 2;
-            
+                w.actualScrollSpeed = 2;
+
             }
-            if (punkty == 400) w.screenScrollSpeed++;
-            if (punkty == 800) w.screenScrollSpeed++;
-            if (punkty == 1200) w.screenScrollSpeed++;
+            if (punkty == 1200) w.screenScrollSpeed = 5;
+            else if (punkty == 800) w.screenScrollSpeed = 4;
+            else if (punkty == 400) w.screenScrollSpeed = 3;
             Random rand = new Random();
             int chance = rand.Next(1, 101);
             if (chance <= 6 && punkty > 50 && punkty < 200)
@@ -264,9 +272,11 @@ namespace WindowsFormsApp1
 
         private void timer4_Tick(object sender, EventArgs e)                                                   //losowanie szansy na wystąpienie power-up'ów
         {
+            if (overlay.gamePaused)
+                return;
             Random rand = new Random();
             int chance = rand.Next(1, 101);
-            
+
             if (chance <= 30 && w.screenScrollSpeed >= 3)             //30% szans co 3 sekundy
             {
                 w.generateKubotsRandom();
@@ -279,6 +289,8 @@ namespace WindowsFormsApp1
 
         private void timer5_Tick(object sender, EventArgs e)
         {
+            if (overlay.gamePaused)
+                return;
             Random rand = new Random();
             int chance = rand.Next(1, 101);
             if (chance <= 10 && w.screenScrollSpeed >= 3)             //10% szans co 2,5 sekundy
@@ -290,23 +302,24 @@ namespace WindowsFormsApp1
 
         private void pictureBoxPlayer_MouseClick(object sender, MouseEventArgs e)
         {
-            
+
             w.explosion.X = (int)((float)Cursor.Position.X * getScalingFactor());
             w.explosion.Y = (int)((float)Cursor.Position.Y * getScalingFactor());
             w.popMeteorite();
-            
+
         }
 
         private void OverlayLayer_MouseClick(object sender, MouseEventArgs e)
         {
             overlay.mousePosition.X = (int)((float)Cursor.Position.X * getScalingFactor());
             overlay.mousePosition.Y = (int)((float)Cursor.Position.Y * getScalingFactor());
+
         }
 
         private void menuTimer_Tick(object sender, EventArgs e)
         {
             overlay.checkMenuInput(w);
-          
+
         }
     }
 }

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace WindowsFormsApp1
@@ -25,15 +24,15 @@ namespace WindowsFormsApp1
         private Graphics gBackground;
         private int resolutionWidth;
         private int resolutionHeight;
-        
+
         public int screenScrollSpeed = 0;
+        public int actualScrollSpeed = 0;
+        public int boostedScrollSpeed = 6;
         public int screenScrollSpeed2 = 0;
         public int screenScrollSpeed3 = 6;
         public int xplat;
         public int yplat;
         public int platw;
-
-        public bool gamePaused = true;
 
         Player p;
 
@@ -110,11 +109,11 @@ namespace WindowsFormsApp1
             {
                 ranX = PlatformHB.LastOrDefault().X;
                 ranY = PlatformHB.LastOrDefault().Y;
-                ranWidth = PlatformHB.LastOrDefault().Width/platWidth;
+                ranWidth = PlatformHB.LastOrDefault().Width / platWidth;
             }
             else
             {
-                ranX = rand.Next(50, resolutionWidth/2);
+                ranX = rand.Next(50, resolutionWidth / 2);
                 ranY = resolutionHeight - 100;
                 ranWidth = 10;
             }
@@ -173,7 +172,7 @@ namespace WindowsFormsApp1
                         ranX -= 2 * (ranX + ranWidth * platWidth - resolutionWidth);
                     }
                 }
-                Rectangle rect = new Rectangle(ranX, ranY, ranWidth*platWidth, 1);
+                Rectangle rect = new Rectangle(ranX, ranY, ranWidth * platWidth, 1);
                 PlatformHB.Add(rect);
             }
         }
@@ -190,7 +189,7 @@ namespace WindowsFormsApp1
                     carrots.RemoveAt(i);
                 if (temp != null)
                 {
-                   gBackground.DrawImage(carrot, temp.Left, temp.Top);
+                    gBackground.DrawImage(carrot, temp.Left, temp.Top);
                 }
             }
         }
@@ -204,15 +203,15 @@ namespace WindowsFormsApp1
 
             if (carrots.Count > 1)
             {
-                ranX = carrots.LastOrDefault().X;             
+                ranX = carrots.LastOrDefault().X;
             }
             else
             {
                 ranX = rand.Next(xplat, xplat + platw);
             }
-                ranX = rand.Next(xplat, xplat + platw);
-                Rectangle rect = new Rectangle(xplat + ranHunit, yplat - 30,carrotWidth, 1);
-                carrots.Add(rect);
+            ranX = rand.Next(xplat, xplat + platw);
+            Rectangle rect = new Rectangle(xplat + ranHunit, yplat - 30, carrotWidth, 1);
+            carrots.Add(rect);
         }
 
         public void RenderGoldenCarrots()                                                                                  //renderowanie złotych marchewek
@@ -249,7 +248,7 @@ namespace WindowsFormsApp1
             }
 
             ranX = rand.Next(xplat, xplat + platw);
-            Rectangle rect = new Rectangle(xplat + ranHunit, yplat - 30, carrotWidth,1);
+            Rectangle rect = new Rectangle(xplat + ranHunit, yplat - 30, carrotWidth, 1);
             gcarrots.Add(rect);
         }
 
@@ -343,7 +342,7 @@ namespace WindowsFormsApp1
                 {
                     clouds.RemoveAt(i);
                 }
-                if (temp.Top < resolutionHeight+cloud.Height && temp!=null)
+                if (temp.Top < resolutionHeight + cloud.Height && temp != null)
                     gBackground.DrawImage(cloud, temp.Left, temp.Top - cloud.Height);
             }
         }
@@ -352,17 +351,17 @@ namespace WindowsFormsApp1
             int cloudWidth = Properties.Resources.cloudsT.Width;
             int cloudHeight = Properties.Resources.cloudsT.Height;
             Random rand = new Random();
-            int ranX = rand.Next(-50, (resolutionWidth + 50)/2-cloudWidth);
+            int ranX = rand.Next(-50, (resolutionWidth + 50) / 2 - cloudWidth);
             int ranY = -cloudHeight;
 
-           Rectangle rect = new Rectangle(ranX, ranY, cloudWidth, 1);
-           clouds.Add(rect);
-           
-           ranX = rand.Next((resolutionWidth + 50) / 2 - cloudWidth, (resolutionWidth + 50) / 2+ (resolutionWidth + 50) / 2);
-           ranY = rand.Next(-2 * cloudHeight, -3*cloudHeight/2);  
-           
-           rect = new Rectangle(ranX, ranY, cloudWidth, 1);
-           clouds.Add(rect);
+            Rectangle rect = new Rectangle(ranX, ranY, cloudWidth, 1);
+            clouds.Add(rect);
+
+            ranX = rand.Next((resolutionWidth + 50) / 2 - cloudWidth, (resolutionWidth + 50) / 2 + (resolutionWidth + 50) / 2);
+            ranY = rand.Next(-2 * cloudHeight, -3 * cloudHeight / 2);
+
+            rect = new Rectangle(ranX, ranY, cloudWidth, 1);
+            clouds.Add(rect);
         }
 
         public void RenderMeteorite()                                                                                        //renderowanie meteorytów
@@ -372,15 +371,15 @@ namespace WindowsFormsApp1
             for (int i = 0; i < meteorites.Count; i++)
             {
                 temp = meteorites[i];
-                
+
                 meteorites[i] = new Rectangle(temp.X, temp.Y + screenScrollSpeed3, temp.Width, temp.Height);
                 if (temp.Y > resolutionHeight + meteorite.Height)
                 {
                     meteorites.RemoveAt(i);
                 }
                 if (temp.Top < resolutionHeight + meteorite.Height && temp != null)
-                   gBackground.DrawImage(meteorite, temp.Left+5, temp.Top+5);
-                gBackground.DrawRectangle(new Pen(Brushes.Red),temp);
+                    gBackground.DrawImage(meteorite, temp.Left + 5, temp.Top + 5);
+                gBackground.DrawRectangle(new Pen(Brushes.Red), temp);
             }
         }
         public void generateMeteorite()                                                                                         //generowanie meteorytów
@@ -392,7 +391,7 @@ namespace WindowsFormsApp1
             int ranY = -meteoriteHeight;
 
             Rectangle rect = new Rectangle(ranX, ranY, meteoriteWidth, meteoriteHeight);
-            
+
             meteorites.Add(rect);
 
             ranX = rand.Next(50, (resolutionWidth - 50));
@@ -408,7 +407,7 @@ namespace WindowsFormsApp1
             for (int i = 0; i < meteorites.Count; i++)
             {
                 temp = meteorites[i];
-                if (temp.Contains(explosion.X,explosion.Y))
+                if (temp.Contains(explosion.X, explosion.Y))
                 {
                     setBoom();
                     meteorites.RemoveAt(i);
@@ -427,7 +426,8 @@ namespace WindowsFormsApp1
             Bitmap boom = Properties.Resources.exploooosion;
 
 
-            gBackground.DrawImage(boom, explosion.X - 70,explosion.Y - 70);
+            gBackground.DrawImage(boom, explosion.X - 70, explosion.Y - 70);
+
         }
     }
 }

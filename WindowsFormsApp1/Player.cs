@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Drawing;
 using System.Threading.Tasks;
-using System.Drawing;
-using System.Windows.Forms;
 
 namespace WindowsFormsApp1
 {
@@ -17,9 +12,10 @@ namespace WindowsFormsApp1
         public bool playerUp = false;
         public bool isGrounded = false; // sprawdza czy gracz dotyka ziemi
         public bool faceLeft = false; // zapamietuje ostatni kierunek ruchu
+        public bool sprinting = false;
         bool playerSideCollison = false;
-        
-        
+
+
         const int fallSpeedAcceleration = 9;
         const int jumpSpeedDeceleration = 18;
         const int maxFallSpeed = 100;
@@ -38,7 +34,7 @@ namespace WindowsFormsApp1
         public int hearts = 3;
 
         Graphics gPlayer;
-        Bitmap player;
+        Bitmap playerBitmap;
         World w;
         public Rectangle playerBox; //hitbox postaci
         Overlay overlay;
@@ -50,7 +46,7 @@ namespace WindowsFormsApp1
         {
             playerBox = new Rectangle(80, H - 200, Properties.Resources.Chungus.Width, Properties.Resources.Chungus.Height);
             gPlayer = _g;
-            player = _player;
+            playerBitmap = _player;
             Width = W;
             Heigth = H;
             this.objectCollection = objectCollection;
@@ -64,54 +60,59 @@ namespace WindowsFormsApp1
         {
             this.overlay = overlay;
         }
-        
+
         public void PlayerMovement()                                                                                                //ruch gracza
         {
-            if (!canMove)
-                return;
 
-                                                                                                                                //zmiana skina zależnie od power-upów
+            //zmiana skina zależnie od power-upów
             if (playereatgold == true && playerhavekuboty == true && playerhavehelmet == false)
             {
-                player = Properties.Resources.goldenchunguskuboty;
+                playerBitmap = Properties.Resources.goldenchunguskuboty;
             }
             else if (playereatgold == true && playerhavekuboty == false && playerhavehelmet == false)
             {
-                player = Properties.Resources.goldenchungus;
+                playerBitmap = Properties.Resources.goldenchungus;
             }
             else if (playerhavekuboty == true && playereatgold == false && playerhavehelmet == false)
             {
-                player = Properties.Resources.chunguskuboty;
+                playerBitmap = Properties.Resources.chunguskuboty;
             }
             else if (playerhavehelmet == true && playerhavekuboty == false && playereatgold == false)
             {
-                player = Properties.Resources.Chungushelmet;
+                playerBitmap = Properties.Resources.Chungushelmet;
             }
-            else if (playerhavehelmet == true && playereatgold ==true && playerhavekuboty == false)
+            else if (playerhavehelmet == true && playereatgold == true && playerhavekuboty == false)
             {
-                player = Properties.Resources.goldenchungushelmet;
+                playerBitmap = Properties.Resources.goldenchungushelmet;
             }
             else if (playerhavehelmet == true && playereatgold == true && playerhavekuboty == true)
             {
-                player = Properties.Resources.goldenchunguskubotyhelmet;
+                playerBitmap = Properties.Resources.goldenchunguskubotyhelmet;
             }
             else if (playerhavehelmet == true && playerhavekuboty == true && playereatgold == false)
             {
-                player = Properties.Resources.chunguskubotyhelmet;
+                playerBitmap = Properties.Resources.chunguskubotyhelmet;
             }
             else
-                player = Properties.Resources.Chungus;
+                playerBitmap = Properties.Resources.Chungus;
+
+
+            //check czy sprintuje
+            if (sprinting)
+                maxPlayerSpeed = 12;
+            else
+                maxPlayerSpeed = 7;
 
             playerSpeed = maxPlayerSpeed;
 
 
-                    
-                                                                                                                   // podstawowy ruch
+
+            // podstawowy ruch
             if (faceLeft)                            // zmienia zwrot postaci
             {
-                player.RotateFlip(RotateFlipType.Rotate180FlipY);
+                playerBitmap.RotateFlip(RotateFlipType.Rotate180FlipY);
             }
-            gPlayer.DrawImage(player, playerBox.X, playerBox.Y);
+            gPlayer.DrawImage(playerBitmap, playerBox.X, playerBox.Y);
 
             if (playerLeft == true && !playerSideCollison)
             {
@@ -125,7 +126,7 @@ namespace WindowsFormsApp1
 
             if (playerUp == true && isGrounded)
             {
-                playerBox.Y -= jumpSpeed/10 ;
+                playerBox.Y -= jumpSpeed / 10;
                 if (jumpSpeed > 0)
                     jumpSpeed -= jumpSpeedDeceleration;
                 else if (jumpSpeed <= 0)
@@ -147,8 +148,12 @@ namespace WindowsFormsApp1
 
             if (playerBox.Top < 200)
             {
-               //if(pk)
+                w.screenScrollSpeed = w.boostedScrollSpeed;
 
+            }
+            else
+            {
+                w.screenScrollSpeed = w.actualScrollSpeed;
             }
         }
 
@@ -159,7 +164,7 @@ namespace WindowsFormsApp1
             {
                 // kolizja gracza z gorna krawedzia zatrzymuje opadanie //dziala
                 if (playerBox.Y + playerBox.Height < hb.Y + 20 && playerBox.Y + playerBox.Height > hb.Y - 4 &&
-                    playerBox.X < hb.X + hb.Width +20 && playerBox.X > hb.X - 50)
+                    playerBox.X < hb.X + hb.Width + 20 && playerBox.X > hb.X - 50)
                 {
                     playerBox.Y = hb.Y - playerBox.Height;
                     fallSpeed = 0;
@@ -168,12 +173,12 @@ namespace WindowsFormsApp1
                 }
                 //kolizja z dolna krawedzia zatrzymuje skok // dziala
                 if (playerBox.Y < hb.Y + hb.Height + 40 && playerBox.Y > hb.Y + hb.Height &&
-                    playerBox.X < hb.X + hb.Width +5 && playerBox.X > hb.X -40)
+                    playerBox.X < hb.X + hb.Width + 5 && playerBox.X > hb.X - 40)
                 {
                     jumpSpeed = 0;
                 }
                 //kolizja z bocznymi krawedziami 
-                if (playerBox.Contains(hb.X-5, hb.Y + 20) || playerBox.Contains(hb.X + hb.Width+10, hb.Y + 20))
+                if (playerBox.Contains(hb.X - 5, hb.Y + 20) || playerBox.Contains(hb.X + hb.Width + 10, hb.Y + 20))
                 {
                     playerSideCollison = true;
                 }
@@ -187,15 +192,15 @@ namespace WindowsFormsApp1
             foreach (Rectangle tt in w.carrots)
             {
                 if (playerBox.Contains(tt))
-                {                
+                {
                     toDelete = tt;
                 }
             }
-            if(!toDelete.IsEmpty)
+            if (!toDelete.IsEmpty)
             {
                 w.carrots.Remove(toDelete);
                 pkt += 1;
-            }                    
+            }
         }
 
 
@@ -234,7 +239,7 @@ namespace WindowsFormsApp1
             if (!toDeleteg.IsEmpty)
             {
                 w.kuboty.Remove(toDeleteg);
-                maxPlayerSpeed = 11;
+                maxPlayerSpeed = 15;
                 playerhavekuboty = true;
                 await Task.Delay(5000);                          //daje przyspieszenie na 5 sekund
                 playerhavekuboty = false;
@@ -266,16 +271,22 @@ namespace WindowsFormsApp1
             Rectangle toDelete = new Rectangle();
             foreach (Rectangle mt in w.meteorites)
             {
-                Rectangle temp = new Rectangle(mt.X+12, mt.Y+8, 25, 25);
+                Rectangle temp = new Rectangle(mt.X + 12, mt.Y + 8, 25, 25);
                 objectCollection.Background.DrawRectangle(new Pen(Brushes.DarkGreen), temp);
                 if (playerBox.IntersectsWith(temp))
                 {
-                    canMove = false;
-                    hearts -= 1;                  //meteoryt nie znika więc wykonuje się cały czas
-                    if (hearts == 0)                  //usunąć by zatrzymać grę po kolizji
-                    overlay.GameOver();                             
-                    toDelete = mt;                      //powinno usunąć meteoryt po kolizji
+                    hearts -= 1;
+                    if (hearts < 1)                  //usunąć by zatrzymać grę po kolizji
+                        overlay.GameOver();
+                    toDelete = mt;
+                    playerhavehelmet = false;
                 }
+            }
+            if (!toDelete.IsEmpty)
+            {
+                w.meteorites.Remove(toDelete);
+                playerhavehelmet = true;
+
             }
         }
     }

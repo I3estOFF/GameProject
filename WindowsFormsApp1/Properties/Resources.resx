@@ -124,6 +124,9 @@
   <data name="Carrot" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Carrot.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="hearts4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\hearts4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Chunguseatgoldencarrot" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Chunguseatgoldencarrot.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -135,6 +138,9 @@
   </data>
   <data name="goldenchungushelmet" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\goldenchungushelmet.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="hearts2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\hearts2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Chungushelmet" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Chungushelmet.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -148,8 +154,8 @@
   <data name="Chungus" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Chungus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="helmet" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\helmet.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="game over1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\game over.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="cloud1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\cloud1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -165,6 +171,9 @@
   </data>
   <data name="goldenchungus" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\goldenchungus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="hearts3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\hearts3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="exploooosion" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\exploooosion.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -190,6 +199,9 @@
   <data name="main menu" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\main menu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="hearts1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\hearts1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Meteoritesmall" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Meteoritesmall.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -199,8 +211,8 @@
   <data name="chunguskubotyhelmet" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\chunguskubotyhelmet.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="game over1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\game over.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="helmet" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\helmet.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Kuboty" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Kuboty.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -208,16 +220,7 @@
   <data name="game over" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\game over.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="hearts1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\hearts1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="hearts2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\hearts2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="hearts3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\hearts3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="hearts4" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\hearts4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="jumping" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\jumping1.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
