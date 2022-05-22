@@ -395,7 +395,6 @@ namespace WindowsFormsApp1
                 }
                 if (temp.Top < resolutionHeight + meteorite.Height && temp != null)
                     gBackground.DrawImage(meteorite, temp.Left + 5, temp.Top + 5);
-                gBackground.DrawRectangle(new Pen(Brushes.Red), temp);
             }
         }
         public void generateMeteorite()                                                                                         //generowanie meteorytów

@@ -79,9 +79,12 @@ namespace WindowsFormsApp1
             label1.Parent = pictureBoxBackground;
             pictureBox2.Parent = pictureBoxBackground;
             pictureBox2.BackColor = Color.Transparent;
+            pictureBox1.Parent = pictureBoxBackground;
+            pictureBox1.BackColor = Color.Transparent;
             pictureBoxPlayer.BackColor = Color.Transparent;
             label1.BringToFront();
             pictureBox2.BringToFront();
+            pictureBox1.BringToFront();
 
             //setup pictureboxa z GameOver
             OverlayLayer.Parent = pictureBoxPlayer;
@@ -91,6 +94,7 @@ namespace WindowsFormsApp1
 
             label1.Visible = false;
             pictureBox2.Visible = false;
+            pictureBox1.Visible = false;
 
             objectCollection = new ObjectCollection(timer1, timer2, timer3, timer4, timer5, menuTimer, gBackground, gPlayer, label1, pictureBox2, ResolutionWidth, ResolutionHeight);
 
@@ -200,12 +204,15 @@ namespace WindowsFormsApp1
 
             if (p.hearts == 3)
                 pictureBox2.Image = Properties.Resources.hearts3;
-            else if (p.hearts == 4)
-                pictureBox2.Image = Properties.Resources.hearts4;
             else if (p.hearts == 2)
                 pictureBox2.Image = Properties.Resources.hearts2;
             else if (p.hearts == 1)
                 pictureBox2.Image = Properties.Resources.hearts1;
+
+            if (p.helmeton == true)
+                pictureBox1.Visible = true;
+            else
+                pictureBox1.Visible = false;
         }
         private void timer2_Tick(object sender, EventArgs e)
         {

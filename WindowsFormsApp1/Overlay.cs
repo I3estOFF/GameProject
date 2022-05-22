@@ -42,9 +42,6 @@ namespace WindowsFormsApp1
             RenderMenu();
             Rectangle start = new Rectangle(860, 430, 190, 60);
             Rectangle exit = new Rectangle(860, 550, 190, 70);
-
-            g.DrawRectangle(new Pen(Brushes.Black), start);
-            g.DrawRectangle(new Pen(Brushes.Black), exit);
             OverlayLayer.BringToFront();
             var t = Task.Run(() => waitForInput(start, exit));
             t.Wait();
@@ -61,10 +58,6 @@ namespace WindowsFormsApp1
             Rectangle cont = new Rectangle(840, 440, 300, 70);
             Rectangle start = new Rectangle(900, 520, 190, 60);
             Rectangle exit = new Rectangle(900, 600, 190, 70);
-
-            g.DrawRectangle(new Pen(Brushes.Black), start);
-            g.DrawRectangle(new Pen(Brushes.Black), exit);
-            g.DrawRectangle(new Pen(Brushes.Black), cont);
             OverlayLayer.BringToFront();
             var t = Task.Run(() => waitForInput(cont,start, exit));
             t.Wait();

@@ -32,6 +32,7 @@ namespace WindowsFormsApp1
         readonly int Width;
         readonly int Heigth;
         public int hearts = 3;
+        public bool helmeton = false;
 
         Graphics gPlayer;
         Bitmap playerBitmap;
@@ -263,14 +264,13 @@ namespace WindowsFormsApp1
                 if (playerBox.Contains(hm))
                 {
                     toDeleteg = hm;
-                    hearts = 4;                                 //tymczasowo regeneruje życia i daje +1
+                    helmeton = true;                                //tymczasowo regeneruje życia i daje +1
                 }
             }
             if (!toDeleteg.IsEmpty)
             {
                 w.helmets.Remove(toDeleteg);
                 playerhavehelmet = true;
-
             }
         }
 
@@ -280,11 +280,16 @@ namespace WindowsFormsApp1
             foreach (Rectangle mt in w.meteorites)
             {
                 Rectangle temp = new Rectangle(mt.X + 12, mt.Y + 8, 25, 25);
-                objectCollection.Background.DrawRectangle(new Pen(Brushes.DarkGreen), temp);
                 if (playerBox.IntersectsWith(temp))
                 {
-                    hearts -= 1;
-                    if (hearts < 1)                  //usunąć by zatrzymać grę po kolizji
+                    if (helmeton == false)
+                    {
+                        hearts -= 1;
+                    }
+                    else
+                        helmeton = false;
+
+                    if (hearts < 1)
                         overlay.GameOver();
                     toDelete = mt;
                     playerhavehelmet = false;
@@ -293,8 +298,6 @@ namespace WindowsFormsApp1
             if (!toDelete.IsEmpty)
             {
                 w.meteorites.Remove(toDelete);
-                playerhavehelmet = true;
-
             }
         }
     }
