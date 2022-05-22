@@ -253,7 +253,7 @@ namespace WindowsFormsApp1
 
             int ranX = 0;
             int ranHunit;
-            ranHunit = rand.Next(30, 350);
+            ranHunit = rand.Next(70, 350);
             if (gcarrots.Count > 1)
             {
                 ranX = gcarrots.LastOrDefault().X;
@@ -329,7 +329,7 @@ namespace WindowsFormsApp1
 
             int ranX = 0;
             int ranHunit = 0;
-            ranHunit = rand.Next(20, 400);
+            ranHunit = rand.Next(160, 350);
             if (helmets.Count > 1)
             {
                 ranX = helmets.LastOrDefault().X;

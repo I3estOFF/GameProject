@@ -161,6 +161,7 @@ namespace WindowsFormsApp1
                 OverlayLayer.Visible = false;
                 gameStarted = false;
                 mousePosition = new Point(0, 0);
+                player.hearts = 3;
             }
         }
 

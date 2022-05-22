@@ -271,12 +271,19 @@ namespace WindowsFormsApp1
             else if (punkty == 400) w.actualScrollSpeed = 3;
             Random rand = new Random();
             int chance = rand.Next(1, 101);
-            if (chance <= 6 && punkty > 50 && punkty < 200)
+            if (chance <= 6 && punkty > 150 && punkty < 300)
             {
                 w.generateMeteorite();
             }
-
-            else if (chance <= 6 && punkty > 1250 && punkty < 1500)
+            else if (chance <= 6 && punkty > 1000 && punkty < 1250)
+            {
+                w.generateMeteorite();
+            }
+            else if (chance <= 6 && punkty > 1800 && punkty < 2000)
+            {
+                w.generateMeteorite();
+            }
+            else if (chance <= 6 && punkty > 2500 && punkty < 2600)
             {
                 w.generateMeteorite();
             }
@@ -293,7 +300,7 @@ namespace WindowsFormsApp1
             {
                 w.generateKubotsRandom();
             }
-            if (chance <= 80 && w.screenScrollSpeed >= 3)             //do testów 80% szans na pojawienie się hełmu co 3 sekundy
+            if (chance <= 3 && w.screenScrollSpeed >= 3)        
             {
                 w.generateHelmetRandom();
             }
