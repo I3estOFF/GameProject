@@ -123,6 +123,7 @@
             this.pictureBoxPlayer.Size = new System.Drawing.Size(1067, 526);
             this.pictureBoxPlayer.TabIndex = 4;
             this.pictureBoxPlayer.TabStop = false;
+            this.pictureBoxPlayer.Click += new System.EventHandler(this.pictureBoxPlayer_Click);
             this.pictureBoxPlayer.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBoxPlayer_MouseClick);
             // 
             // pictureBoxBackground

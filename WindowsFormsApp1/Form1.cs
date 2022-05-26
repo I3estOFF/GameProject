@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using WMPLib;
 
 namespace WindowsFormsApp1
 {
@@ -23,6 +24,7 @@ namespace WindowsFormsApp1
         Overlay overlay;
         World w;
         ObjectCollection objectCollection;
+        WindowsMediaPlayer player = new WindowsMediaPlayer();
 
         public Form1()                                                                                                      //inicjalizacja okna
         {
@@ -30,7 +32,10 @@ namespace WindowsFormsApp1
             FormBorderStyle = FormBorderStyle.None;
             WindowState = FormWindowState.Maximized;
             label1.Text = "Punkty: 0";
+            player.URL = "muzyka.mp3";
         }
+       
+
 
         [DllImport("gdi32.dll")]
         static extern int GetDeviceCaps(IntPtr hdc, int nIndex);
@@ -340,5 +345,20 @@ namespace WindowsFormsApp1
             overlay.checkMenuInput(w);
 
         }
+
+        private void pictureBoxPlayer_Click(object sender, EventArgs e)
+        {
+
+        }
     }
+
+
+
+    
+
+
+    
+
+
+
 }
