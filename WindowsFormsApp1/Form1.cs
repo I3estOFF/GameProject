@@ -166,6 +166,9 @@ namespace WindowsFormsApp1
             {
                 p.playerUp = true;
                 p.fallSpeed = 0;
+                System.IO.Stream str = Properties.Resources.jump;
+                System.Media.SoundPlayer snd = new System.Media.SoundPlayer(str);
+                snd.Play();
             }
             if(e.KeyCode == Keys.ShiftKey)
             {

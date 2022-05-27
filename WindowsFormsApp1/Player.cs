@@ -138,6 +138,7 @@ namespace WindowsFormsApp1
                 playerBox.Y -= jumpSpeed / 10;
                 if (jumpSpeed > 0)
                     jumpSpeed -= jumpSpeedDeceleration;
+
                 else if (jumpSpeed <= 0)
                 {
                     playerUp = false;
@@ -203,6 +204,9 @@ namespace WindowsFormsApp1
                 if (playerBox.Contains(tt))
                 {
                     toDelete = tt;
+                    System.IO.Stream str = Properties.Resources.eatcarrot;
+                    System.Media.SoundPlayer snd = new System.Media.SoundPlayer(str);
+                    snd.Play();
                 }
             }
             if (!toDelete.IsEmpty)
@@ -221,6 +225,9 @@ namespace WindowsFormsApp1
                 if (playerBox.Contains(gt))
                 {
                     toDeleteg = gt;
+                    System.IO.Stream str = Properties.Resources.eatgolden;
+                    System.Media.SoundPlayer snd = new System.Media.SoundPlayer(str);
+                    snd.Play();
                 }
             }
             if (!toDeleteg.IsEmpty)
@@ -243,6 +250,9 @@ namespace WindowsFormsApp1
                 if (playerBox.Contains(kb))
                 {
                     toDeleteg = kb;
+                    System.IO.Stream str = Properties.Resources.speedup;
+                    System.Media.SoundPlayer snd = new System.Media.SoundPlayer(str);
+                    snd.Play();
                 }
             }
             if (!toDeleteg.IsEmpty)
@@ -285,6 +295,9 @@ namespace WindowsFormsApp1
                     if (helmeton == false)
                     {
                         hearts -= 1;
+                        System.IO.Stream str = Properties.Resources.hurt1;
+                        System.Media.SoundPlayer snd = new System.Media.SoundPlayer(str);
+                        snd.Play();
                     }
                     else
                         helmeton = false;

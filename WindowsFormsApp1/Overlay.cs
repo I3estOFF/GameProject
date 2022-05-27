@@ -186,7 +186,9 @@ namespace WindowsFormsApp1
             player.playerRight = false;
             player.playerLeft = false;
             player.playerUp = false;
-
+            System.IO.Stream str = Properties.Resources.gameover1;
+            System.Media.SoundPlayer snd = new System.Media.SoundPlayer(str);
+            snd.Play();
             g.Clear(Color.Transparent);
             g.DrawImage(Properties.Resources.game_over, 500, 500);
             OverlayLayer.Visible = true;

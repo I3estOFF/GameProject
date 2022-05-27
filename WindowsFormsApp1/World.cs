@@ -425,6 +425,9 @@ namespace WindowsFormsApp1
                 if (temp.Contains(explosion.X, explosion.Y))
                 {
                     setBoom();
+                    System.IO.Stream str = Properties.Resources.expl;
+                    System.Media.SoundPlayer snd = new System.Media.SoundPlayer(str);
+                    snd.Play();
                     meteorites.RemoveAt(i);
                 }
             }
