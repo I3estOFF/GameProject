@@ -12,7 +12,6 @@ namespace WindowsFormsApp1
         int ResolutionWidth = 1; // zmienne trzymajace rzeczywista rozdzielczosc ekranu
         int ResolutionHeight = 1;
         int screenShift = 0;
-        static int punkty = 0;
         int czas = 0;
 
 
@@ -77,12 +76,14 @@ namespace WindowsFormsApp1
             pictureBoxPlayer.Parent = pictureBoxBackground;
             pictureBoxPlayer.BackColor = Color.Transparent;
             label1.Parent = pictureBoxBackground;
+            scorelabel.Parent = OverlayLayer;
             pictureBox2.Parent = pictureBoxBackground;
             pictureBox2.BackColor = Color.Transparent;
             pictureBox1.Parent = pictureBoxBackground;
             pictureBox1.BackColor = Color.Transparent;
             pictureBoxPlayer.BackColor = Color.Transparent;
             label1.BringToFront();
+            scorelabel.BringToFront();
             pictureBox2.BringToFront();
             pictureBox1.BringToFront();
 
@@ -95,8 +96,9 @@ namespace WindowsFormsApp1
             label1.Visible = false;
             pictureBox2.Visible = false;
             pictureBox1.Visible = false;
+            
 
-            objectCollection = new ObjectCollection(timer1, timer2, timer3, timer4, timer5, menuTimer, gBackground, gPlayer, label1, pictureBox2, ResolutionWidth, ResolutionHeight);
+            objectCollection = new ObjectCollection(timer1, timer2, timer3, timer4, timer5, menuTimer, gBackground, gPlayer, label1, pictureBox2, ResolutionWidth, ResolutionHeight, scorelabel);
 
             w = new World(gBackground, ResolutionWidth, ResolutionHeight);
             p = new Player(gPlayer, PlayerBitmap, ResolutionWidth, ResolutionHeight, objectCollection);
@@ -203,7 +205,7 @@ namespace WindowsFormsApp1
             p.HelmetPlayerCollision();
             pictureBoxPlayer.Refresh();
             gPlayer.Clear(Color.Transparent);
-            label1.Text = "   Punkty: " + punkty + "   " + p.pkt + "x    " + p.gpkt + "x      ";
+            label1.Text = "   Punkty: " + p.points + "   " + p.pkt + "x    " + p.gpkt + "x      ";
 
             if (p.hearts == 3)
                 pictureBox2.Image = Properties.Resources.hearts3;
@@ -256,7 +258,7 @@ namespace WindowsFormsApp1
             if (overlay.gamePaused)
                 return;
             if (w.screenScrollSpeed >= 2)
-                punkty = punkty + 1;
+                p.points++;
 
             czas = czas + 1;
             if (czas == 30)
@@ -266,27 +268,27 @@ namespace WindowsFormsApp1
                 w.actualScrollSpeed = 2;
 
             }
-            if (punkty == 2800) w.actualScrollSpeed = 9;
-            else if (punkty == 2400) w.actualScrollSpeed = 8;
-            else if (punkty == 2000) w.actualScrollSpeed = 7;
-            else if (punkty == 1600) w.actualScrollSpeed = 6;
-            else if (punkty == 800) w.actualScrollSpeed = 4;
-            else if (punkty == 400) w.actualScrollSpeed = 3;
+            if (p.points == 2800) w.actualScrollSpeed = 9;
+            else if (p.points == 2400) w.actualScrollSpeed = 8;
+            else if (p.points == 2000) w.actualScrollSpeed = 7;
+            else if (p.points == 1600) w.actualScrollSpeed = 6;
+            else if (p.points == 800) w.actualScrollSpeed = 4;
+            else if (p.points == 400) w.actualScrollSpeed = 3;
             Random rand = new Random();
             int chance = rand.Next(1, 101);
-            if (chance <= 6 && punkty > 150 && punkty < 300)
+            if (chance <= 6 && p.points > 150 && p.points < 300)
             {
                 w.generateMeteorite();
             }
-            else if (chance <= 6 && punkty > 1000 && punkty < 1250)
+            else if (chance <= 6 && p.points > 1000 && p.points < 1250)
             {
                 w.generateMeteorite();
             }
-            else if (chance <= 6 && punkty > 1800 && punkty < 2000)
+            else if (chance <= 6 && p.points > 1800 && p.points < 2000)
             {
                 w.generateMeteorite();
             }
-            else if (chance <= 6 && punkty > 2500 && punkty < 2600)
+            else if (chance <= 6 && p.points > 2500 && p.points < 2600)
             {
                 w.generateMeteorite();
             }

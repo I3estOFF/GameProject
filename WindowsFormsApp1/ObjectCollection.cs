@@ -19,8 +19,9 @@ namespace WindowsFormsApp1
         public int resolutionWidth;
         public Player player;
         public World world;
+        public Label scoreLabel;
 
-        public ObjectCollection(Timer timer1, Timer timer2, Timer timer3, Timer timer4, Timer timer5, Timer timer6, Graphics backgroundgraphics, Graphics playerGraphics, Label label1, PictureBox pictureBox2, int width, int height)
+        public ObjectCollection(Timer timer1, Timer timer2, Timer timer3, Timer timer4, Timer timer5, Timer timer6, Graphics backgroundgraphics, Graphics playerGraphics, Label label1, PictureBox pictureBox2, int width, int height, Label scoreboard)
         {
             this.timer1 = timer1;
             this.timer2 = timer2;
@@ -34,6 +35,7 @@ namespace WindowsFormsApp1
             this.picturebox2 = pictureBox2;
             this.resolutionHeight = height;
             this.resolutionWidth = width;
+            scoreLabel = scoreboard;
         }
 
         public void SetPlayer(Player p)

@@ -24,6 +24,7 @@ namespace WindowsFormsApp1
         public int fallSpeed = 0;
         public int jumpSpeed;
         public int playerSpeed;
+        public int points = 0;
         public int pkt = 0;
         public int gpkt = 0;
         public bool playereatgold = false;
@@ -56,6 +57,10 @@ namespace WindowsFormsApp1
 
         public void Reset()
         {
+            points = 0;
+            pkt = 0;
+            gpkt = 0;
+
             playerBox.X = 80;
             playerBox.Y = Heigth - 200;
         }

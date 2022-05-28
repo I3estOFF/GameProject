@@ -1,0 +1,35 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace WindowsFormsApp1
+{
+
+    internal class ScoreBoard
+    {
+        public List<Score> scores = new List<Score>();
+
+
+        public void AddScore(int points, int carrots, int goldenCarrots)
+        {
+            scores.Add(new Score(points, carrots, goldenCarrots));
+            scores.Sort(delegate (Score s1, Score s2) { return s2.summary.CompareTo(s1.summary); });
+
+        }
+
+        override public String ToString()
+        {
+            String toPrint = "";
+            foreach (Score score in scores)
+            {
+                toPrint += score.points.ToString() + "   " + score.carrots.ToString() + "    " + score.goldenCarrots.ToString()+ "\n\n" ;
+            }
+
+            return toPrint;
+        }
+
+
+    }
+}

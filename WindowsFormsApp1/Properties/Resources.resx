@@ -130,14 +130,17 @@
   <data name="Chunguseatgoldencarrot" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Chunguseatgoldencarrot.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="eatgolden" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\eatgolden.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="goldenchunguskuboty" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\goldenchunguskuboty.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="clouds" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\clouds.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="goldenchungushelmet" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\goldenchungushelmet.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="hurt1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\hurt1.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="jumping" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\jumping1.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -151,11 +154,14 @@
   <data name="punkty" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\punkty.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="chunguskuboty" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\chunguskuboty.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Chungus" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Chungus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="helmet" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\helmet.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="game over1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\game over.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="cloud1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\cloud1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -163,8 +169,8 @@
   <data name="goldencarrot" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\goldencarrot.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Meteoritesmall" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Meteoritesmall.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="cloud" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cloud.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Empty" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Empty.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -184,6 +190,9 @@
   <data name="311" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\311.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="main menu continue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\main menu continue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="hearts2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\hearts2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -193,11 +202,14 @@
   <data name="cloudsT" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\cloudsT.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="speedup" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\speedup.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="goldenchunguskubotyhelmet" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\goldenchunguskubotyhelmet.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="chunguskuboty" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\chunguskuboty.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="clouds" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\clouds.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="main menu" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\main menu.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -205,8 +217,8 @@
   <data name="hearts1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\hearts1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="cloud" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\cloud.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Meteoritesmall" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Meteoritesmall.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Chunguseatcarrot" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Chunguseatcarrot.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -214,8 +226,17 @@
   <data name="chunguskubotyhelmet" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\chunguskubotyhelmet.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="game over1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\game over.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="eatcarrot" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\eatcarrot.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="expl" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\expl.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="helmet" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\helmet.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="gameover1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\gameover1.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Kuboty" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Kuboty.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -223,28 +244,10 @@
   <data name="game over" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\game over.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="main menu continue" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\main menu continue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="eatcarrot" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\eatcarrot.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="eatgolden" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\eatgolden.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="expl" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\expl.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="gameover1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\gameover1.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="jump" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\jump.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="speedup" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\speedup.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="hurt1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\hurt1.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="scoreBoard" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\scoreBoard.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

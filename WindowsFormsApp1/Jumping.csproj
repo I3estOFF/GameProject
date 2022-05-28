@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Score.cs" />
+    <Compile Include="ScoreBoard.cs" />
     <Compile Include="ObjectCollection.cs" />
     <Compile Include="Overlay.cs" />
     <Compile Include="World.cs" />
@@ -240,6 +242,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\hurt1.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\scoreBoard.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

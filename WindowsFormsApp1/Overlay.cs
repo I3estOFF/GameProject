@@ -18,6 +18,8 @@ namespace WindowsFormsApp1
         public bool gamePaused = false;
         public bool gameContinue = false;
 
+        public ScoreBoard scoreBoard = new ScoreBoard();
+
         public Overlay(PictureBox OverlayLayer, ObjectCollection objectCollection, Player player)
         {
             OverlayLayer.BackColor = Color.Transparent;
@@ -140,6 +142,20 @@ namespace WindowsFormsApp1
 
         }
 
+        private void RenderScoreBoard()
+        {
+            Bitmap board = Properties.Resources.scoreBoard;
+            Bitmap resized = new Bitmap(board, new Size(board.Width / 3, board.Height/3));
+            g.DrawImage(resized,objectCollection.resolutionWidth-resized.Height,objectCollection.resolutionHeight/10);
+
+           objectCollection.scoreLabel.Text = scoreBoard.ToString();
+            objectCollection.scoreLabel.Visible = true;
+            objectCollection.scoreLabel.Location = new Point(1290, 160);
+            objectCollection.scoreLabel.AutoSize = false;
+            objectCollection.scoreLabel.Size = new Size(400, 250);
+
+        }
+
         public void scaleGraphics(float scalingFactor)
         {
             g.ScaleTransform(1f / scalingFactor, 1 / scalingFactor);
@@ -151,7 +167,7 @@ namespace WindowsFormsApp1
             if (gameStarted && gamePaused == false)
             {
                 restartGame();
-
+                //objectCollection.scoreLabel.Visible = false ;
                 System.Diagnostics.Debug.WriteLine("game started");
                 objectCollection.label.Visible = true;
                 objectCollection.picturebox2.Visible = true;
@@ -181,6 +197,13 @@ namespace WindowsFormsApp1
 
         public void GameOver()                                                                                //GameOver
         {
+            int points= objectCollection.player.points;
+            int carrots = objectCollection.player.pkt;
+            int gCarrots = objectCollection.player.gpkt;
+            scoreBoard.AddScore(points, carrots, gCarrots);
+            
+            System.Diagnostics.Debug.WriteLine(scoreBoard.ToString());
+
             gamePaused = true;
             player.playerLeft = false;
             player.playerRight = false;
@@ -190,13 +213,16 @@ namespace WindowsFormsApp1
             System.Media.SoundPlayer snd = new System.Media.SoundPlayer(str);
             snd.Play();
             g.Clear(Color.Transparent);
-            g.DrawImage(Properties.Resources.game_over, 500, 500);
+            Bitmap gameOver = Properties.Resources.game_over;
+            g.DrawImage(new Bitmap(gameOver,4*gameOver.Width/3,4*gameOver.Height/3), 100, 200);
             OverlayLayer.Visible = true;
             objectCollection.timer1.Enabled = false;
             objectCollection.timer2.Enabled = false;
             objectCollection.timer3.Enabled = false;
 
-             MainMenu();
+
+            RenderScoreBoard();
+            MainMenu();
         }
 
         public void restartGame()

@@ -42,6 +42,7 @@
             this.pictureBoxBackground = new System.Windows.Forms.PictureBox();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.scorelabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.OverlayLayer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlayer)).BeginInit();
@@ -147,11 +148,23 @@
             this.pictureBox1.TabIndex = 8;
             this.pictureBox1.TabStop = false;
             // 
+            // scorelabel
+            // 
+            this.scorelabel.AutoSize = true;
+            this.scorelabel.BackColor = System.Drawing.Color.Transparent;
+            this.scorelabel.Font = new System.Drawing.Font("Consolas", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.scorelabel.Location = new System.Drawing.Point(887, 98);
+            this.scorelabel.Name = "scorelabel";
+            this.scorelabel.Size = new System.Drawing.Size(240, 26);
+            this.scorelabel.TabIndex = 9;
+            this.scorelabel.Text = "jhcbsadvbahjvbhjahv";
+            // 
             // Form1
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1067, 554);
+            this.Controls.Add(this.scorelabel);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.OverlayLayer);
@@ -189,6 +202,7 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.BindingSource bindingSource1;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label scorelabel;
     }
 }
 
