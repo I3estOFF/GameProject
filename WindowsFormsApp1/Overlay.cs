@@ -144,11 +144,7 @@ namespace WindowsFormsApp1
 
         private void RenderScoreBoard()
         {
-            Bitmap board = Properties.Resources.scoreBoard;
-            Bitmap resized = new Bitmap(board, new Size(board.Width / 3, board.Height/3));
-            g.DrawImage(resized,objectCollection.resolutionWidth-resized.Height,objectCollection.resolutionHeight/10);
-
-           objectCollection.scoreLabel.Text = scoreBoard.ToString();
+            objectCollection.scoreLabel.Text = scoreBoard.ToString();
             objectCollection.scoreLabel.Visible = true;
             objectCollection.scoreLabel.AutoSize = false;
 
@@ -212,7 +208,7 @@ namespace WindowsFormsApp1
             snd.Play();
             g.Clear(Color.Transparent);
             Bitmap gameOver = Properties.Resources.game_over;
-            g.DrawImage(new Bitmap(gameOver,4*gameOver.Width/3,4*gameOver.Height/3), 100, 200);
+            g.DrawImage(new Bitmap(gameOver,4*gameOver.Width/3,4*gameOver.Height/3), objectCollection.resolutionWidth-2*gameOver.Width, 200);
             OverlayLayer.Visible = true;
             objectCollection.timer1.Enabled = false;
             objectCollection.timer2.Enabled = false;

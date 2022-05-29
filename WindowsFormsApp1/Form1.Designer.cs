@@ -86,11 +86,15 @@
             // 
             // scorelabel
             // 
+            this.scorelabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.scorelabel.ForeColor = System.Drawing.SystemColors.ControlText;
             this.scorelabel.Image = global::WindowsFormsApp1.Properties.Resources.scoreBoard;
-            this.scorelabel.Location = new System.Drawing.Point(17, 52);
+            this.scorelabel.Location = new System.Drawing.Point(12, 52);
             this.scorelabel.Name = "scorelabel";
-            this.scorelabel.Size = new System.Drawing.Size(400, 460);
+            this.scorelabel.Padding = new System.Windows.Forms.Padding(0, 20, 0, 0);
+            this.scorelabel.Size = new System.Drawing.Size(400, 493);
             this.scorelabel.TabIndex = 10;
+            this.scorelabel.Visible = false;
             // 
             // pictureBox1
             // 
@@ -168,6 +172,8 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBoxPlayer);
             this.Controls.Add(this.pictureBoxBackground);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "A Game";
