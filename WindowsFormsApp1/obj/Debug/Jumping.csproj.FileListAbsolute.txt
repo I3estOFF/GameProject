@@ -172,3 +172,8 @@ C:\Users\macie\Documents\GitStuff\JumpingChungus\WindowsFormsApp1\bin\Debug\AxIn
 C:\Users\macie\Documents\GitStuff\JumpingChungus\WindowsFormsApp1\obj\Debug\Interop.WMPLib.dll
 C:\Users\macie\Documents\GitStuff\JumpingChungus\WindowsFormsApp1\obj\Debug\AxInterop.WMPLib.dll
 C:\Users\macie\Documents\GitStuff\JumpingChungus\WindowsFormsApp1\obj\Debug\Jumping.csproj.ResolveComReference.cache
+C:\Users\Czarek\Source\Repos\JumpingChungus2\WindowsFormsApp1\bin\Debug\Interop.WMPLib.dll
+C:\Users\Czarek\Source\Repos\JumpingChungus2\WindowsFormsApp1\bin\Debug\AxInterop.WMPLib.dll
+C:\Users\Czarek\Source\Repos\JumpingChungus2\WindowsFormsApp1\obj\Debug\Interop.WMPLib.dll
+C:\Users\Czarek\Source\Repos\JumpingChungus2\WindowsFormsApp1\obj\Debug\AxInterop.WMPLib.dll
+C:\Users\Czarek\Source\Repos\JumpingChungus2\WindowsFormsApp1\obj\Debug\Jumping.csproj.ResolveComReference.cache

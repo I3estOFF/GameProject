@@ -21,10 +21,14 @@ namespace WindowsFormsApp1
 
         override public String ToString()
         {
-            String toPrint = "";
+            String toPrint = "\n \n \n \n \n \n \n \n";
             foreach (Score score in scores)
             {
-                toPrint += score.points.ToString() + "   " + score.carrots.ToString() + "    " + score.goldenCarrots.ToString()+ "\n\n" ;
+                toPrint += "                                                       " + score.points.ToString() + "               " + score.carrots.ToString() + "                 " + score.goldenCarrots.ToString()+ "\n\n" ;
+                toPrint += "\n\n                                                       " + score.points.ToString() + "               " + score.carrots.ToString() + "                 " + score.goldenCarrots.ToString() + "\n\n";
+                toPrint += "\n                                                       " + score.points.ToString() + "               " + score.carrots.ToString() + "                 " + score.goldenCarrots.ToString() + "\n\n";
+
+
             }
 
             return toPrint;

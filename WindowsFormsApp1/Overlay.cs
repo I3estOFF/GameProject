@@ -150,9 +150,7 @@ namespace WindowsFormsApp1
 
            objectCollection.scoreLabel.Text = scoreBoard.ToString();
             objectCollection.scoreLabel.Visible = true;
-            objectCollection.scoreLabel.Location = new Point(1290, 160);
             objectCollection.scoreLabel.AutoSize = false;
-            objectCollection.scoreLabel.Size = new Size(400, 250);
 
         }
 
