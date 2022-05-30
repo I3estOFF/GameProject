@@ -118,6 +118,9 @@ namespace WindowsFormsApp1
             w.generateGround(0, ResolutionHeight - 100, 50);
             w.generatePlatformRandom(4);
             //overlay.StartGame();
+
+            //zczytanie wynikow
+            overlay.ReadScoreFile();
         }
         private void KeyU(object sender, KeyEventArgs e)                                                                        //sterowanie
         {

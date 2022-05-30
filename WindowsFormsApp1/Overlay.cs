@@ -2,6 +2,8 @@
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsFormsApp1;
+using System.IO;
+using System;
 
 namespace WindowsFormsApp1
 {
@@ -161,6 +163,7 @@ namespace WindowsFormsApp1
             if (gameStarted && gamePaused == false)
             {
                 restartGame();
+                
                 //objectCollection.scoreLabel.Visible = false ;
                 System.Diagnostics.Debug.WriteLine("game started");
                 objectCollection.label.Visible = true;
@@ -172,6 +175,8 @@ namespace WindowsFormsApp1
                 gameStarted = false;
                 mousePosition = new Point(0, 0);
                 player.hearts = 3;
+                g.Clear(Color.Transparent);
+                
             }
         }
 
@@ -195,7 +200,9 @@ namespace WindowsFormsApp1
             int carrots = objectCollection.player.pkt;
             int gCarrots = objectCollection.player.gpkt;
             scoreBoard.AddScore(points, carrots, gCarrots);
-            
+
+            UpdateScoreFile();
+
             System.Diagnostics.Debug.WriteLine(scoreBoard.ToString());
 
             gamePaused = true;
@@ -224,6 +231,37 @@ namespace WindowsFormsApp1
             
             objectCollection.world.Reset();
             objectCollection.player.Reset();
+        }
+
+        public void UpdateScoreFile()
+        {
+            using (StreamWriter sw = new StreamWriter("scores.txt"))
+            {
+
+                foreach (string s in scoreBoard.scoresCSV)
+                {
+                    sw.WriteLine(s);
+                }
+            }
+        }
+        public void ReadScoreFile()
+        {
+            try
+            {
+                using (var reader = new StreamReader("scores.txt"))
+                {
+                    while (!reader.EndOfStream)
+                    {
+                        var line = reader.ReadLine();
+                        var values = line.Split(',');
+
+                        scoreBoard.AddScore(Int32.Parse(values[0]), Int32.Parse(values[1]), Int32.Parse(values[2]));
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            { Console.WriteLine(ex.Message); }
         }
 
         public void closeGame()                                                                                 //Wychodzenie z gry
