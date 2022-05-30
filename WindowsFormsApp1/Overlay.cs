@@ -91,11 +91,13 @@ namespace WindowsFormsApp1
                 {
                     gameContinue = true;
                     break;
+                    
                 }
                 if (start.Contains(mousePosition))
                 {
                     gameStarted = true;
                     break;
+                    
                 }
                 if (exit.Contains(mousePosition))
                 {
@@ -113,12 +115,18 @@ namespace WindowsFormsApp1
             {
                 gamePaused = false;
                 ContinueGame();
+                System.IO.Stream str = Properties.Resources.silence;
+                System.Media.SoundPlayer snd = new System.Media.SoundPlayer(str);
+                snd.Play();
             }
 
             if (gameStarted)
             {
                 gamePaused = false;
                 StartGame();
+                System.IO.Stream str = Properties.Resources.silence;
+                System.Media.SoundPlayer snd = new System.Media.SoundPlayer(str);
+                snd.Play();
 
             }
             if (gameExited)
@@ -131,7 +139,9 @@ namespace WindowsFormsApp1
             OverlayLayer.Visible = true;
             OverlayLayer.BringToFront();
             g.DrawImage(Properties.Resources.main_menu, objectCollection.resolutionWidth / 3, objectCollection.resolutionHeight / 3);
-
+            System.IO.Stream str = Properties.Resources.muzyka;
+            System.Media.SoundPlayer snd = new System.Media.SoundPlayer(str);
+            snd.Play();
         }
 
         private void RenderPauseMenu()
@@ -139,7 +149,9 @@ namespace WindowsFormsApp1
             OverlayLayer.Visible = true;
             OverlayLayer.BringToFront();
             g.DrawImage(Properties.Resources.main_menu_continue, objectCollection.resolutionWidth / 3, objectCollection.resolutionHeight / 3);
-
+            System.IO.Stream str = Properties.Resources.muzyka;
+            System.Media.SoundPlayer snd = new System.Media.SoundPlayer(str);
+            snd.Play();
         }
 
         private void RenderScoreBoard()

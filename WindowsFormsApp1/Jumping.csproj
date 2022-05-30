@@ -246,5 +246,11 @@
   <ItemGroup>
     <None Include="Resources\scoreBoard.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\silence.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\muzyka.wav" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
