@@ -35,6 +35,7 @@
             this.timer4 = new System.Windows.Forms.Timer(this.components);
             this.timer5 = new System.Windows.Forms.Timer(this.components);
             this.menuTimer = new System.Windows.Forms.Timer(this.components);
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.scorelabel = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
@@ -42,13 +43,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBoxPlayer = new System.Windows.Forms.PictureBox();
             this.pictureBoxBackground = new System.Windows.Forms.PictureBox();
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.OverlayLayer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlayer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBackground)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // timer1
@@ -92,7 +92,7 @@
             this.scorelabel.Location = new System.Drawing.Point(12, 52);
             this.scorelabel.Name = "scorelabel";
             this.scorelabel.Padding = new System.Windows.Forms.Padding(0, 20, 0, 0);
-            this.scorelabel.Size = new System.Drawing.Size(400, 493);
+            this.scorelabel.Size = new System.Drawing.Size(400, 520);
             this.scorelabel.TabIndex = 10;
             this.scorelabel.Visible = false;
             // 
@@ -180,12 +180,12 @@
             this.Load += new System.EventHandler(this.onFormLoad);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyDow);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.KeyU);
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.OverlayLayer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPlayer)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBackground)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

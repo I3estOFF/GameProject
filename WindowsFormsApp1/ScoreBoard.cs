@@ -25,7 +25,7 @@ namespace WindowsFormsApp1
             int i = 0;
             foreach (Score score in scores)
             {
-                toPrint += "                                   " + score.points.ToString() + "             " + score.carrots.ToString() + "                 " + score.goldenCarrots.ToString() + "\n\n";
+                toPrint += "                                   " + score.points.ToString() + "             " + score.carrots.ToString() + "                 " + score.goldenCarrots.ToString() + "\n\n\n";
                 i++;
 
                 if (i > 7)
